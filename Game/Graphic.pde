@@ -1,4 +1,5 @@
 private PImage background;
+
 public class Graphic {
 
   public Graphic() {
