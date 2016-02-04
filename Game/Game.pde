@@ -1,6 +1,6 @@
 private Player player;
 private Graphic graphic;
-//hei gard
+//hj
 void setup ()
 {
   size(1000, 700);
