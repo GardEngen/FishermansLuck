@@ -1,5 +1,5 @@
 public class Control {
-  //Manages player input
+
   Control() {
     
   }

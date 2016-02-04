@@ -1,6 +1,5 @@
 private Player player;
 private Graphic graphic;
-//hei inga
 void setup ()
 {
   size(1000, 700);
