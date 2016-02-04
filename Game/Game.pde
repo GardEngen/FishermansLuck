@@ -10,4 +10,5 @@ void setup ()
 void draw ()
 {
   graphic.drawBackground();
+  player.boat();
 }
