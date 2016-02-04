@@ -12,3 +12,5 @@ void draw ()
   graphic.drawBackground();
   player.boat();
 }
+
+//sso
