@@ -1,15 +1,7 @@
+private Control control;
+public class Player {
 
-class Player{
-  
-  Player() {
-    
-  }
-  
-  void setup() {
-    
-  }
-  
-  void draw() {
-    
+  public Player() {
+    control = new Control();
   }
 }

@@ -1,15 +1,11 @@
+private PImage background;
+public class Graphic {
 
-class Graphic{
-  
-  Graphic() {
-    
+  public Graphic() {
   }
-  
-  void setup() {
-    
-  }
-  
-  void draw() {
-    
+  public void drawBackground()
+  {
+    background = loadImage("Bilder.Grafikk/background.png");
+    image(background, 0, 0);
   }
 }
