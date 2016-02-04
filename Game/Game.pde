@@ -1,6 +1,6 @@
 private Player player;
 private Graphic graphic;
-//hei gard
+//hei inga
 void setup ()
 {
   size(1000, 700);
@@ -12,5 +12,3 @@ void draw ()
   graphic.drawBackground();
   player.boat();
 }
-
-//sso
