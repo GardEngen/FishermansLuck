@@ -5,8 +5,7 @@ public class Fish {
   private float yDelta;
   private PImage [] animation;
   private PImage fish;
-  private int yDir; // y retning
-  private int xDir; // x retning
+
   private int speedX; // fart x retning
   public Fish() {
     xDelta = random(-10, 10);
@@ -31,13 +30,22 @@ public class Fish {
     }
   }
 
-
+// Moves at different speed and start at differnt position
   public void randomPosition() {
-    xDir = 0;
-    yDir = int(random(height));
+    xDelta = 0;
+    yDelta = int(random(height));
     speedX = int(random(1, 5));
     
-    point(xDir,yDir);
+    point(xDelta,yDelta);
     drawFish();
   }
+  
+  // brukes til å teste fiskene
+  // funker ikke enda
+  void draw(){
+    if(mousePressed) {
+    drawFish();
+    }
+  }
+
 }
