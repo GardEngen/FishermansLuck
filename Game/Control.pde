@@ -6,7 +6,7 @@ public class Control {
   Control() {
   }
   
-
+  //Returns an X position value, that changes if arrow keys are pressed 
   public int horizontalMove() {
     if(keyPressed && (key == CODED)) {
       if(keyCode == LEFT) {
@@ -19,10 +19,12 @@ public class Control {
     return startPositionX;
   }
   
+  //Sets X value start position 
   public void setPositionX(int xPotition) {
     startPositionX = xPotition;
   }
   
+  //Sets the moving speed
   public void setSpeedX(int speed) {
     speedX = speed;
   }
