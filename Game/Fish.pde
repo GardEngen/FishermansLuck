@@ -1,8 +1,7 @@
 public class Fish {
-  private float x;
-  private float y ;
+  private float xPosition;
+  private float yPosition;
   private float xDelta;
-  private float yDelta;
   private PImage [] animation;
   private PImage fish;
   private boolean inMotion = true;
@@ -10,9 +9,8 @@ public class Fish {
   
   public Fish() {
     xDelta = random(-10, 10);
-    yDelta = random(-10, 10);
-    x = random(50, 600);
-    y = random(250, 600);
+    xPosition = 50;
+    yPosition = random(250, 600);
   }
  
   public void drawFish() {
@@ -22,9 +20,9 @@ public class Fish {
 
       animation[i] = fish.get(20*i, 0, 20, 15);
     }
-    x = x+xDelta;
+    xPosition = xPosition+xDelta;
 
-    if ((x > width - 40) || (x < 10)) {
+    if ((xPosition > width - 40) || (xPosition < -1)) {
       xDelta = xDelta *(-1);
     }
    
@@ -34,7 +32,7 @@ public class Fish {
       int i=1;
   
       i = (i + 1) % 4;
-      image(animation[i], x, y);
+      image(animation[i], xPosition, yPosition);
         break;
       
     }
@@ -42,24 +40,17 @@ public class Fish {
   
   public float getFishXpos()
     {
-        return x;
+        return xPosition;
     }
 
   // Moves at different speed and start at differnt position
   public void randomPosition() {
     xDelta = 0;
-    yDelta = int(random(height));
-    speedX = int(random(1, 5));
+   
+  
 
-    point(xDelta, yDelta);
+    //point(xDelta);
     drawFish();
   }
 
-  // brukes til å teste fiskene
-  // funker ikke enda
-  void draw() {
-    if (mousePressed) {
-      drawFish();
-    }
-  }
 }
