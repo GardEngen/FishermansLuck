@@ -1,6 +1,6 @@
 public class Fish {
-  private float x = 200;
-  private float y = 300;
+  private float x;
+  private float y ;
   private float xDelta;
   private float yDelta;
   private PImage [] animation;
@@ -11,6 +11,8 @@ public class Fish {
   public Fish() {
     xDelta = random(-10, 10);
     yDelta = random(-10, 10);
+    x = random(50, 600);
+    y = random(250, 600);
   }
  
   public void drawFish() {
