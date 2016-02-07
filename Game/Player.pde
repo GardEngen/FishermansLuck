@@ -11,7 +11,9 @@ public class Player {
   
   //Manages the boatMovement
   public void boat() {
-    rect(control.horizontalMove(),178,50,30);
+    int xPos = control.horizontalMove();
+    rect(xPos,178,50,30);
+    
   }
   
   //Sets new boat speed
