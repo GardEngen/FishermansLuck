@@ -1,7 +1,9 @@
-private PImage background;
+
 
 public class Graphic {
 
+  private PImage background;
+  
   public Graphic() {
   }
   public void drawBackground()

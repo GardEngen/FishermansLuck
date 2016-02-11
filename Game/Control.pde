@@ -1,8 +1,10 @@
-private int startPositionX;
-private int speedX;
+
 
 public class Control {
-
+private int startPositionX;
+private int speedX;
+//private PImage [] animation;
+  
   Control() {
   }
 

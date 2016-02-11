@@ -1,6 +1,6 @@
 private Player player;
 private Graphic graphic;
-private ArrayList <Fish> fish;
+private ArrayList <Catch> fish;
 private int numberOfFish = 6;
 
 void setup ()
@@ -9,28 +9,23 @@ void setup ()
   frameRate(60);
   player = new Player();
   graphic = new Graphic();
-  fish = new ArrayList <Fish>();
-  cratefish();
-
+  fish = new ArrayList <Catch>();
+  createfish();
 }
+
 void draw ()
 {
   graphic.drawBackground();
   player.boat();
-  for (int i =0; i < numberOfFish; i++)
-  {
-    fish.get(i).drawFish();
-
+  for (int i = 0; i < numberOfFish; i++) {
+    fish.get(i).drawAllFish() ;
   }
-  
-  
 }
 
 
-public void cratefish()
+public void createfish()
 {
-  for (int i=0; i<numberOfFish; i++)
-  {
-    fish.add(new Fish());
+  for (int i=0; i<numberOfFish; i++) {
+    fish.add(new Catch());
   }
 }

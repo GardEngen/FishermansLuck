@@ -1,7 +1,10 @@
+
+public class Player {
+  
 private Control control;
 private int boatPosition = 215;
 private int boatSpeed = 4;
-public class Player {
+
 
   public Player() {
     control = new Control();
@@ -13,7 +16,6 @@ public class Player {
   public void boat() {
     int xPos = control.horizontalMove();
     rect(xPos,178,50,30);
-    
   }
   
   //Sets new boat speed
