@@ -19,7 +19,7 @@ public class GameElement {
 //Sets the start position, left or right
   public boolean setStartPosition() {
     if (startPosition == 0) {
-      xPosition = 0 - 40;
+      xPosition = -40;
       startLeft = true;
     } 
     else if (startPosition == 1) {
@@ -33,12 +33,12 @@ public class GameElement {
 //Changes the speed, and moves the object
   public void elementMovement(float speed, PImage image) {
     
-    if (startLeft == true)
-    //&& (xPosition < width + 40))
-    {
-        xPosition = xPosition + speed;
-        drawElement(image);
-      }
+    //if (startLeft == true)
+    ////&& (xPosition < width + 40))
+    //{
+    //    xPosition = xPosition + speed;
+    //    drawElement(image);
+    //  }
     if (startLeft == false)
      //&&(xPosition > -20))
      {
@@ -46,7 +46,8 @@ public class GameElement {
         drawElement(image);
       }
      else {
-       xPosition = -40;
+       xPosition = xPosition + speed;
+        drawElement(image);
      }
     }
   
