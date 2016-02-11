@@ -6,8 +6,9 @@ public class GameElement {
   private PImage [] animation;
   private PImage fishP;
   private boolean startLeft;
+  private int hei;
 
-  public GameElement() {
+  public GameElement()  {
     yPosition = random(300, (height - 20));
     startPosition = int (random(-1, 2));
     println(startPosition);
@@ -55,9 +56,10 @@ public class GameElement {
     public void drawElement(PImage picture) {
       fishP = picture;
       animation = new PImage[4];
-      for (int i=0; i < 4; i++) {
-       animation[i] = fishP.get(20*i, 0, 20, 15);
-       image(animation[i], xPosition, yPosition);
-      }
+      hei = (hei + 1)%3;
+     // for (int i=0; i < 4; i++) {
+       animation[hei] = fishP.get(20*hei, 0, 20, 15);
+       image(animation[hei], xPosition, yPosition);
+     // }
     }
   }
