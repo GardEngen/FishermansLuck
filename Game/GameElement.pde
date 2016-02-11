@@ -39,13 +39,12 @@ public class GameElement {
     //    xPosition = xPosition + speed;
     //    drawElement(image);
     //  }
-    if (startLeft == false)
-     //&&(xPosition > -20))
+    if ((startLeft == false)&&(xPosition > -20))
      {
         xPosition = xPosition - speed;
         drawElement(image);
       }
-     else {
+     else if ((startLeft == true)&&(xPosition < width + 40)) {
        xPosition = xPosition + speed;
         drawElement(image);
      }
