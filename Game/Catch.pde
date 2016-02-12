@@ -13,6 +13,8 @@ public class Catch extends GameElement {
   public void clownFish() {
     PImage image = loadImage("Bilder.Grafikk/fishtest.png");
     elementMovement(speed, image);
+   //kanskje ikke den lureste plassen å legge den #diskuteres
+    hitboxAction();
   }
   
 }

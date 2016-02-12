@@ -8,13 +8,17 @@ public class GameElement {
   private boolean startLeft;
   private int currentFrame;
   private float delay;
+  
+  private Player player;
 
   public GameElement() {
     yPosition = random(300, (height - 20));
     startPosition = int (random(-1, 2));
-    println(startPosition);
+    //println(startPosition);
     // startPosition = 0;
     startLeft = setStartPosition();
+    
+    player = new Player();
   }
 
   //Sets the start position, left or right
@@ -26,7 +30,7 @@ public class GameElement {
       xPosition = width + 40;
       startLeft = false;
     }
-    println(startLeft);
+    //println(startLeft);
     return startLeft;
   }
 
@@ -47,6 +51,17 @@ public class GameElement {
       xPosition = xPosition + speed;
       drawElement(image);
     }
+  }
+    //hitbox
+  public void hitboxAction()
+  {
+    float pos = player.getHitboxXPosition();
+    if(xPosition >= pos+10)
+    {
+    //println("FUCK YEAH");
+    
+    }
+    
   }
 
 
