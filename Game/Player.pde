@@ -24,6 +24,7 @@ public class Player {
     //Fishingrod kan deles opp i to funskjoner
     line(xPos+90, 147, xPos+40, 178);
     line(xPos+90, 147, xPos+50, 178);
+    //Fishingline
     line(xPos+90, 147, xPos+90, 155 +rod);
     //draw hook
     image(hook, xPos+71, 150+rod);
