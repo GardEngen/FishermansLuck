@@ -82,7 +82,7 @@ public class GameElement {
     animation = new PImage[4];
     delay = (delay + 0.05) % 4;
     currentFrame =  int(delay);
-    animation[currentFrame] = fishP.get(20*currentFrame, 0, 100, 54);
+    animation[currentFrame] = fishP.get(20*currentFrame, 0, 55, 30);
     image(animation[currentFrame], xPosition, yPosition);
   }
 }
