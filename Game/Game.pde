@@ -1,7 +1,7 @@
 private Player player;
 private Graphic graphic;
 private ArrayList <Catch> fish;
-private int numberOfFish = 6;
+private int numberOfFish = 1;
 
 void setup ()
 {

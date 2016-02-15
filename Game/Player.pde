@@ -54,4 +54,10 @@ public class Player {
     float hitBoxXPos = control.horizontalMove() + 77;
     return hitBoxXPos;
   }
+  //Returns Hitbox y position
+  public float getHitboxYPosition()
+  {
+    float hitBoxYPos = control.rodInteraction() + 155 ;
+    return hitBoxYPos;
+  }
 }

@@ -8,7 +8,7 @@ public class GameElement {
   private boolean startLeft;
   private int currentFrame;
   private float delay;
-  
+
   private Player player;
 
   public GameElement() {
@@ -17,7 +17,7 @@ public class GameElement {
     //println(startPosition);
     // startPosition = 0;
     startLeft = setStartPosition();
-    
+
     player = new Player();
   }
 
@@ -52,16 +52,27 @@ public class GameElement {
       drawElement(image);
     }
   }
-    //hitbox
+  //hitbox
   public void hitboxAction()
   {
-    float pos = player.getHitboxXPosition();
-    if(xPosition >= pos+10)
+    float xPositionFish = xPosition;
+    float yPositionFish = yPosition;
+    float xPosHitbox = player.getHitboxXPosition();
+    float yPosHitbox = player.getHitboxYPosition();
+    //println("hitboxposiXX: " +xPosHitbox);
+    println("hitboxposY: " +yPosHitbox);
+    //println("fiskX: " +xPositionFish);
+    println("fiskY: " +yPositionFish);
+
+
+    if (startLeft)
     {
-    //println("FUCK YEAH");
-    
+      if (xPositionFish >= xPosHitbox-10 &&
+      ((yPositionFish >= yPosHitbox -10) || (yPositionFish <= yPosHitbox +10)))
+      {
+        println("FUCK YEAH");
+      }
     }
-    
   }
 
 
@@ -71,7 +82,7 @@ public class GameElement {
     animation = new PImage[4];
     delay = (delay + 0.05) % 4;
     currentFrame =  int(delay);
-    animation[currentFrame] = fishP.get(20*currentFrame, 0, 20, 15);
+    animation[currentFrame] = fishP.get(20*currentFrame, 0, 100, 54);
     image(animation[currentFrame], xPosition, yPosition);
   }
 }
