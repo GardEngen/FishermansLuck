@@ -7,14 +7,14 @@ public class Catch extends GameElement {
   }
   
     public void drawAllFish() {
-    clownFish();
+    haraldFish();
   }
   
-  public void clownFish() {
-    PImage image = loadImage("Bilder.Grafikk/Harald1update.png");
-    elementMovement(speed, image);
-   //kanskje ikke den lureste plassen å legge den #diskuteres
-    hitboxAction();
+  public void haraldFish() {
+    PImage image = loadImage("Bilder.Grafikk/Harald1update3.png");
+    PImage imageRevers = loadImage("Bilder.Grafikk/Harald1update3Revers.png");
+    elementMovement(speed, image, imageRevers);
+    hitboxAction();   
   }
   
 }

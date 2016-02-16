@@ -35,7 +35,7 @@ public class GameElement {
   }
 
   //Changes the speed, and moves the object
-  public void elementMovement(float speed, PImage image) {
+  public void elementMovement(float speed, PImage image, PImage imageRevers) {
 
     //if (startLeft == true)
     ////&& (xPosition < width + 40))
@@ -46,13 +46,13 @@ public class GameElement {
     if ((startLeft == false)&&(xPosition > -20))
     {
       xPosition = xPosition - speed;
-      drawElement(image);
+      drawElement(imageRevers);
     } else if ((startLeft == true)&&(xPosition < width + 40)) {
       xPosition = xPosition + speed;
       drawElement(image);
     }
   }
-  //hitbox
+  //hitbox under utvikling
   public void hitboxAction()
   {
     float xPositionFish = xPosition;
@@ -60,29 +60,29 @@ public class GameElement {
     float xPosHitbox = player.getHitboxXPosition();
     float yPosHitbox = player.getHitboxYPosition();
     //println("hitboxposiXX: " +xPosHitbox);
-    println("hitboxposY: " +yPosHitbox);
+    //println("hitboxposY: " +yPosHitbox);
     //println("fiskX: " +xPositionFish);
-    println("fiskY: " +yPositionFish);
-
-
+    //println("fiskY: " +yPositionFish);
     if (startLeft)
     {
       if (xPositionFish >= xPosHitbox-10 &&
       ((yPositionFish >= yPosHitbox -10) || (yPositionFish <= yPosHitbox +10)))
       {
-        println("FUCK YEAH");
+        //println("FUCK YEAH");
       }
     }
   }
 
 
   //Draws the object, sets the position and animates the images
+  //Gard skal fikse sånn at denne endres utifra størrelse på fisk. 
+  //Gard skal fikse bere kodestil
   public void drawElement(PImage picture) {
     fishP = picture;
-    animation = new PImage[4];
-    delay = (delay + 0.05) % 4;
+    animation = new PImage[8];
+    delay = (delay + 0.80) % 8;
     currentFrame =  int(delay);
-    animation[currentFrame] = fishP.get(20*currentFrame, 0, 55, 30);
+    animation[currentFrame] = fishP.get(100*currentFrame, 0, 100, 55);
     image(animation[currentFrame], xPosition, yPosition);
   }
 }

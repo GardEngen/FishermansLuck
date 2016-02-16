@@ -29,7 +29,7 @@ public class Control {
     if (keyPressed) {
       if (key == spaceKey)
       {
-        fishingLine = 70;
+        fishingLine = 150;
         hookInWater = true;
       }
     }
@@ -38,11 +38,11 @@ public class Control {
     {
       if (keyCode == DOWN && (hookInWater) && fishingLine < 500)
       { 
-        fishingLine = fishingLine + 5;
+        fishingLine = fishingLine + 10;
       }
       if (keyCode == UP && (hookInWater) && fishingLine > 100)
       {
-        fishingLine = fishingLine - 5;
+        fishingLine = fishingLine - 10;
       }
     }
     return fishingLine;
