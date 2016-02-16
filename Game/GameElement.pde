@@ -50,11 +50,11 @@ public class GameElement {
     if ((startLeft == false)&&(xPosition > -20))
     {
       xPosition = xPosition - speed;
-      rect(xPosition, yPosition, 100, 55);
+      //rect(xPosition, yPosition, 100, 55);
       drawElement(imageRevers);
     } else if ((startLeft == true)&&(xPosition < width + 40)) {
       xPosition = xPosition + speed;
-      rect(xPosition, yPosition, 100, 55);
+      //rect(xPosition, yPosition, 100, 55);
       drawElement(image);
     }
   }
@@ -97,10 +97,8 @@ public class GameElement {
   //Draws the object, sets the position and animates the images
   public void drawElement(PImage picture) {
     fishP = picture;
-    //i is not in use yet, some problem with animation = new PImage[i]
-    int i = numberOfImages; 
-    animation = new PImage[8];
-    AnimationDelay = (AnimationDelay + imageDelay) % i;
+    animation = new PImage[numberOfImages];
+    AnimationDelay = (AnimationDelay + imageDelay) % numberOfImages;
     currentFrame =  int(AnimationDelay);
     animation[currentFrame] = fishP.get(imageXCut*currentFrame, 0, imageXCut, imageYCut);
     image(animation[currentFrame], xPosition, yPosition);

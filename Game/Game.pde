@@ -1,7 +1,7 @@
 private Player player;
 private Graphic graphic;
 private ArrayList <Catch> fish;
-private int numberOfFish = 1;
+private int numberOfFish = 3;
 
 void setup ()
 {
@@ -18,7 +18,7 @@ void draw ()
   graphic.drawBackground();
   player.boat();
   for (int i = 0; i < numberOfFish; i++) {
-    fish.get(i).drawAllFish() ;
+    fish.get(i).drawAllFish();
   }
 }
 
