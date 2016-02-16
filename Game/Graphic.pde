@@ -8,7 +8,7 @@ public class Graphic {
   }
   public void drawBackground()
   {
-    background = loadImage("Bilder.Grafikk/background.png");
-    image(background, 0, 0);
+    background = loadImage("Bilder.Grafikk/background2.png");
+    image(background, 0, 0, 1000, 700);
   }
 }
