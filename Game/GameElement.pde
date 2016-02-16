@@ -62,7 +62,7 @@ public class GameElement {
     float xPosHitbox = player.getHitboxXPosition();
     float yPosHitbox = player.getHitboxYPosition();
 
-    boolean treff;
+    boolean hit;
     println("hitboxposiXX: " +xPosHitbox);
     //println("hitboxposY: " +yPosHitbox);
     println("fiskX: " +xPositionFish);
@@ -71,13 +71,13 @@ public class GameElement {
     {
       if (xPositionFish >= xPosHitbox)
       {
-        treff = true;
-        println(treff);
+        hit = true;
+        println(hit);
       }
       else
       {
-      treff = false;
-      println(treff);
+      hit = false;
+      println(hit);
       }
     }
   }
@@ -85,7 +85,7 @@ public class GameElement {
 
   //Draws the object, sets the position and animates the images
   //Gard skal fikse sånn at denne endres utifra størrelse på fisk. 
-  //Gard skal fikse bere kodestil
+  //Gard skal fikse bedre kodestil
   public void drawElement(PImage picture) {
     fishP = picture;
     animation = new PImage[8];
