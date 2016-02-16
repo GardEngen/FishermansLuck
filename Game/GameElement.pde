@@ -46,9 +46,11 @@ public class GameElement {
     if ((startLeft == false)&&(xPosition > -20))
     {
       xPosition = xPosition - speed;
+      rect(xPosition, yPosition, 100, 55);
       drawElement(imageRevers);
     } else if ((startLeft == true)&&(xPosition < width + 40)) {
       xPosition = xPosition + speed;
+      rect(xPosition, yPosition, 100, 55);
       drawElement(image);
     }
   }
@@ -59,16 +61,23 @@ public class GameElement {
     float yPositionFish = yPosition;
     float xPosHitbox = player.getHitboxXPosition();
     float yPosHitbox = player.getHitboxYPosition();
-    //println("hitboxposiXX: " +xPosHitbox);
+
+    boolean treff;
+    println("hitboxposiXX: " +xPosHitbox);
     //println("hitboxposY: " +yPosHitbox);
-    //println("fiskX: " +xPositionFish);
+    println("fiskX: " +xPositionFish);
     //println("fiskY: " +yPositionFish);
     if (startLeft)
     {
-      if (xPositionFish >= xPosHitbox-10 &&
-      ((yPositionFish >= yPosHitbox -10) || (yPositionFish <= yPosHitbox +10)))
+      if (xPositionFish >= xPosHitbox)
       {
-        //println("FUCK YEAH");
+        treff = true;
+        println(treff);
+      }
+      else
+      {
+      treff = false;
+      println(treff);
       }
     }
   }
