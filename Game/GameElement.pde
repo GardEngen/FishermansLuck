@@ -7,7 +7,11 @@ public class GameElement {
   private PImage fishP;
   private boolean startLeft;
   private int currentFrame;
-  private float delay;
+  private float imageDelay;
+  private int imageXCut;
+  private int imageYCut;
+  private int numberOfImages;
+  private float AnimationDelay;
 
   private Player player;
 
@@ -63,35 +67,42 @@ public class GameElement {
     float yPosHitbox = player.getHitboxYPosition();
 
     boolean hit;
-    println("hitboxposiXX: " +xPosHitbox);
+    //println("hitboxposiXX: " +xPosHitbox);
     //println("hitboxposY: " +yPosHitbox);
-    println("fiskX: " +xPositionFish);
+    //println("fiskX: " +xPositionFish);
     //println("fiskY: " +yPositionFish);
     if (startLeft)
     {
       if (xPositionFish >= xPosHitbox)
       {
         hit = true;
-        println(hit);
-      }
-      else
+        //println(hit);
+      } else
       {
-      hit = false;
-      println(hit);
+        hit = false;
+        //println(hit);
       }
     }
+  }
+  
+  public void imageDivider(int numberOfpictures, int xCut, int yCut, float delay)
+  {
+    imageXCut = xCut;
+    imageYCut = yCut;
+    numberOfImages = numberOfpictures;
+    imageDelay = delay;
   }
 
 
   //Draws the object, sets the position and animates the images
-  //Gard skal fikse sånn at denne endres utifra størrelse på fisk. 
-  //Gard skal fikse bedre kodestil
   public void drawElement(PImage picture) {
     fishP = picture;
+    //i is not in use yet, some problem with animation = new PImage[i]
+    int i = numberOfImages; 
     animation = new PImage[8];
-    delay = (delay + 0.80) % 8;
-    currentFrame =  int(delay);
-    animation[currentFrame] = fishP.get(100*currentFrame, 0, 100, 55);
+    AnimationDelay = (AnimationDelay + imageDelay) % i;
+    currentFrame =  int(AnimationDelay);
+    animation[currentFrame] = fishP.get(imageXCut*currentFrame, 0, imageXCut, imageYCut);
     image(animation[currentFrame], xPosition, yPosition);
   }
 }
