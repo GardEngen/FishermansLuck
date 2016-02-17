@@ -1,7 +1,7 @@
 private Player player;
 private Graphic graphic;
 private ArrayList <Catch> fish;
-private int numberOfFish = 3;
+private int numberOfFish = 8;
 
 void setup ()
 {
@@ -23,7 +23,7 @@ void draw ()
 }
 
 
-public void createfish()
+private void createfish()
 {
   for (int i=0; i<numberOfFish; i++) {
     fish.add(new Catch());

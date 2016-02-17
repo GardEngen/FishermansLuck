@@ -26,7 +26,7 @@ public class GameElement {
   }
 
   //Sets the start position, left or right
-  public boolean setStartPosition() {
+  private boolean setStartPosition() {
     if (startPosition == 0) {
       xPosition = -40;
       startLeft = true;

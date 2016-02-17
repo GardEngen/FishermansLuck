@@ -5,38 +5,46 @@ public class Catch extends GameElement {
   private int yCut;
   private int numberOfpictures;
   private float delay;
+  //all fish images
+  private PImage haraldImage;
+  private PImage haraldImageRevers;
+  private PImage guriImage;
+  private PImage guriImageRevers;
 
   public Catch() {
-    speed = random(1, 6);
-  }
+    speed =random(5, 10);
 
+    //load all fish images    
+    haraldImage = loadImage("Bilder.Grafikk/Harald1update3.png");
+    haraldImageRevers = loadImage("Bilder.Grafikk/Harald1update3Revers.png");
+    guriImage = loadImage("Bilder.Grafikk/GuriAnimation.png"); 
+    guriImageRevers = loadImage("Bilder.Grafikk/GuriAnimationRevers.png");
+  }
+  //draw all creatures in the deep
   public void drawAllFish() {
     //haraldFish();
     guriFish();
   }
+  //Creats a HaraldFish
+  private void haraldFish() {
 
-  public void haraldFish() {
-    PImage image = loadImage("Bilder.Grafikk/Harald1update3.png");
-    PImage imageRevers = loadImage("Bilder.Grafikk/Harald1update3Revers.png");
     xCut = 100;
     yCut = 55;
     numberOfpictures = 8;
     delay = 0.80;
     imageDivider(numberOfpictures, xCut, yCut, delay);
-    elementMovement(speed, image, imageRevers);
+    elementMovement(speed, haraldImage, haraldImageRevers);
 
     hitboxAction();
   }
 
-  //Not it use yet.
-  public void guriFish() {
-    PImage image = loadImage("Bilder.Grafikk/GuriAnimation.png"); 
-    PImage imageRevers = loadImage("Bilder.Grafikk/GuriAnimationRevers.png");
+  //Creats a GuriFish
+  private void guriFish() {
     xCut = 120;
     yCut = 89;
     numberOfpictures = 8;
     delay = 0.80;
     imageDivider(numberOfpictures, xCut, yCut, delay);
-    elementMovement(speed, image, imageRevers);
+    elementMovement(speed, guriImage, guriImageRevers);
   }
 }
