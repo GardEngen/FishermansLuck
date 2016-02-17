@@ -10,9 +10,11 @@ public class Catch extends GameElement {
   private PImage haraldImageRevers;
   private PImage guriImage;
   private PImage guriImageRevers;
+  private int fishType;
 
   public Catch() {
     speed = random(2, 6);
+    fishType = int(random(-1,2));
     //load all fish images    
     haraldImage = loadImage("Bilder.Grafikk/Harald1update3.png");
     haraldImageRevers = loadImage("Bilder.Grafikk/Harald1update3Revers.png");
@@ -20,9 +22,15 @@ public class Catch extends GameElement {
     guriImageRevers = loadImage("Bilder.Grafikk/GuriAnimationRevers.png");
   }
   //draw all creatures in the deep
-  public void drawAllFish() {
-    //haraldFish();
-    guriFish();
+    public void drawAllFish() {
+    if(fishType == 0)
+    {
+      haraldFish();
+    }
+    if(fishType == 1)
+    {
+      guriFish();
+    }
   }
   
   //Creats a HaraldFish

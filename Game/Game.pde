@@ -6,6 +6,10 @@ private Player player;
 private Graphic graphic;
 private ArrayList <Catch> fish;
 private int numberOfFish = 2;
+private InGameDisplay IGDisplay;
+//under utvikling
+private Button button;
+private boolean sound =true;
 
 void setup ()
 {
@@ -13,19 +17,21 @@ void setup ()
   frameRate(60);
   player = new Player();
   graphic = new Graphic();
-
+  IGDisplay = new InGameDisplay();
   fish = new ArrayList <Catch>();
   createfish();
   //Music
   minim = new Minim(this); //audio context
-  backgroundMusic();
+  backgroundMusic(sound);
   
+  button = new Button();
 }
 
 void draw ()
 {
   graphic.drawBackground();
   player.boat();
+  IGDisplay.drawButton();
   for (int i = 0; i < numberOfFish; i++) {
     fish.get(i).drawAllFish();
   }
@@ -40,10 +46,37 @@ private void createfish()
   }
 }
 
-private void backgroundMusic()
+//under utvikling
+private void backgroundMusic(boolean sound)
 {
-  audioPlayer = minim.loadFile("Lyd/Fishing.mp3", 2048);
- // audioPlayer.play();
+  if (sound == true) {
+    audioPlayer = minim.loadFile("Lyd/Fishing.mp3", 2048);
+    audioPlayer.play();
+  }
+  if (sound == false)
+  {
+    audioPlayer.close();
+  minim.stop();
+  }
+}
+
+//under utvikling
+public void mouseReleased()
+{
+  float x = button.getXButton();
+  float y = button.getYButton();
+  float distance = sqrt((x - mouseX) * (x - mouseX) + (y - mouseY) + (y - mouseY));
+  if (distance <=40 &&(sound==true))
+  {  
+    sound = false;
+    backgroundMusic(sound);
+
+  }
+  if (distance <=40 &&(sound==false))
+  {
+    
+    backgroundMusic(sound);
+  }
 }
 
 private void caughtSomething() {
