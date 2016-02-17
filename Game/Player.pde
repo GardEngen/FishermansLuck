@@ -27,11 +27,6 @@ public class Player {
     line(xPos+300, 50, xPos+300, 63 +rod);
     //draw hook
     image(hook, xPos+281, 57+rod);
-    //draw hitbox
-    int hitBoxYPos= 154+rod;
-    //stroke(255, 0, 0);
-    //noFill();
-    //rect(getHitboxXPosition(), hitBoxYPos, 16, 29);
   }
 
   //Sets new boat speed
@@ -47,16 +42,25 @@ public class Player {
   }
 
   //Returns Hitbox x position
-  public float getHitboxXPosition()
+  public int getHitboxCenterXPos()
   {
-    float hitBoxXPos = control.horizontalMove() + 77;
-    return hitBoxXPos;
+    int pos = 270 + control.horizontalMove() + (hook.width/2);
+    return pos;
   }
+  
   //Returns Hitbox y position
-  public float getHitboxYPosition()
+  public int getHitboxCenterYPos()
   {
-    float hitBoxYPos = control.rodInteraction() + 155 ;
+    int hitBoxYPos = 65+control.rodInteraction() + (hook.height/2);
     return hitBoxYPos;
+  }
+  
+  public int getHitboxHeight() {
+   return hook.height;
+  }
+  
+   public int getHitboxWidth() {
+   return hook.width;
   }
 
   //Draws the Fisher, animates the images

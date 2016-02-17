@@ -12,8 +12,7 @@ public class Catch extends GameElement {
   private PImage guriImageRevers;
 
   public Catch() {
-    speed =random(5, 10);
-
+    speed = random(2, 6);
     //load all fish images    
     haraldImage = loadImage("Bilder.Grafikk/Harald1update3.png");
     haraldImageRevers = loadImage("Bilder.Grafikk/Harald1update3Revers.png");
@@ -25,26 +24,29 @@ public class Catch extends GameElement {
     //haraldFish();
     guriFish();
   }
+  
   //Creats a HaraldFish
-  private void haraldFish() {
+  public void haraldFish() {
 
     xCut = 100;
-    yCut = 55;
+    yCut = haraldImage.height;
     numberOfpictures = 8;
     delay = 0.80;
     imageDivider(numberOfpictures, xCut, yCut, delay);
     elementMovement(speed, haraldImage, haraldImageRevers);
-
-    hitboxAction();
   }
 
   //Creats a GuriFish
-  private void guriFish() {
+  public void guriFish() {
     xCut = 120;
-    yCut = 89;
+    yCut = guriImage.height;
     numberOfpictures = 8;
     delay = 0.80;
     imageDivider(numberOfpictures, xCut, yCut, delay);
     elementMovement(speed, guriImage, guriImageRevers);
+  }
+  
+  public void isCaught() {
+    speed = 0;
   }
 }

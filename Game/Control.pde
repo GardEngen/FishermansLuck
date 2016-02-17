@@ -36,13 +36,13 @@ public class Control {
     //if the hook is in the water, the player can move it
     if (keyPressed && (key == CODED))
     {
-      if (keyCode == DOWN && (hookInWater) && fishingLine < 500)
+      if (keyCode == DOWN && (hookInWater) && fishingLine < 550)
       { 
-        fishingLine = fishingLine + 10;
+        fishingLine = fishingLine + 5;
       }
       if (keyCode == UP && (hookInWater) && fishingLine > 100)
       {
-        fishingLine = fishingLine - 10;
+        fishingLine = fishingLine - 5;
       }
     }
     return fishingLine;
