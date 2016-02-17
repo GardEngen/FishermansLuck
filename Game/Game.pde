@@ -1,3 +1,7 @@
+import ddf.minim.*;
+
+private AudioPlayer audioPlayer;
+private Minim minim;
 private Player player;
 private Graphic graphic;
 private ArrayList <Catch> fish;
@@ -11,6 +15,10 @@ void setup ()
   graphic = new Graphic();
   fish = new ArrayList <Catch>();
   createfish();
+  //Music
+  minim = new Minim(this); //audio context
+  backgroundMusic();
+  
 }
 
 void draw ()
@@ -28,4 +36,10 @@ private void createfish()
   for (int i=0; i<numberOfFish; i++) {
     fish.add(new Catch());
   }
+}
+
+private void backgroundMusic()
+{
+  audioPlayer = minim.loadFile("Lyd/Fishing.mp3", 2048);
+  audioPlayer.play();
 }
