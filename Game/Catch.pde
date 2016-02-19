@@ -21,8 +21,9 @@ public class Catch extends GameElement {
     guriImage = loadImage("Bilder.Grafikk/GuriAnimation.png"); 
     guriImageRevers = loadImage("Bilder.Grafikk/GuriAnimationRevers.png");
   }
+  
   //draw all creatures in the deep
-    public void drawAllFish() {
+  public void drawAllFish() {
     if(fishType == 0)
     {
       haraldFish();
