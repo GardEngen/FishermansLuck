@@ -1,4 +1,4 @@
-public class SoundButton extends Button{
+public class SoundButton {
   private float xPosition = 920;
   private float yPosition = 7;
   private PImage SoundOn;
