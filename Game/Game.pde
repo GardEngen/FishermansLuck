@@ -19,6 +19,7 @@ private final int STATE_CONTINUE = 5;
 private final int STATE_TUTUROIAL = 6;
 private int STATE = STATE_MENU;
 
+
 void setup ()
 {
   size(1000, 700);
@@ -119,7 +120,7 @@ public void mousePressed() {
   // Checks if the use are pressing a button
   IGDisplay.buttonPressed();
   // if true set buttonState
-  if (IGDisplay.getHasPressed()) {
+  if (IGDisplay.getBeenPressed()) {
     boolean soundButtonState=IGDisplay.buttonState();
     if (soundButtonState)
     {

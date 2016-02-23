@@ -1,27 +1,37 @@
-public class SoundButton {
+public class SoundButton extends Button{
   private float xPosition = 920;
   private float yPosition = 7;
-  private PImage SoundOn;
-  private PImage SoundOff;
+  private PImage soundOn;
+  private PImage soundOff;
   
   public SoundButton() {
-    SoundOn = loadImage("Knapp/ButtonOntest.png");
-    SoundOff = loadImage("Knapp/ButtonOfftest.png");
+    soundOn = loadImage("Knapp/ButtonOntest.png");
+    soundOff = loadImage("Knapp/ButtonOfftest.png");
+
   }
 
-  public void displaySoundOn() {
-    image(SoundOn, xPosition, yPosition);
+  //public void displaySoundOn() {
+  //  displayImage(soundOn,xPosition,yPosition);
+  //  image(soundOn, xPosition, yPosition);
+  //}
+  //public void displaySoundOff() {
+  //  displayImage(soundOff,xPosition,yPosition);
+  //  image(soundOff, xPosition, yPosition);
+  //}
+  
+  
+  public void drawButton(){
+  buttonInfo(xPosition, yPosition, soundOn, soundOff);
+  
   }
-  public void displaySoundOff() {
-    image(SoundOff, xPosition, yPosition);
-  }
-  public float getXPos() {
-    return xPosition;
-  }
-  public float getYPos() {
-    return yPosition;
-  }
-  public PImage getImage() {
-    return SoundOn;
-  }
+  
+  //public float getXPos() {
+  //  return xPosition;
+  //}
+  //public float getYPos() {
+  //  return yPosition;
+  //}
+  //public PImage getImage() {
+  //  return soundOff;
+  //}
 }
