@@ -7,7 +7,7 @@ public class SoundButton extends Button{
   public SoundButton() {
     soundOn = loadImage("Knapp/ButtonOntest.png");
     soundOff = loadImage("Knapp/ButtonOfftest.png");
-
+    buttonInfo(xPosition, yPosition, soundOn, soundOff);
   }
 
   //public void displaySoundOn() {
@@ -20,10 +20,10 @@ public class SoundButton extends Button{
   //}
   
   
-  public void drawButton(){
-  buttonInfo(xPosition, yPosition, soundOn, soundOff);
+  //public void dButton(){
+  //  buttonInfo(xPosition, yPosition, soundOn, soundOff);
   
-  }
+  //}
   
   //public float getXPos() {
   //  return xPosition;

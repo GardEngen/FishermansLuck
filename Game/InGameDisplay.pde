@@ -4,26 +4,26 @@ class InGameDisplay {
   InGameDisplay()
   {
     s = new SoundButton();
-    button = new Button();
+    //button = new Button();
     
   }
 
   public void drawButton()
   {  
     s.drawButton();
-    button.drawButton();
+    //button.drawButton();
    
   }
 
   public void buttonPressed() {
-    button.buttonPressed();
+    s.buttonPressed();
   }
   public boolean buttonState() { 
-    return button.getButtonState();
+    return s.getButtonState();
   }
 
   public boolean getBeenPressed()
   {
-    return button.getBeenPressed();
+    return s.getBeenPressed();
   }
 }
