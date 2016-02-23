@@ -8,13 +8,15 @@ public class Player {
   private int currentFrameOfFisher;
   private float fisherAnimationDelay;
   private PImage fisher;
-  private PImage hook;
+  private PImage hookM;
+  private PImage hookU;
 
   public Player() {
     control = new Control();
     control.setSpeedX(boatSpeed);
     control.setPositionX(boatPosition);
-    hook = loadImage("Bilder.Grafikk/hook.png");
+    hookM = loadImage("Bilder.Grafikk/hook1copy.png");
+    hookU = loadImage("Bilder.Grafikk/hookUtencopy.png");
     fisher = loadImage("Bilder.Grafikk/fisker.png");
   }
 
@@ -24,9 +26,9 @@ public class Player {
     int rod = control.rodInteraction();
     drawFisher(); 
     //Fishingline
-    line(xPos+300, 50, xPos+300, 63 +rod);
+    line(xPos+299, 57, xPos+300, 63+rod);
     //draw hook
-    image(hook, xPos+281, 57+rod);
+    image(hookM, xPos+285, 57+rod);
   }
 
   //Sets new boat speed
@@ -44,23 +46,23 @@ public class Player {
   //Returns Hitbox x position
   public int getHitboxCenterXPos()
   {
-    int pos = 270 + control.horizontalMove() + (hook.width/2);
+    int pos = 270 + control.horizontalMove() + (hookM.width/2);
     return pos;
   }
   
   //Returns Hitbox y position
   public int getHitboxCenterYPos()
   {
-    int hitBoxYPos = 65+control.rodInteraction() + (hook.height/2);
+    int hitBoxYPos = 65+control.rodInteraction() + (hookM.height/2);
     return hitBoxYPos;
   }
   
   public int getHitboxHeight() {
-   return hook.height;
+   return hookM.height;
   }
   
    public int getHitboxWidth() {
-   return hook.width;
+   return hookM.width;
   }
 
   //Draws the Fisher, animates the images

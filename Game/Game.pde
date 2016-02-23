@@ -146,8 +146,6 @@ private void caughtSomething() {
     catchHeight = temp.getYCut();
     catchY = temp.getCenterYHit(); //centered
     catchX = temp.getCenterXHit(); //centered
-    //println("fisk x " + catchX + "rod x " + rodX);
-    //println("fisk y " + catchY + "rod y " + rodY);
 
     if ( dist(rodX, rodY, catchX, catchY) <= catchHeight/2 ) {
       temp.isCaught();
