@@ -10,6 +10,8 @@ public class Player {
   private PImage fisher;
   private PImage hookM;
   private PImage hookU;
+  private GameElement newCatch;
+  private boolean caught;
 
   public Player() {
     control = new Control();
@@ -18,6 +20,7 @@ public class Player {
     hookM = loadImage("Bilder.Grafikk/hook1copy.png");
     hookU = loadImage("Bilder.Grafikk/hookUtencopy.png");
     fisher = loadImage("Bilder.Grafikk/fisker.png");
+    caught = false;
   }
 
   //Manages the boatMovement
@@ -28,7 +31,13 @@ public class Player {
     //Fishingline
     line(xPos+299, 57, xPos+300, 63+rod);
     //draw hook
-    image(hookM, xPos+285, 57+rod);
+    //image(hookM, xPos+285, 57+rod);
+    if(caught == true) {
+      image(hookU, xPos+292, 57+rod);
+      catchPosition(xPos+278, 50+rod);
+    } else {
+      image(hookM, xPos+285, 57+rod);
+    }
   }
 
   //Sets new boat speed
@@ -44,27 +53,17 @@ public class Player {
   }
 
   //Returns Hitbox x position
-  public int getHitboxCenterXPos()
-  {
+  public int getHitboxCenterXPos() {
     int pos = 270 + control.horizontalMove() + (hookM.width/2);
     return pos;
   }
   
   //Returns Hitbox y position
-  public int getHitboxCenterYPos()
-  {
+  public int getHitboxCenterYPos(){
     int hitBoxYPos = 65+control.rodInteraction() + (hookM.height/2);
     return hitBoxYPos;
   }
   
-  public int getHitboxHeight() {
-   return hookM.height;
-  }
-  
-   public int getHitboxWidth() {
-   return hookM.width;
-  }
-
   //Draws the Fisher, animates the images
   public void drawFisher() {
     int xPosFisher = control.horizontalMove();
@@ -73,5 +72,20 @@ public class Player {
     currentFrameOfFisher =  int(fisherAnimationDelay);
     fisherAnimation[currentFrameOfFisher] = fisher.get(300*currentFrameOfFisher, 0, 300, 220);
     image(fisherAnimation[currentFrameOfFisher], xPosFisher, 30);
+  }
+  
+  public void myCatch(GameElement newCatch) {
+    this.newCatch = newCatch;
+    caught = true;
+  }
+  
+  public void catchPosition(int x, int y) {
+    int xPos = x;
+    int rod = y;
+    newCatch.onTheHook(xPos, rod);
+  }
+  
+  public boolean gotCatch() {
+    return caught;
   }
 }

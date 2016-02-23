@@ -90,7 +90,11 @@ public void play() {
   for (int i = 0; i < numberOfFish; i++) {
     fish.get(i).drawAllFish();
   }
-  caughtSomething();
+  
+  if(player.gotCatch() == false) {
+  catchSomething();
+  }
+  
 }
 
 //Creats fish, an add the to an arraylist
@@ -142,7 +146,7 @@ public void mousePressed() {
 }
 
 //Hitbox detection for catching fish
-private void caughtSomething() {
+private void catchSomething() {
   float catchX;
   float catchY;
   float catchHeight;
@@ -155,7 +159,7 @@ private void caughtSomething() {
     catchX = temp.getCenterXHit(); //centered
 
     if ( dist(rodX, rodY, catchX, catchY) <= catchHeight/2 ) {
-      temp.isCaught();
+      player.myCatch(temp.isCaught());
     }
   }
 } 
