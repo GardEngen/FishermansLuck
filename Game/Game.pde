@@ -7,10 +7,8 @@ private Graphic graphic;
 private Control control;
 private Menu menu;
 private ArrayList <Catch> fish;
-private int numberOfFish = 2;
+private int numberOfFish = 5;
 private InGameDisplay IGDisplay;
-//under utvikling
-private Button button;
 private boolean sound =true;
 
 private final int STATE_MENU = 1;
@@ -28,19 +26,19 @@ void setup ()
   player = new Player();
   graphic = new Graphic();
   menu = new Menu();
-  control = new Control();
+  control = new Control(); 
   IGDisplay = new InGameDisplay();
   fish = new ArrayList <Catch>();
   createfish();
-  //Music
-  minim = new Minim(this); //audio context
-  backgroundMusic(sound);
-
-  button = new Button();
+  //Music if sound == true play background music
+  if (sound == true) {
+    playBackgroundMusic(sound);
+  }
 }
 
 void draw () {
-  run();
+  //run();
+  play();
 }
 
 //Runs the game
@@ -103,10 +101,11 @@ private void createfish() {
   }
 }
 
-//under utvikling
-private void backgroundMusic(boolean sound) {
-  if (sound == true) {
-    audioPlayer = minim.loadFile("Lyd/Fishing.mp3", 2048);
+//background music function.
+private void playBackgroundMusic(boolean sound) {
+  if (sound) {
+    minim = new Minim(this);
+    audioPlayer = minim.loadFile("Lyd/Fishing2.mp3");
     audioPlayer.play();
   }
   if (sound == false)
@@ -116,20 +115,20 @@ private void backgroundMusic(boolean sound) {
   }
 }
 
-//under utvikling
-public void mouseReleased() {
-  float x = button.getXButton();
-  float y = button.getYButton();
-  float distance = sqrt((x - mouseX) * (x - mouseX) + (y - mouseY) + (y - mouseY));
-  if (distance <=40 &&(sound==true))
-  {  
-    sound = false;
-    backgroundMusic(sound);
-  }
-  if (distance <=40 &&(sound==false))
-  {
-
-    backgroundMusic(sound);
+public void mousePressed() {
+  // Checks if the use are pressing a button
+  IGDisplay.buttonPressed();
+  // if true set buttonState
+  if (IGDisplay.getHasPressed()) {
+    boolean soundButtonState=IGDisplay.buttonState();
+    if (soundButtonState)
+    {
+      playBackgroundMusic(soundButtonState);
+    }
+    if (soundButtonState == false)
+    {
+      playBackgroundMusic(soundButtonState);
+    }
   }
 }
 
@@ -146,8 +145,8 @@ private void caughtSomething() {
     catchHeight = temp.getYCut();
     catchY = temp.getCenterYHit(); //centered
     catchX = temp.getCenterXHit(); //centered
-    println("fisk x " + catchX + "rod x " + rodX);
-    println("fisk y " + catchY + "rod y " + rodY);
+    //println("fisk x " + catchX + "rod x " + rodX);
+    //println("fisk y " + catchY + "rod y " + rodY);
 
     if ( dist(rodX, rodY, catchX, catchY) <= catchHeight/2 ) {
       temp.isCaught();

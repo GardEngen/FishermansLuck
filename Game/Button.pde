@@ -1,36 +1,58 @@
 class Button {
-  private PImage SoundOn;
-  private PImage SoundOff;
-  private PImage image;
-  private float xPosition = 920;
-  private float yPosition = 7;
+  private PImage buttonImage;
+  private boolean currentState;
+  private float xPosition;
+  private float yPosition;
+  private boolean hasPressed;
+  private SoundButton s;
+
   Button()
   {
-    SoundOn = loadImage("Knapp/ButtonOntest.png");
-    SoundOff = loadImage("Knapp/ButtonOfftest.png");
+    s = new SoundButton();
+    xPosition = s.getXPos();
+    yPosition = s.getYPos();
+    buttonImage = s.getImage(); 
+    currentState = true;
   }
+
   public void drawButton()
   {
-    SoundOff();
-    //SoundOn();
+    if (currentState == true) {
+      s.displaySoundOn();
+    }
+    if (currentState == false) {
+      s.displaySoundOff();
+    }
   }
-  public void SoundOn()
+
+
+  public void buttonPressed()
   {
-    image = SoundOn;
-    image(image, xPosition, yPosition);
+    
+    if ( (mouseX>xPosition) && (mouseX < (xPosition + buttonImage.width)) && 
+      (mouseY>yPosition) && (mouseY < (yPosition + buttonImage.height)) ) {
+      //println("!currentState = " + !currentState);
+      boolean newState;
+      newState = !currentState;
+      currentState = newState;
+      //has pressed the button
+      hasPressed = true;
+    }
+    // if the user is not pressing the button
+    if ( !((mouseX>xPosition) && (mouseX < (xPosition + buttonImage.width)) && 
+      (mouseY>yPosition) && (mouseY < (yPosition + buttonImage.height))) )
+      {
+        hasPressed=false;
+      
+      }
+    
   }
-  public void SoundOff()
-  { 
-    image = SoundOff;
-    image(image, xPosition, yPosition);
-  }
-  
-  public float getXButton()
+  public boolean getButtonState()
   {
-    return xPosition;
+    return currentState;    
   }
-    public float getYButton()
+  public boolean getHasPressed()
   {
-    return yPosition;
+    return hasPressed;
   }
 }
