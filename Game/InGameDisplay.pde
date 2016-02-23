@@ -1,29 +1,31 @@
 class InGameDisplay {
   private Button button;
   private SoundButton s;
+  private PauseButton p;
   InGameDisplay()
   {
-    s = new SoundButton();
-    //button = new Button();
-    
+    s = new SoundButton();   
+    p = new PauseButton();
   }
 
   public void drawButton()
   {  
-    s.drawButton();
-    //button.drawButton();
-   
+    s.drawButton();  
+    p.drawButton();
   }
 
-  public void buttonPressed() {
-    s.buttonPressed();
+  public boolean soundButtonPressed() {
+    return s.buttonPressed();
   }
-  public boolean buttonState() { 
-    return s.getButtonState();
+  public boolean pauseButtonPressed() {
+    return p.buttonPressed();
   }
-
-  public boolean getBeenPressed()
+  public boolean getSoundOnOffSwitch()
   {
-    return s.getBeenPressed();
+    return s.onOffSwitch();
+  }
+  public boolean getPauseOnOffSwitch()
+  {
+    return p.onOffSwitch();
   }
 }

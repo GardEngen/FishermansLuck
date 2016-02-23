@@ -1,4 +1,4 @@
-public class PauseButton {
+public class PauseButton extends Button {
   private float xPosition = 920;
   private float yPosition = 107;
   private PImage pause;
@@ -7,21 +7,7 @@ public class PauseButton {
   public PauseButton() {
     pause = loadImage("Knapp/pause.png");
     play = loadImage("Knapp/play.png");
+    buttonInfo(xPosition, yPosition, play, pause);
   }
-  
-  public void displayPause() {
-    image(pause, xPosition, yPosition);
-  }
-  public void displayPlay() {
-    image(play, xPosition, yPosition);
-  }
-  public float getXPos() {
-    return xPosition;
-  }
-  public float getYPos() {
-    return yPosition;
-  }
-  public PImage getImage() {
-    return pause;
-  }
+
 }

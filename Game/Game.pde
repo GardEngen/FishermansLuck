@@ -9,7 +9,7 @@ private Menu menu;
 private ArrayList <Catch> fish;
 private int numberOfFish = 5;
 private InGameDisplay IGDisplay;
-private boolean sound =true;
+private boolean sound=true;
 
 private final int STATE_MENU = 1;
 private final int STATE_PLAYING = 2;
@@ -32,9 +32,7 @@ void setup ()
   fish = new ArrayList <Catch>();
   createfish();
   //Music if sound == true play background music
-  if (sound == true) {
-    playBackgroundMusic(sound);
-  }
+  playBackgroundMusic(sound);
 }
 
 void draw () {
@@ -103,7 +101,8 @@ private void createfish() {
 }
 
 //background music function.
-private void playBackgroundMusic(boolean sound) {
+private void playBackgroundMusic(boolean sound) 
+{
   if (sound) {
     minim = new Minim(this);
     audioPlayer = minim.loadFile("Lyd/Fishing2.mp3");
@@ -115,21 +114,30 @@ private void playBackgroundMusic(boolean sound) {
     minim.stop();
   }
 }
+public void pauseGame(boolean pause)
+{
+  if(pause == false)
+  {
+      noLoop(); 
+      play();
+  }
+  else
+  {
+    loop();
+  }
+}
 
 public void mousePressed() {
   // Checks if the use are pressing a button
-  IGDisplay.buttonPressed();
-  // if true set buttonState
-  if (IGDisplay.getBeenPressed()) {
-    boolean soundButtonState=IGDisplay.buttonState();
-    if (soundButtonState)
-    {
-      playBackgroundMusic(soundButtonState);
-    }
-    if (soundButtonState == false)
-    {
-      playBackgroundMusic(soundButtonState);
-    }
+  boolean mouseOnSound = IGDisplay.soundButtonPressed();
+  if (mouseOnSound)
+  {  
+    playBackgroundMusic( IGDisplay.getSoundOnOffSwitch());
+  }
+  boolean mouseOnPause = IGDisplay.pauseButtonPressed(); 
+  if(mouseOnPause)
+  {
+    pauseGame(IGDisplay.getPauseOnOffSwitch());
   }
 }
 
@@ -138,7 +146,6 @@ private void caughtSomething() {
   float catchX;
   float catchY;
   float catchHeight;
-
   float rodX = player.getHitboxCenterXPos(); //centered
   float rodY = player.getHitboxCenterYPos(); //centered
 
