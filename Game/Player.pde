@@ -1,4 +1,3 @@
-
 public class Player {
 
   private Control control;
@@ -12,6 +11,9 @@ public class Player {
   private PImage hookU;
   private GameElement newCatch;
   private boolean caught;
+  private PImage hook;
+  private String name;
+  private int life;
 
   public Player() {
     control = new Control();
@@ -57,13 +59,21 @@ public class Player {
     int pos = 270 + control.horizontalMove() + (hookM.width/2);
     return pos;
   }
-  
+
   //Returns Hitbox y position
-  public int getHitboxCenterYPos(){
+  public int getHitboxCenterYPos() {
     int hitBoxYPos = 65+control.rodInteraction() + (hookM.height/2);
     return hitBoxYPos;
   }
-  
+
+  public int getHitboxHeight() {
+    return hook.height;
+  }
+
+  public int getHitboxWidth() {
+    return hook.width;
+  }
+
   //Draws the Fisher, animates the images
   public void drawFisher() {
     int xPosFisher = control.horizontalMove();
@@ -73,19 +83,46 @@ public class Player {
     fisherAnimation[currentFrameOfFisher] = fisher.get(300*currentFrameOfFisher, 0, 300, 220);
     image(fisherAnimation[currentFrameOfFisher], xPosFisher, 30);
   }
-  
+
   public void myCatch(GameElement newCatch) {
     this.newCatch = newCatch;
     caught = true;
   }
-  
+
   public void catchPosition(int x, int y) {
     int xPos = x;
     int rod = y;
     newCatch.onTheHook(xPos, rod);
   }
-  
+
   public boolean gotCatch() {
     return caught;
+  }
+
+  // get the name of the player
+  public String getName() {
+    return name;
+  }
+
+  // set the name of the player
+  public String setName(String name) {
+    return name;
+  }
+
+  // get the life of the player
+  public int getLife() {
+    return life;
+  }
+
+  // set the life of the player
+  public void setLife(int life) {
+    life = 3;
+  }
+
+  // set the information in the player that is going to be saved.
+  public void setPlayer(String name, int life) {
+    boat();
+    setName(name);
+    setLife(life);
   }
 }

@@ -1,4 +1,17 @@
+// the real G
 import ddf.minim.*;
+import java.io.File;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 private AudioPlayer audioPlayer;
 private Minim minim;
@@ -10,6 +23,7 @@ private ArrayList <Catch> fish;
 private int numberOfFish = 5;
 private InGameDisplay IGDisplay;
 private boolean sound=true;
+private Load loader;
 
 private final int STATE_MENU = 1;
 private final int STATE_PLAYING = 2;
@@ -25,6 +39,7 @@ void setup ()
   size(1000, 700);
   frameRate(60);
   player = new Player();
+  loader = new Load(player);
   graphic = new Graphic();
   menu = new Menu();
   control = new Control(); 
@@ -48,8 +63,6 @@ public void run() {
     graphic.drawLogo();
     menu.showMenu();
     control.keysForMenu();
-    
-    
     break;
 
   case STATE_CONTINUE: 
@@ -93,11 +106,9 @@ public void play() {
   for (int i = 0; i < numberOfFish; i++) {
     fish.get(i).drawAllFish();
   }
-  
-  if(player.gotCatch() == false) {
-  catchSomething();
+  if (player.gotCatch() == false) {
+    catchSomething();
   }
-  
 }
 
 //Creats fish, an add the to an arraylist
@@ -123,12 +134,11 @@ private void playBackgroundMusic(boolean sound)
 }
 public void pauseGame(boolean pause)
 {
-  if(pause == false)
+  if (pause == false)
   {
-      noLoop(); 
-      play();
-  }
-  else
+    noLoop(); 
+    play();
+  } else
   {
     loop();
   }
@@ -142,7 +152,7 @@ public void mousePressed() {
     playBackgroundMusic( IGDisplay.getSoundOnOffSwitch());
   }
   boolean mouseOnPause = IGDisplay.pauseButtonPressed(); 
-  if(mouseOnPause)
+  if (mouseOnPause)
   {
     pauseGame(IGDisplay.getPauseOnOffSwitch());
   }
