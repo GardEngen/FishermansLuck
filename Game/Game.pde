@@ -36,8 +36,8 @@ void setup ()
 }
 
 void draw () {
-  //run();
-  play();
+  run();
+  //play();
 }
 
 //Runs the game
@@ -45,8 +45,11 @@ public void run() {
   switch(STATE) {
   case STATE_MENU: 
     graphic.drawBackground();
+    graphic.drawLogo();
     menu.showMenu();
     control.keysForMenu();
+    
+    
     break;
 
   case STATE_CONTINUE: 

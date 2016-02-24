@@ -1,7 +1,12 @@
 
 public class Menu {
-
+   private PImage forsettSpill;
+   private PImage nyttSpill;
+   private PImage tutorial;
   public Menu() {
+     forsettSpill = loadImage("Knapp/Forsett.png");
+     nyttSpill = loadImage("Knapp/NyttSpill.png");
+     tutorial = loadImage("Knapp/Tutorial.png");
   }
 
   // Show the help for the game
@@ -15,13 +20,11 @@ public class Menu {
 
   // Display the name of the game
   public void showMenu() {
-    text("Fisherman's luck", 350, 350);
-    text("- A fishilishes game", 350, 370);
-    textSize(14);
-    text("Press 1 for å fortsette spillet", 600, 250);
-    text("Press 2 for å starte nytt spill", 600, 270);
-    text("Press 3 for å starte tutorial", 600, 290);
-    text("Press H for hjelp", 600, 310);
-    text("Press Q for å avslutte spillet", 600, 330);
+    //textSize(14);
+    image(forsettSpill, 381, 281);
+    image(nyttSpill, 392, 358);
+    image(tutorial, 400, 434);
+    //text("Press H for hjelp", 600, 310);
+    //text("Press Q for å avslutte spillet", 600, 330);
   }
 }
