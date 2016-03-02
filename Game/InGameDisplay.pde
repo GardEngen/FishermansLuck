@@ -1,5 +1,4 @@
 class InGameDisplay {
-  private Button button;
   private SoundButton s;
   private PauseButton p;
   private NewGameButton n;
@@ -7,6 +6,8 @@ class InGameDisplay {
   private TutorialButton t;
   private HelpButton h;
   private QuitButton q;
+  private PFont font;
+  
   InGameDisplay()
   {
     s = new SoundButton();   
@@ -16,6 +17,7 @@ class InGameDisplay {
     t = new TutorialButton();
     h = new HelpButton();
     q = new QuitButton();
+    font = createFont("Arial", 16, true);
   }
 
   public void drawInGameButton()
@@ -68,5 +70,11 @@ class InGameDisplay {
   //function for QuitButton
   public boolean quitButtonPressed() {
     return q.buttonPressed();
+  }
+  
+   private void scoreBoard(int score){
+      textFont(font, 16);
+      fill(0);
+      text("Score = " + score, 30, 30);
   }
 }

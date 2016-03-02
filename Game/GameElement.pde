@@ -85,17 +85,14 @@ public class GameElement {
   public void drawElement(PImage picture) {
     fishP = picture;
     if(caught == true) {
-      
-     //translate(width/2, height/2);
-     //rotate(-HALF_PI);
-     image(fishP, xPosition, yPosition);
+       image(fishP, xPosition, yPosition);
       
     } else { 
-    int currentFrameNr;
-    animation = new PImage[numberOfImages];
-    AnimationDelay = (AnimationDelay + imageDelay) % numberOfImages;
-    currentFrameNr =  int(AnimationDelay);
-    animation[currentFrameNr] = fishP.get(imageXCut*currentFrameNr, 0, imageXCut, imageYCut);
+        int currentFrameNr;
+        animation = new PImage[numberOfImages];
+        AnimationDelay = (AnimationDelay + imageDelay) % numberOfImages;
+        currentFrameNr =  int(AnimationDelay);
+        animation[currentFrameNr] = fishP.get(imageXCut*currentFrameNr, 0, imageXCut, imageYCut);
     
       image(animation[currentFrameNr], xPosition, yPosition);
     }
@@ -105,8 +102,5 @@ public class GameElement {
     caught = true;
     xPosition = x;
     yPosition = y;
-    //translate(width/2, height/2);
-    //rotate(-HALF_PI);
-   // image(fishP, xPosition, yPosition);
   }
 }

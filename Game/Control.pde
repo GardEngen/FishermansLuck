@@ -4,10 +4,15 @@ public class Control {
   private int startPositionX;
   private int speedX;
   private int fishingLine; 
-  private boolean hookInWater = false;
+  private boolean hookInWater;
+  private int minLenght;
+  private int maxLenght;
   //private PImage [] animation;
 
   Control() {
+    minLenght = 50;
+    maxLenght = 550;
+    hookInWater = false;
   }
 
   //Returns an X position value, that changes if arrow keys are pressed 
@@ -27,25 +32,29 @@ public class Control {
     char spaceKey =' ';
 
     if (keyPressed) {
-      if (key == spaceKey)
+      if ((key == spaceKey) && (hookInWater == false))
       {
-        fishingLine = 150;
+        fishingLine = 200;
         hookInWater = true;
       }
     }
     //if the hook is in the water, the player can move it
     if (keyPressed && (key == CODED))
     {
-      if (keyCode == DOWN && (hookInWater) && fishingLine < 550)
+      if (keyCode == DOWN && (hookInWater) && fishingLine < maxLenght)
       { 
         fishingLine = fishingLine + 5;
       }
-      if (keyCode == UP && (hookInWater) && fishingLine > 100)
+      if (keyCode == UP && (hookInWater) && fishingLine > minLenght)
       {
         fishingLine = fishingLine - 5;
       }
     }
     return fishingLine;
+  }
+  
+  public int getMinLineLenght() {
+    return minLenght;
   }
 
   //Sets X value start position 
@@ -56,5 +65,9 @@ public class Control {
   //Sets the moving speed
   public void setSpeedX(int speed) {
     speedX = speed;
+  }
+  
+  public void takeOutHook() {
+    hookInWater = false;
   }
 }

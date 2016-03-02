@@ -14,6 +14,7 @@ public class Player {
   private PImage hook;
   private String name;
   private int life;
+  private boolean onBoard;
 
   public Player() {
     control = new Control();
@@ -23,6 +24,7 @@ public class Player {
     hookU = loadImage("Bilder.Grafikk/hookUtencopy.png");
     fisher = loadImage("Bilder.Grafikk/fisker.png");
     caught = false;
+    onBoard = false;
   }
 
   //Manages the boatMovement
@@ -33,11 +35,18 @@ public class Player {
     //Fishingline
     line(xPos+299, 57, xPos+300, 63+rod);
     //draw hook
-    //image(hookM, xPos+285, 57+rod);
     if(caught == true) {
+      
       image(hookU, xPos+292, 57+rod);
       catchPosition(xPos+278, 50+rod);
-    } else {
+        if(rod <= control.minLenght) {
+           onBoard = true;
+        }
+        else {
+          onBoard = false;
+        }
+      
+    }else {
       image(hookM, xPos+285, 57+rod);
     }
   }
@@ -88,6 +97,10 @@ public class Player {
     this.newCatch = newCatch;
     caught = true;
   }
+  
+  public GameElement getCatch() {
+    return newCatch;
+  }
 
   public void catchPosition(int x, int y) {
     int xPos = x;
@@ -97,6 +110,17 @@ public class Player {
 
   public boolean gotCatch() {
     return caught;
+  }
+
+  public boolean fishOnBoard() {
+    boolean x = false;
+     if((caught == true) && (onBoard == true) ) {
+       x = true;
+       caught = false;
+       onBoard = false;
+       control.takeOutHook();
+     }
+     return x;
   }
 
   // get the name of the player

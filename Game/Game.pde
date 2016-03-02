@@ -19,9 +19,10 @@ private Graphic graphic;
 private ArrayList <Catch> fish;
 private int numberOfFish = 5;
 private InGameDisplay IGDisplay;
-private boolean sound=true;
+private boolean sound = true;
 private boolean inGame = false;
-private Load loader;
+private int score;
+//private Load loader;
 
 private final int STATE_MENU = 1;
 private final int STATE_PLAYING = 2;
@@ -37,13 +38,14 @@ void setup ()
   size(1000, 700);
   frameRate(60);
   player = new Player();
-  loader = new Load(player);
+  //loader = new Load(player);
   graphic = new Graphic();
   IGDisplay = new InGameDisplay();
   fish = new ArrayList <Catch>();
   createfish();
   //Music if sound == true play background music
   playBackgroundMusic(sound);
+  score = 0;
 }
 
 void draw () {
@@ -96,12 +98,23 @@ public void run() {
 public void play() {
   inGame = true;
   graphic.drawBackground();
+  IGDisplay.scoreBoard(score);
   player.boat();
   IGDisplay.drawInGameButton();
-  for (int i = 0; i < numberOfFish; i++) {
+  for (int i = 0; i < fish.size(); i++) {
     fish.get(i).drawAllFish();
   }
-  if (player.gotCatch() == false) {
+   if( (player.gotCatch() == true) && (player.fishOnBoard() == true) ){
+      score = score + 1;
+      for (int i = 0; i < fish.size(); i++) {
+        if(fish.get(i).equals(player.getCatch())) {
+          fish.remove(i);
+          
+        }
+      }
+      
+  }
+  else {
     catchSomething();
   }
 }
@@ -143,47 +156,40 @@ public void mousePressed() {
   // Checks if the use are pressing a button
   //Sound button in Game + menu  
   boolean mouseOnSound = IGDisplay.soundButtonPressed();
-  if (mouseOnSound)
-  {  
+  if (mouseOnSound){  
     playBackgroundMusic( IGDisplay.getSoundOnOffSwitch());
   }
   //Pause button in Game
   boolean mouseOnPause = IGDisplay.pauseButtonPressed(); 
-  if (mouseOnPause)
-  {
+  if (mouseOnPause){
     pauseGame(IGDisplay.getPauseOnOffSwitch());
-  }
+  } 
   
   if(inGame==false)
   {
   //New Game button in menu 
   boolean mouseOnNewGame = IGDisplay.newGameButtonPressed();
-  if (mouseOnNewGame)
-  {
+  if (mouseOnNewGame){
     STATE = STATE_PLAYING;
   }
   //Resume Game button in menu 
   boolean mouseOnResume = IGDisplay.resumeButtonPressed();
-  if (mouseOnResume)
-  {
+  if (mouseOnResume){
     STATE = STATE_CONTINUE;
   }
   //Tutorial button in menu 
   boolean mouseOnTutorial = IGDisplay.tutorialButtonPressed();
-  if (mouseOnTutorial)
-  {
+  if (mouseOnTutorial){
     STATE = STATE_TUTUROIAL;
   }
   //Help button in menu 
   boolean mouseOnHelp = IGDisplay.helpButtonPressed();
-  if (mouseOnHelp)
-  {
+  if (mouseOnHelp){
     STATE = STATE_HELP;
   }
   //Quit button in menu 
   boolean mouseOnQuit = IGDisplay.quitButtonPressed();
-  if (mouseOnQuit)
-  {
+  if (mouseOnQuit){
     STATE = STATE_QUIT;
   }
   }
