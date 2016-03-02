@@ -1,4 +1,3 @@
-// the real G
 import ddf.minim.*;
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
@@ -17,12 +16,11 @@ private AudioPlayer audioPlayer;
 private Minim minim;
 private Player player;
 private Graphic graphic;
-private Control control;
-private Menu menu;
 private ArrayList <Catch> fish;
 private int numberOfFish = 5;
 private InGameDisplay IGDisplay;
 private boolean sound=true;
+private boolean inGame = false;
 private Load loader;
 
 private final int STATE_MENU = 1;
@@ -41,8 +39,6 @@ void setup ()
   player = new Player();
   loader = new Load(player);
   graphic = new Graphic();
-  menu = new Menu();
-  control = new Control(); 
   IGDisplay = new InGameDisplay();
   fish = new ArrayList <Catch>();
   createfish();
@@ -52,7 +48,6 @@ void setup ()
 
 void draw () {
   run();
-  //play();
 }
 
 //Runs the game
@@ -61,16 +56,13 @@ public void run() {
   case STATE_MENU: 
     graphic.drawBackground();
     graphic.drawLogo();
-    menu.showMenu();
-    control.keysForMenu();
+    IGDisplay.drawMenuButton();
     break;
 
   case STATE_CONTINUE: 
     // fortsett spill skal inn her
     text("oi, her er det ingenting", 350, 300);
-    control.keysForMenu();
     text("her skal du kunne fortsette spillet", 350, 310);
-    control.keysForMenu();
     break;
 
   case STATE_PLAYING: 
@@ -79,13 +71,15 @@ public void run() {
 
   case STATE_TUTUROIAL: 
     // tutorial skal inn her
-    text("oi, her er det ingenting", 350, 300);
-    control.keysForMenu();
+    text("oi, her er det ingenting", 350, 300);;
     break;
 
   case STATE_HELP:
-    menu.showHelp();
-    control.keysForMenu();
+    text("Hvis du trenger hjelp i spillet må du gjøre dette...", 200, 350); //nr. 3
+    text("Dine kommandoer er:", 200, 270);     // ut print skal væer i meny 
+    text("q for avslutte spillet", 200, 290);
+    text("space for å slippe ned kroken", 200, 310);
+    text("Piltastene for å styre båten og fiskestangen", 200, 320);
     break;
 
   case STATE_QUIT:
@@ -99,10 +93,11 @@ public void run() {
 }
 
 //Starts the game 
-public void play() { 
+public void play() {
+  inGame = true;
   graphic.drawBackground();
   player.boat();
-  IGDisplay.drawButton();
+  IGDisplay.drawInGameButton();
   for (int i = 0; i < numberOfFish; i++) {
     fish.get(i).drawAllFish();
   }
@@ -146,15 +141,51 @@ public void pauseGame(boolean pause)
 
 public void mousePressed() {
   // Checks if the use are pressing a button
+  //Sound button in Game + menu  
   boolean mouseOnSound = IGDisplay.soundButtonPressed();
   if (mouseOnSound)
   {  
     playBackgroundMusic( IGDisplay.getSoundOnOffSwitch());
   }
+  //Pause button in Game
   boolean mouseOnPause = IGDisplay.pauseButtonPressed(); 
   if (mouseOnPause)
   {
     pauseGame(IGDisplay.getPauseOnOffSwitch());
+  }
+  
+  if(inGame==false)
+  {
+  //New Game button in menu 
+  boolean mouseOnNewGame = IGDisplay.newGameButtonPressed();
+  if (mouseOnNewGame)
+  {
+    STATE = STATE_PLAYING;
+  }
+  //Resume Game button in menu 
+  boolean mouseOnResume = IGDisplay.resumeButtonPressed();
+  if (mouseOnResume)
+  {
+    STATE = STATE_CONTINUE;
+  }
+  //Tutorial button in menu 
+  boolean mouseOnTutorial = IGDisplay.tutorialButtonPressed();
+  if (mouseOnTutorial)
+  {
+    STATE = STATE_TUTUROIAL;
+  }
+  //Help button in menu 
+  boolean mouseOnHelp = IGDisplay.helpButtonPressed();
+  if (mouseOnHelp)
+  {
+    STATE = STATE_HELP;
+  }
+  //Quit button in menu 
+  boolean mouseOnQuit = IGDisplay.quitButtonPressed();
+  if (mouseOnQuit)
+  {
+    STATE = STATE_QUIT;
+  }
   }
 }
 

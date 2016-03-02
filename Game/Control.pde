@@ -10,21 +10,6 @@ public class Control {
   Control() {
   }
 
-  // Keys for the menu
-  public void keysForMenu() {
-    if (keyPressed && (key == '1')) {
-      STATE = STATE_CONTINUE;
-    } else if (keyPressed && (key == '2')) {
-      STATE = STATE_PLAYING;
-    } else if (keyPressed && (key == '3')) {
-      STATE = STATE_TUTUROIAL;
-    } else if (keyPressed && ((key == 'q') || (key == 'Q'))) {
-      STATE = STATE_QUIT;
-    } else if (keyPressed && ((key == 'h') || (key == 'H'))) {
-      STATE = STATE_HELP;
-    }
-  }
-
   //Returns an X position value, that changes if arrow keys are pressed 
   public int horizontalMove() {
     if (keyPressed && (key == CODED)) {

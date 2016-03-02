@@ -1,3 +1,16 @@
+public class PauseButton extends Button {
+  private float xPosition = 920;
+  private float yPosition = 107;
+  private PImage pause;
+  private PImage play;
+  
+  public PauseButton() {
+    pause = loadImage("Knapp/pause.png");
+    play = loadImage("Knapp/play.png");
+    buttonInfo(xPosition, yPosition, pause, play);
+  }
+
+}
 public class SoundButton extends Button{
   private float xPosition = 920;
   private float yPosition = 7;
@@ -9,4 +22,5 @@ public class SoundButton extends Button{
     soundOff = loadImage("Knapp/ButtonOfftest.png");
     buttonInfo(xPosition, yPosition, soundOn, soundOff);
   }
+  
 }
