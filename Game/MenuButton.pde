@@ -15,7 +15,7 @@ public class ResumeButton extends Button{
   private PImage resumeButton;
   
   public ResumeButton() {
-    resumeButton = loadImage("Knapp/forsett.png");
+    resumeButton = loadImage("Knapp/Forsett.png");
     buttonInfo(xPosition, yPosition, resumeButton, resumeButton);
   }
 }
@@ -26,7 +26,7 @@ public class TutorialButton extends Button{
   private PImage tutorialButton;
   
   public TutorialButton() {
-    tutorialButton = loadImage("Knapp/tutorial.png");
+    tutorialButton = loadImage("Knapp/Tutorial.png");
     buttonInfo(xPosition, yPosition, tutorialButton, tutorialButton);
   }
 }
@@ -37,7 +37,7 @@ public class HelpButton extends Button{
   private PImage helpButton;
   
   public HelpButton() {
-    helpButton = loadImage("Knapp/help.png");
+    helpButton = loadImage("Knapp/Help.png");
     buttonInfo(xPosition, yPosition, helpButton, helpButton);
   }
 }
@@ -48,7 +48,7 @@ public class QuitButton extends Button{
   private PImage quitButton;
   
   public QuitButton() {
-    quitButton = loadImage("Knapp/avsluttSpill.png");
+    quitButton = loadImage("Knapp/AvsluttSpill.png");
     buttonInfo(xPosition, yPosition, quitButton, quitButton);
   }
 }

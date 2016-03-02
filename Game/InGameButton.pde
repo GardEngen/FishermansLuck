@@ -5,8 +5,8 @@ public class PauseButton extends Button {
   private PImage play;
   
   public PauseButton() {
-    pause = loadImage("Knapp/pause.png");
-    play = loadImage("Knapp/play.png");
+    pause = loadImage("Knapp/Pause.png");
+    play = loadImage("Knapp/Play.png");
     buttonInfo(xPosition, yPosition, pause, play);
   }
 
