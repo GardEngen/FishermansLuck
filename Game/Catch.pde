@@ -23,8 +23,8 @@ public class Catch extends GameElement {
 
   public Catch() {
     speed = random(2, 6);
-    fishType = 2;
-    //fishType = int(random(-1, 4));
+    //fishType = 3;
+    fishType = int(random(-1, 4));
     // caught = false;
     //load all fish images    
     haraldImage = loadImage("Bilder.Grafikk/Harald1update3.png");
@@ -100,7 +100,7 @@ public class Catch extends GameElement {
 
   // creates a Karin fish
   public void karinFish() {
-    xCut= 120;
+    xCut= 100;
     yCut = karinImage.height;
     numberOfpictures = 6;
     delay = 0.5;
