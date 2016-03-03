@@ -8,9 +8,10 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import java.util.Timer; 
+import java.util.List;
+import org.w3c.dom.*; //  attr, document and element is used from this
+
 
 private AudioPlayer audioPlayer;
 private Minim minim;
@@ -22,7 +23,8 @@ private InGameDisplay IGDisplay;
 private boolean sound = true;
 private boolean inGame = false;
 private int score;
-//private Load loader;
+private Load loader;
+private Saving save;
 
 private final int STATE_MENU = 1;
 private final int STATE_PLAYING = 2;
@@ -38,7 +40,8 @@ void setup ()
   size(1000, 700);
   frameRate(60);
   player = new Player();
-  //loader = new Load(player);
+  save = new Saving();
+  loader = new Load(player);
   graphic = new Graphic();
   IGDisplay = new InGameDisplay();
   fish = new ArrayList <Catch>();
@@ -46,6 +49,7 @@ void setup ()
   //Music if sound == true play background music
   playBackgroundMusic(sound);
   score = 0;
+  resumeGame();
 }
 
 void draw () {
@@ -145,6 +149,7 @@ public void pauseGame(boolean pause)
   if (pause == false)
   {
     noLoop(); 
+    save.saveState(player, fish);
     play();
   } else
   {
@@ -213,3 +218,10 @@ private void catchSomething() {
     }
   }
 } 
+
+// resume the player from the last game.
+public void resumeGame() { 
+  play();
+  loader.fillPlayerInfo();
+  //loader.fillFishInfo();
+}

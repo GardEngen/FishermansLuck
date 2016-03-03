@@ -2,6 +2,7 @@ public class Player {
 
   private Control control;
   private int boatPosition = 215;
+  //  private final int DEFAULT_BOAT_POSITION = 215;
   private int boatSpeed = 4;
   private PImage [] fisherAnimation;
   private int currentFrameOfFisher;
@@ -20,6 +21,7 @@ public class Player {
     control = new Control();
     control.setSpeedX(boatSpeed);
     control.setPositionX(boatPosition);
+    //  control.setPositionX(DEFAULT_BOAT_POSITION);
     hookM = loadImage("Bilder.Grafikk/hook1copy.png");
     hookU = loadImage("Bilder.Grafikk/hookUtencopy.png");
     fisher = loadImage("Bilder.Grafikk/fisker.png");
@@ -57,10 +59,31 @@ public class Player {
     control.setSpeedX(boatSpeed);
   }
 
-  //Sets new start x position
-  public void setStartPosition(int newPositionX) {
-    boatPosition = newPositionX;
-    control.setPositionX(boatPosition);
+  // Sets player position. used in saving
+  public void setPlayerPosition(int newPositionX) {
+    //boatPosition = newPositionX;
+    control.setPositionX(newPositionX);
+  }
+
+  ////Sets new start x position
+  //public void setStartPosition(int newPositionX) {
+  //  boatPosition = newPositionX;
+  //  control.setPositionX(boatPosition);
+  //}
+  
+    // get position of the player. used in saving
+  public int getPlayerPosition() {
+    return control.horizontalMove();
+  }
+
+  // get position of the hook. used in saving
+  public int getHookPosition() {
+    return control.rodInteraction();
+  }
+  
+  // set the position of the hook. used in saving
+  public void setHookPosition(int newPositonY) {
+    control.setRoodY(newPositonY);
   }
 
   //Returns Hitbox x position
@@ -139,14 +162,7 @@ public class Player {
   }
 
   // set the life of the player
-  public void setLife(int life) {
-    life = 3;
-  }
-
-  // set the information in the player that is going to be saved.
-  public void setPlayer(String name, int life) {
-    boat();
-    setName(name);
-    setLife(life);
+  public int setLife(int life) {
+    return life;
   }
 }

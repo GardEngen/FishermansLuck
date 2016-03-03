@@ -47,6 +47,7 @@ class Button {
     }
     return beenPressed;
   }
+  
   //return the state of the button
   public boolean onOffSwitch() {
     return currentState;

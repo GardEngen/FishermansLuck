@@ -8,11 +8,12 @@ public class Catch extends GameElement {
   //all fish images
   private PImage haraldImage;
   private PImage haraldImageRevers;
+  private PImage haraldCaught;
   //private PImage guriImage;
   //private PImage guriImageRevers;
   //private PImage bertImage;
   //private PImage bertImageRevers;
-  private PImage haraldCaught;
+  //private PImage bertCaught;
   private int fishType;
  // private boolean caught;
 
@@ -29,6 +30,7 @@ public class Catch extends GameElement {
     //guriImageRevers = loadImage("Bilder.Grafikk/GuriAnimationRevers.png");
     //bertImage = loadImage("Bilder.Grafikk/BertAnimation.png");
     //bertImageRevers = loadImage("Bilder.Grafikk/BertAnimationRevers.png");
+    //bertCaught = loadImage("Bilder.Fisk/Bert/BertFanget.png");
   }
 
   //draw all creatures in the deep
@@ -79,7 +81,7 @@ public class Catch extends GameElement {
   //  numberOfpictures = 2;
   //  delay = 1.9;
   //  imageDivider(numberOfpictures, xCut, yCut, delay);
-  //  elementMovement(speed, bertImage, bertImageRevers);
+  //  elementMovement(speed, bertImage, bertImageRevers, bertCaught);
   //}
 
   //public void isCaught() {

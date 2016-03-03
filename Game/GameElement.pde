@@ -22,7 +22,7 @@ public class GameElement {
   }
 
   //Sets the start position, left or right
-  private boolean setStartPosition() {
+  public boolean setStartPosition() {
     if (startPosition == 0) {
       xPosition = -40;
       startLeft = true;
@@ -31,6 +31,26 @@ public class GameElement {
       startLeft = false;
     }
     return startLeft;
+  }
+
+  // set the position of the fish
+  public void setFishPosX(float yPos) { 
+    this.xPosition = yPos;
+  }
+
+  // get the X posisjon of the fish PROBLEMER
+  public float getFishPositionX() { 
+    return xPosition;
+  }
+
+  // set the Y position of the fish
+  public void setFishPosY(float yPos) {
+    yPosition = yPos;
+  }
+
+  // get the Y position of the fish PROBLEMER
+  public float getFishPositionY() {
+    return yPosition;
   }
 
   //Changes the speed, and moves the object

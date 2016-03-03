@@ -70,4 +70,9 @@ public class Control {
   public void takeOutHook() {
     hookInWater = false;
   }
+  
+  // set the Y value of the rood.
+  public void setRoodY(int yPosition) {
+    fishingLine = yPosition;
+  }
 }
