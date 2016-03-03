@@ -238,7 +238,7 @@ private void catchSomething() {
 
 // resume the player from the last game.
 public void resumeGame() { 
-  play();
+  //play();
   loader.fillPlayerInfo();
   //loader.fillFishInfo();
 }
