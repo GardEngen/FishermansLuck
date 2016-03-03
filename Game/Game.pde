@@ -124,7 +124,7 @@ public void play() {
       }
       
   }
-  else {
+   if (player.gotCatch() == false){
     catchSomething();
   }
 }
