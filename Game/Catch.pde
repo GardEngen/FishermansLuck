@@ -9,8 +9,9 @@ public class Catch extends GameElement {
   private PImage haraldImage;
   private PImage haraldImageRevers;
   private PImage haraldCaught;
-  //private PImage guriImage;
-  //private PImage guriImageRevers;
+  private PImage guriImage;
+  private PImage guriImageRevers;
+  private PImage guriCaught;
   //private PImage bertImage;
   //private PImage bertImageRevers;
   //private PImage bertCaught;
@@ -19,15 +20,16 @@ public class Catch extends GameElement {
 
   public Catch() {
     speed = random(2, 6);
-    fishType = 0;
-   // fishType = int(random(-1, 3));
+    //fishType = 1;
+    fishType = int(random(-1, 2));
    // caught = false;
     //load all fish images    
     haraldImage = loadImage("Bilder.Grafikk/Harald1update3.png");
     haraldImageRevers = loadImage("Bilder.Grafikk/Harald1update3Revers.png");
     haraldCaught = loadImage("Bilder.Fisk/Harald/HaraldFanget.png");
-    //guriImage = loadImage("Bilder.Grafikk/GuriAnimation.png"); 
-    //guriImageRevers = loadImage("Bilder.Grafikk/GuriAnimationRevers.png");
+    guriImage = loadImage("Bilder.Grafikk/GuriAnimation.png"); 
+    guriImageRevers = loadImage("Bilder.Grafikk/GuriAnimationRevers.png");
+    guriCaught = loadImage("Bilder.Fisk/Guri/GuriFanget.png");
     //bertImage = loadImage("Bilder.Grafikk/BertAnimation.png");
     //bertImageRevers = loadImage("Bilder.Grafikk/BertAnimationRevers.png");
     //bertCaught = loadImage("Bilder.Fisk/Bert/BertFanget.png");
@@ -40,11 +42,11 @@ public class Catch extends GameElement {
       haraldFish();
      // img = haraldImage;
     }
-    //if (fishType == 1)
-    //{
-    //  guriFish();
+    if (fishType == 1)
+    {
+      guriFish();
     // // img = guriImage;
-    //}
+    }
     //if ( fishType == 2)
     //{
     //  bertFish();
@@ -64,15 +66,15 @@ public class Catch extends GameElement {
     elementMovement(speed, haraldImage, haraldImageRevers, haraldCaught);
   }
 
-  ////Creats a GuriFish
-  //public void guriFish() {
-  //  xCut = 120;
-  //  yCut = guriImage.height;
-  //  numberOfpictures = 8;
-  //  delay = 0.80;
-  //  imageDivider(numberOfpictures, xCut, yCut, delay);
-  //  elementMovement(speed, guriImage, guriImageRevers);
-  //}
+  //Creats a GuriFish
+  public void guriFish() {
+   xCut = 90;
+   yCut = guriImage.height;
+   numberOfpictures = 8;
+   delay = 0.80;
+   imageDivider(numberOfpictures, xCut, yCut, delay);
+   elementMovement(speed, guriImage, guriImageRevers, guriCaught);
+  }
 
   //// creates a Bert fish
   //public void bertFish() {

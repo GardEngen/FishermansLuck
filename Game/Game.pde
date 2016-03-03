@@ -139,7 +139,7 @@ private void playBackgroundMusic(boolean sound)
   if (sound) {
     minim = new Minim(this);
     audioPlayer = minim.loadFile("Lyd/Fishing2.mp3");
-    audioPlayer.play();
+    //audioPlayer.play();
   }
   if (sound == false)
   {
