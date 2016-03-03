@@ -44,7 +44,7 @@ void setup ()
   frameRate(60);
   player = new Player();
   save = new Saving();
-  loader = new Load(player);
+  //loader = new Load(player);
   graphic = new Graphic();
   IGDisplay = new InGameDisplay();
   fish = new ArrayList <Catch>();
@@ -69,10 +69,12 @@ public void run() {
     break;
 
   case STATE_CONTINUE: 
+    loader = new Load(player);
     //// fortsett spill skal inn her
     //text("oi, her er det ingenting", 350, 300);
     //text("her skal du kunne fortsette spillet", 350, 310);
     resumeGame(); 
+    STATE = STATE_PLAYING;
     break;
 
   case STATE_PLAYING: 
