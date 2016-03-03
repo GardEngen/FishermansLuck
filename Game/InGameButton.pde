@@ -2,12 +2,12 @@ public class PauseButton extends Button {
   private float xPosition = 920;
   private float yPosition = 107;
   private PImage pause;
-  private PImage play;
+  //private PImage play;
   
   public PauseButton() {
     pause = loadImage("Knapp/Pause.png");
-    play = loadImage("Knapp/Play.png");
-    buttonInfo(xPosition, yPosition, pause, play);
+    //play = loadImage("Knapp/Play.png");
+    buttonInfo(xPosition, yPosition, pause, pause);
   }
 
 }

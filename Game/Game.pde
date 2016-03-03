@@ -25,6 +25,7 @@ private int numberOfFish = 5;
 private InGameDisplay IGDisplay;
 private boolean sound = true;
 private boolean inGame = false;
+private boolean inPauseMenu;
 private int score;
 private Load loader;
 private Saving save;
@@ -52,7 +53,7 @@ void setup ()
   //Music if sound == true play background music
   playBackgroundMusic(sound);
   score = 0;
- // resumeGame(); 
+  // resumeGame();
 }
 
 void draw () {
@@ -83,7 +84,8 @@ public void run() {
 
   case STATE_TUTUROIAL: 
     // tutorial skal inn her
-    text("oi, her er det ingenting", 350, 300);;
+    text("oi, her er det ingenting", 350, 300);
+    ;
     break;
 
   case STATE_HELP:
@@ -114,17 +116,15 @@ public void play() {
   for (int i = 0; i < fish.size(); i++) {
     fish.get(i).drawAllFish();
   }
-   if( (player.gotCatch() == true) && (player.fishOnBoard() == true) ){
-      score = score + 1;
-      for (int i = 0; i < fish.size(); i++) {
-        if(fish.get(i).equals(player.getCatch())) {
-          fish.remove(i);
-          
-        }
+  if ( (player.gotCatch() == true) && (player.fishOnBoard() == true) ) {
+    score = score + 1;
+    for (int i = 0; i < fish.size(); i++) {
+      if (fish.get(i).equals(player.getCatch())) {
+        fish.remove(i);
       }
-      
+    }
   }
-   if (player.gotCatch() == false){
+  if (player.gotCatch() == false) {
     catchSomething();
   }
 }
@@ -142,7 +142,7 @@ private void playBackgroundMusic(boolean sound)
   if (sound) {
     minim = new Minim(this);
     audioPlayer = minim.loadFile("Lyd/Fishing2.mp3");
-    //audioPlayer.play();
+    audioPlayer.play();
   }
   if (sound == false)
   {
@@ -150,59 +150,70 @@ private void playBackgroundMusic(boolean sound)
     minim.stop();
   }
 }
-public void pauseGame(boolean pause)
+public void pauseGame()
 {
-  if (pause == false)
-  {
-    noLoop(); 
-    save.saveState(player, fish);
-    play();
-  } else
-  {
-    loop();
-  }
+  noLoop(); 
+  save.saveState(player, fish);
+  inPauseMenu = true;
+  IGDisplay.drawPauseMenu();
 }
 
 public void mousePressed() {
   // Checks if the use are pressing a button
   //Sound button in Game + menu  
   boolean mouseOnSound = IGDisplay.soundButtonPressed();
-  if (mouseOnSound){  
+  if (mouseOnSound) {  
     playBackgroundMusic( IGDisplay.getSoundOnOffSwitch());
   }
   //Pause button in Game
   boolean mouseOnPause = IGDisplay.pauseButtonPressed(); 
-  if (mouseOnPause){
-    pauseGame(IGDisplay.getPauseOnOffSwitch());
+  if (mouseOnPause) {
+    pauseGame();
   } 
-  
-  if(inGame==false)
+
+  if (inGame==false)
   {
-  //New Game button in menu 
-  boolean mouseOnNewGame = IGDisplay.newGameButtonPressed();
-  if (mouseOnNewGame){
-    STATE = STATE_PLAYING;
+    //New Game button in menu 
+    boolean mouseOnNewGame = IGDisplay.newGameButtonPressed();
+    if (mouseOnNewGame) {
+      STATE = STATE_PLAYING;
+    }
+    //Resume Game button in menu 
+    boolean mouseOnResume = IGDisplay.resumeButtonPressed();
+    if (mouseOnResume) {
+      STATE = STATE_CONTINUE;
+    }
+    //Tutorial button in menu 
+    boolean mouseOnTutorial = IGDisplay.tutorialButtonPressed();
+    if (mouseOnTutorial) {
+      STATE = STATE_TUTUROIAL;
+    }
+    //Help button in menu 
+    boolean mouseOnHelp = IGDisplay.helpButtonPressed();
+    if (mouseOnHelp) {
+      STATE = STATE_HELP;
+    }
+    //Quit button in menu 
+    boolean mouseOnQuit = IGDisplay.quitButtonPressed();
+    if (mouseOnQuit) {
+      STATE = STATE_QUIT;
+    }
   }
-  //Resume Game button in menu 
-  boolean mouseOnResume = IGDisplay.resumeButtonPressed();
-  if (mouseOnResume){
-    STATE = STATE_CONTINUE;
-  }
-  //Tutorial button in menu 
-  boolean mouseOnTutorial = IGDisplay.tutorialButtonPressed();
-  if (mouseOnTutorial){
-    STATE = STATE_TUTUROIAL;
-  }
-  //Help button in menu 
-  boolean mouseOnHelp = IGDisplay.helpButtonPressed();
-  if (mouseOnHelp){
-    STATE = STATE_HELP;
-  }
-  //Quit button in menu 
-  boolean mouseOnQuit = IGDisplay.quitButtonPressed();
-  if (mouseOnQuit){
-    STATE = STATE_QUIT;
-  }
+  //buttons for in Pause Menu
+  if (inPauseMenu)
+  {
+    //resume game
+    boolean mouseOnResume = IGDisplay.resumeButtonPressed();
+    if (mouseOnResume) {      
+      loop();
+    }
+    //go back to menu
+    boolean mouseOnQuit = IGDisplay.quitButtonPressed();
+    if (mouseOnQuit) {
+      STATE = STATE_MENU;
+      inGame = false;
+      loop();
+    }
   }
 }
 

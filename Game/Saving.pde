@@ -72,12 +72,12 @@ public class Saving {
     attr = doc.createAttribute("fishX"); // 
     attr.setValue("" + f.getFishPositionX()); // The fish x position
     fish.setAttributeNode(attr);
-    println(attr);
+    //println(attr);
 
     attr = doc.createAttribute("fishY");
     attr.setValue("" + f.getFishPositionY()); // The fish y position
     fish.setAttributeNode(attr);
-    println(attr);
+    //println(attr);
   }
 
   // save the player

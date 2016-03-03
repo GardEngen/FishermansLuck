@@ -34,6 +34,12 @@ class InGameDisplay {
     h.drawButton();
     q.drawButton();
   }
+  
+  public void drawPauseMenu()
+  {
+    r.drawButton();
+    q.drawButton();   
+  }
 
   //functions for SoundButton
   public boolean soundButtonPressed() {
@@ -47,10 +53,10 @@ class InGameDisplay {
   public boolean pauseButtonPressed() {
     return p.buttonPressed();
   }
-  public boolean getPauseOnOffSwitch()
-  {
-    return p.onOffSwitch();
-  }
+  //public boolean getPauseOnOffSwitch()
+  //{
+  //  return p.onOffSwitch();
+  //}
   //function for NewGameButton
   public boolean newGameButtonPressed() {
     return n.buttonPressed();
