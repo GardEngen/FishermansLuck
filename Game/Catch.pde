@@ -12,27 +12,36 @@ public class Catch extends GameElement {
   private PImage guriImage;
   private PImage guriImageRevers;
   private PImage guriCaught;
-  //private PImage bertImage;
-  //private PImage bertImageRevers;
-  //private PImage bertCaught;
+  private PImage bertImage;
+  private PImage bertImageRevers;
+  private PImage bertCaught;
+  private PImage karinImage;
+  private PImage karinImageRevers;
+  private PImage karinCaught;
   private int fishType;
- // private boolean caught;
+  // private boolean caught;
 
   public Catch() {
     speed = random(2, 6);
-    //fishType = 1;
-    fishType = int(random(-1, 2));
-   // caught = false;
+    //fishType = 3;
+    fishType = int(random(-1, 4));
+    // caught = false;
     //load all fish images    
     haraldImage = loadImage("Bilder.Grafikk/Harald1update3.png");
     haraldImageRevers = loadImage("Bilder.Grafikk/Harald1update3Revers.png");
     haraldCaught = loadImage("Bilder.Fisk/Harald/HaraldFanget.png");
+    // guri
     guriImage = loadImage("Bilder.Grafikk/GuriAnimation.png"); 
     guriImageRevers = loadImage("Bilder.Grafikk/GuriAnimationRevers.png");
     guriCaught = loadImage("Bilder.Fisk/Guri/GuriFanget.png");
-    //bertImage = loadImage("Bilder.Grafikk/BertAnimation.png");
-    //bertImageRevers = loadImage("Bilder.Grafikk/BertAnimationRevers.png");
-    //bertCaught = loadImage("Bilder.Fisk/Bert/BertFanget.png");
+    // bert
+    bertImage = loadImage("Bilder.Grafikk/BertAnimation.png");
+    bertImageRevers = loadImage("Bilder.Grafikk/BertAnimationRevers.png");
+    bertCaught = loadImage("Bilder.Fisk/Bert/BertFanget.png");
+    // karin
+    karinImage = loadImage("Bilder.Grafikk/KarinAnimation.png");
+    karinImageRevers = loadImage("Bilder.Grafikk/KarinAnimationRevers.png");
+    karinCaught = loadImage("Bilder.Fisk/Karin/KarinFanget.png");
   }
 
   //draw all creatures in the deep
@@ -40,19 +49,22 @@ public class Catch extends GameElement {
     if (fishType == 0)
     {
       haraldFish();
-     // img = haraldImage;
+      // img = haraldImage;
     }
     if (fishType == 1)
     {
       guriFish();
-    // // img = guriImage;
+      // // img = guriImage;
     }
-    //if ( fishType == 2)
-    //{
-    //  bertFish();
-    // // img = bertImage;
-    //}
- 
+    if ( fishType == 2)
+    {
+      bertFish();
+      // // img = bertImage;
+    }
+    if ( fishType == 3) 
+    {
+      karinFish();
+    }
   }
 
   //Creats a HaraldFishe
@@ -68,30 +80,40 @@ public class Catch extends GameElement {
 
   //Creats a GuriFish
   public void guriFish() {
-   xCut = 90;
-   yCut = guriImage.height;
-   numberOfpictures = 8;
-   delay = 0.80;
-   imageDivider(numberOfpictures, xCut, yCut, delay);
-   elementMovement(speed, guriImage, guriImageRevers, guriCaught);
+    xCut = 90;
+    yCut = guriImage.height;
+    numberOfpictures = 8;
+    delay = 0.80;
+    imageDivider(numberOfpictures, xCut, yCut, delay);
+    elementMovement(speed, guriImage, guriImageRevers, guriCaught);
   }
 
-  //// creates a Bert fish
-  //public void bertFish() {
-  //  xCut= 69;
-  //  yCut = bertImage.height;
-  //  numberOfpictures = 2;
-  //  delay = 1.9;
-  //  imageDivider(numberOfpictures, xCut, yCut, delay);
-  //  elementMovement(speed, bertImage, bertImageRevers, bertCaught);
-  //}
+  // creates a Bert fish
+  public void bertFish() {
+    xCut= 50;
+    yCut = bertImage.height;
+    numberOfpictures = 6;
+    delay = 0.5;
+    imageDivider(numberOfpictures, xCut, yCut, delay);
+    elementMovement(speed, bertImage, bertImageRevers, bertCaught);
+  }
+
+  // creates a Karin fish
+  public void karinFish() {
+    xCut= 50;
+    yCut = karinImage.height;
+    numberOfpictures = 6;
+    delay = 0.5;
+    imageDivider(numberOfpictures, xCut, yCut, delay);
+    elementMovement(speed, karinImage, karinImageRevers, karinCaught);
+  }
 
   //public void isCaught() {
   //  speed = 0;
   //  caught = true;
   //}
-  
-   public GameElement isCaught() {
+
+  public GameElement isCaught() {
     //caught = true;
     return this;
   }
