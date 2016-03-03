@@ -8,6 +8,9 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import java.util.Timer; 
 import java.util.List;
 import org.w3c.dom.*; //  attr, document and element is used from this
@@ -49,7 +52,7 @@ void setup ()
   //Music if sound == true play background music
   playBackgroundMusic(sound);
   score = 0;
-  resumeGame();
+ // resumeGame(); 
 }
 
 void draw () {
