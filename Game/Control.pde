@@ -13,6 +13,7 @@ public class Control {
     minLenght = 50;
     maxLenght = 550;
     hookInWater = false;
+    fishingLine = minLenght; 
   }
 
   //Returns an X position value, that changes if arrow keys are pressed 
