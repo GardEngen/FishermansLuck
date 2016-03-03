@@ -40,7 +40,7 @@ public class Player {
     if(caught == true) {
       
       image(hookU, xPos+292, 57+rod);
-      catchPosition(xPos+278, 50+rod);
+      catchPosition(xPos+245, 50+rod);
         if(rod <= control.minLenght) {
            onBoard = true;
         }
