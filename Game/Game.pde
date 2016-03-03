@@ -69,9 +69,10 @@ public void run() {
     break;
 
   case STATE_CONTINUE: 
-    // fortsett spill skal inn her
-    text("oi, her er det ingenting", 350, 300);
-    text("her skal du kunne fortsette spillet", 350, 310);
+    //// fortsett spill skal inn her
+    //text("oi, her er det ingenting", 350, 300);
+    //text("her skal du kunne fortsette spillet", 350, 310);
+    resumeGame(); 
     break;
 
   case STATE_PLAYING: 
