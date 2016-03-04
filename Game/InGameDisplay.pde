@@ -1,6 +1,7 @@
 class InGameDisplay {
   private SoundButton s;
   private PauseButton p;
+  private PlayButton play;
   private NewGameButton n;
   private ResumeButton r;
   private TutorialButton t;
@@ -12,6 +13,7 @@ class InGameDisplay {
   {
     s = new SoundButton();   
     p = new PauseButton();
+    play = new PlayButton();
     n = new NewGameButton();
     r = new ResumeButton();
     t = new TutorialButton();
@@ -38,7 +40,8 @@ class InGameDisplay {
   public void drawPauseMenu()
   {
     r.drawButton();
-    q.drawButton();   
+    q.drawButton();
+    play.drawButton();
   }
 
   //functions for SoundButton
@@ -55,7 +58,7 @@ class InGameDisplay {
   }
   //public boolean getPauseOnOffSwitch()
   //{
-  //  return p.onOffSwitch();
+  // return p.onOffSwitch();
   //}
   //function for NewGameButton
   public boolean newGameButtonPressed() {

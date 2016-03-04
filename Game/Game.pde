@@ -58,6 +58,7 @@ void setup ()
 
 void draw () {
   run();
+  //play();
 }
 
 //Runs the game
@@ -142,7 +143,7 @@ private void playBackgroundMusic(boolean sound)
   if (sound) {
     minim = new Minim(this);
     audioPlayer = minim.loadFile("Lyd/Fishing2.mp3");
-    audioPlayer.play();
+    //audioPlayer.play();
   }
   if (sound == false)
   {
@@ -165,7 +166,7 @@ public void mousePressed() {
   if (mouseOnSound) {  
     playBackgroundMusic( IGDisplay.getSoundOnOffSwitch());
   }
-  //Pause button in Game
+  //Run PauseMenu in Game
   boolean mouseOnPause = IGDisplay.pauseButtonPressed(); 
   if (mouseOnPause) {
     pauseGame();
@@ -204,7 +205,7 @@ public void mousePressed() {
   {
     //resume game
     boolean mouseOnResume = IGDisplay.resumeButtonPressed();
-    if (mouseOnResume) {      
+    if (mouseOnResume) { 
       loop();
     }
     //go back to menu
