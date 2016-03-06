@@ -22,7 +22,7 @@ public class Catch extends GameElement {
   // private boolean caught;
 
   public Catch() {
-    speed = random(2, 6);
+    speed = random(1, 5);
     //fishType = 3;
     fishType = int(random(-1, 4));
     // caught = false;

@@ -84,6 +84,6 @@ class InGameDisplay {
    private void scoreBoard(int score){
       textFont(font, 16);
       fill(0);
-      text("Score = " + score, 30, 30);
+      text("Score " + score, 30, 30);
   }
 }

@@ -29,6 +29,8 @@ private boolean inPauseMenu;
 private int score;
 private Load loader;
 private Saving save;
+private int spawner;
+
 
 private final int STATE_MENU = 1;
 private final int STATE_PLAYING = 2;
@@ -49,16 +51,14 @@ void setup ()
   graphic = new Graphic();
   IGDisplay = new InGameDisplay();
   fish = new ArrayList <Catch>();
-  createfish();
   //Music if sound == true play background music
   playBackgroundMusic(sound);
   score = 0;
-  // resumeGame();
+  spawner = 300;
 }
 
 void draw () {
   run();
-  //play();
 }
 
 //Runs the game
@@ -114,28 +114,39 @@ public void play() {
   IGDisplay.scoreBoard(score);
   player.boat();
   IGDisplay.drawInGameButton();
+  //Checks if its time to spawn new fish
+  if(spawner >= 300) {
+    spawn();
+    spawner = 0;
+  }
+  
   for (int i = 0; i < fish.size(); i++) {
     fish.get(i).drawAllFish();
+//There is two for-loops to prevent a bug in the fish animation 
+  }
+  for (int i = 0; i < fish.size(); i++) {
+    if(fish.get(i).isInMotion() == false) {
+     fish.remove(i);
+    }
   }
   if ( (player.gotCatch() == true) && (player.fishOnBoard() == true) ) {
     score = score + 1;
     for (int i = 0; i < fish.size(); i++) {
       if (fish.get(i).equals(player.getCatch())) {
-        fish.remove(i);
+       fish.remove(i);
       }
     }
   }
   if (player.gotCatch() == false) {
     catchSomething();
   }
+  spawner = spawner + int(random(1,10));
 }
 
 //Creats fish, an add the to an arraylist
-private void createfish() {
-  for (int i=0; i<numberOfFish; i++) {
-    fish.add(new Catch());
-  }
-}
+ private void spawn() {
+   fish.add(new Catch());
+ }
 
 //background music function.
 private void playBackgroundMusic(boolean sound) 

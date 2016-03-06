@@ -13,18 +13,20 @@ public class GameElement {
   private int imageYCut;
   private int numberOfImages;
   private float AnimationDelay;
+  private boolean inMotion;
 
   public GameElement() {
-    yPosition = random(300, (height - 80));
+    yPosition = random(300, (height - 60));
     startPosition = int (random(-1, 2));
     startLeft = setStartPosition();
     caught = false;
+    inMotion = true;
   }
 
   //Sets the start position, left or right
   public boolean setStartPosition() {
     if (startPosition == 0) {
-      xPosition = -40;
+      xPosition = -60;
       startLeft = true;
     } else if (startPosition == 1) {
       xPosition = width + 40;
@@ -60,7 +62,7 @@ public class GameElement {
       drawElement(taken);
     }
 
-    else if ((startLeft == false)&&(xPosition > -20)&&(caught == false))
+    else if ((startLeft == false)&&(xPosition > -60)&&(caught == false))
     {
       xPosition = xPosition - speed;
       drawElement(imageRevers);
@@ -68,6 +70,10 @@ public class GameElement {
     } else if ((startLeft == true)&&(xPosition < width + 40)&&(caught == false)) {
       xPosition = xPosition + speed;
       drawElement(image);
+    }
+    
+    else {
+      inMotion = false;
     }
   }
 
@@ -122,5 +128,10 @@ public class GameElement {
     caught = true;
     xPosition = x;
     yPosition = y;
+  }
+  
+  // Returns a value of whether or not the object is in motion.
+  public boolean isInMotion() {
+    return inMotion;
   }
 }
