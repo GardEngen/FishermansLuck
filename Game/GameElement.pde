@@ -17,7 +17,7 @@ public class GameElement {
 
   public GameElement() {
     yPosition = random(300, (height - 60));
-    startPosition = int (random(-1, 2));
+    startPosition = (int (random(0,10))%2); //Mod is used to optimize the random() function
     startLeft = setStartPosition();
     caught = false;
     inMotion = true;
@@ -26,7 +26,7 @@ public class GameElement {
   //Sets the start position, left or right
   public boolean setStartPosition() {
     if (startPosition == 0) {
-      xPosition = -60;
+      xPosition = -70;
       startLeft = true;
     } else if (startPosition == 1) {
       xPosition = width + 40;

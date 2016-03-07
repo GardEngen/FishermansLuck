@@ -21,7 +21,7 @@ private Minim minim;
 private Player player;
 private Graphic graphic;
 private ArrayList <Catch> fish;
-private int numberOfFish = 5;
+//private int numberOfFish = 5;
 private InGameDisplay IGDisplay;
 private boolean sound = true;
 private boolean inGame = false;
