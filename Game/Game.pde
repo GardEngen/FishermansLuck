@@ -143,7 +143,7 @@ public void play() {
   spawner = spawner + int(random(1,10));
 }
 
-//Creats fish, an add the to an arraylist
+//Creats a fish and adds it to the arraylist
  private void spawn() {
    fish.add(new Catch());
  }
