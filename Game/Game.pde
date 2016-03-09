@@ -42,7 +42,7 @@ void setup ()
   playBackgroundMusic(sound);
   gameOver = false;
   spawner = 300;
-  this.savingThread = new SaveThread(saving, this);
+  this.savingThread = new SaveThread(saving, this, score);
   this.savingThread.start();
 }
 
@@ -167,7 +167,8 @@ private void playBackgroundMusic(boolean sound)
 public void pauseGame()
 {
   noLoop(); 
-  saving.playerSave(player, score);
+  //saving.playerSave(player, score);
+  saving.saveGameState( player,  score,fish);
   inPauseMenu = true;
   IGDisplay.drawPauseMenu();
 }

@@ -1,25 +1,52 @@
 class Saving {
   Player player;
+  GameElement GameFish;
 
   JSONObject json;
   Saving() {
   }
-  public void playerSave(Player player, int score) {      
+
+  // create the JSON document
+  public void createJSON() {
     json = new JSONObject();
+  }
 
-    //get positin to boat
-    int playerXpos = player.gethorizontalMove();
-    int roodYpos = player.getHookPosition();
-
-    json.setInt("xPos", playerXpos); // get the players x position
-    json.setInt("Score", score); // get the score
-    json.setInt("yPos", roodYpos); // get the y-position of the rood
+  // save the JSON document
+  public void saveJSON() {
     //saveJSONObject(json, "Game.app/data/data.json");
     saveJSONObject(json, "data/data.json");
+  }
+  public void saveGameState(Player player, int score, ArrayList<Catch> fish) {
+    createJSON();
+    playerSave(player, score);
+    for ( Catch f : fish) {
+      saveFish(f);
+    }
+    saveJSON();
+  }
+  public void playerSave(Player player, int score) {      
+    //json = new JSONObject();
+    //get positin to boat
+    int playerXpos = player.gethorizontalMove(); // get the players(boat) x position
+    int roodYpos = player.getHookPosition(); // get the y-position of the rood
 
+    json.setInt("xPos", playerXpos); 
+    json.setInt("Score", score); 
+    json.setInt("yPos", roodYpos); 
 
-    println("Saved xPos: " + playerXpos);
+    //saveJSON();
+    //saveJSONObject(json, "Game.app/data/data.json");
+    //saveJSONObject(json, "data/data.json");
+
+    println("Saved boat Pos: " + playerXpos);
     println("Saved score: " + score);
-    println("Saved xPos: " + roodYpos);
+    println("Saved rood Pos: " + roodYpos);
+  }
+
+  public void saveFish(GameElement fish) {
+    float fishYpos = fish.getFishPositionY();
+    float fishXPos = fish.getFishPositionX();
+    json.setFloat("FishY", fishYpos);
+    json.setFloat("FishX", fishXPos);
   }
 }

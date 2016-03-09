@@ -11,6 +11,9 @@ class Load {
     int xPos = json.getInt("xPos");   
     player.setPlayerPosition(xPos);
     
+    int yPos = json.getInt("yPos");
+    player.setHookPosition(yPos);
+    
      score = json.getInt("Score");
     println("Din lagra score er : " + score);
   }
