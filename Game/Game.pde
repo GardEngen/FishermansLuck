@@ -1,3 +1,4 @@
+// the real G
 import ddf.minim.*;
 private AudioPlayer audioPlayer;
 private Minim minim;
