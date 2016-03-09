@@ -22,13 +22,19 @@ public class Catch extends GameElement {
   private PImage sharkImage;
   private PImage sharkImageRevers;
   private PImage sharkCaught;
+  private PImage siriImage; // siri fisk
+  private PImage siriImageRevers;
+  private PImage siriCaught;
+  private PImage annaImage; // anna fisk
+  private PImage annaImageRevers;
+  private PImage annaCaught;
   private int fishType;
   // private boolean caught;
 
   public Catch() {
     speed = random(1, 5);
     //fishType = 4;
-    fishType = int(random(-1, 5));
+    fishType = int(random(-1, 7));
     // caught = false;
     //load all fish images     
     haraldImage = loadImage("animation/Harald1update3.png");
@@ -46,6 +52,14 @@ public class Catch extends GameElement {
     karinImage = loadImage("animation/KarinAnimation.png");
     karinImageRevers = loadImage("animation/KarinAnimationRevers.png");
     karinCaught = loadImage("animation/KarinFanget.png");
+    // siri
+    siriImage = loadImage("animation/SiriAnimation.png");
+    siriImageRevers = loadImage("animation/SiriAnimationRevers.png");
+    siriCaught = loadImage("animation/SiriFanget.png");
+    // anna
+    annaImage = loadImage("animation/AnnaAnimation.png");
+    annaImageRevers = loadImage("animation/AnnaAnimationRevers.png");
+    annaCaught = loadImage("animation/AnnaFanget.png");
     // Shark
     sharkImage = loadImage("animation/shark.png");
     sharkImageRevers  = loadImage("animation/sharkRevers.png");
@@ -75,6 +89,12 @@ public class Catch extends GameElement {
     }
     if (fishType == 4) {
       shark();
+    }
+    if (fishType == 5) {
+      annaFish();
+    }
+    if (fishType == 6) {
+      siriFish();
     }
   }
 
@@ -122,7 +142,27 @@ public class Catch extends GameElement {
     imageDivider(numberOfpictures, xCut, yCut, delay);
     elementMovement(speed, karinImage, karinImageRevers, karinCaught, dangerous);
   }
-  
+
+  // creates a siri fish
+  public void siriFish() {
+    xCut= 100;
+    yCut = siriImage.height;
+    numberOfpictures = 8;
+    delay = 0.5;
+    imageDivider(numberOfpictures, xCut, yCut, delay);
+    elementMovement(speed, siriImage, siriImageRevers, siriCaught, dangerous);
+  }
+
+  // creates a anna fish
+  public void annaFish() {
+    xCut= 100;
+    yCut = annaImage.height;
+    numberOfpictures = 8;
+    delay = 0.5;
+    imageDivider(numberOfpictures, xCut, yCut, delay);
+    elementMovement(speed, annaImage, annaImageRevers, annaCaught, dangerous);
+  }
+
   public void shark() {
     xCut = 139;
     yCut = sharkImage.height;

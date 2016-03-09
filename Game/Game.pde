@@ -15,6 +15,7 @@ private boolean inPauseMenu;
 private boolean gameOver;
 private int score;
 private int spawner;
+private SaveThread savingThread; 
 
 private final int STATE_MENU = 1;
 private final int STATE_PLAYING = 2;
@@ -41,6 +42,8 @@ void setup ()
   playBackgroundMusic(sound);
   gameOver = false;
   spawner = 300;
+  this.savingThread = new SaveThread(saving, this);
+  this.savingThread.start();
 }
 
 
@@ -87,7 +90,7 @@ public void run() {
     gameOver = true;
     graphic.gameOverBackground();
     IGDisplay.drawGameOVerMenu();
-   
+
     break;   
 
   default:
@@ -99,7 +102,7 @@ public void run() {
 //Starts the game 
 public void play() {
   inGame = true;
-   gameOver = false;
+  gameOver = false;
   graphic.drawBackground();
   IGDisplay.scoreBoard(score);
   player.boat();
@@ -223,7 +226,7 @@ public void mousePressed() {
     if (mouseOnQuit) {
       STATE = STATE_MENU;
       inGame = false;
-      
+
       loop();
     }
   }
@@ -258,4 +261,8 @@ private void catchSomething() {
       player.myCatch(temp.isCaught());
     }
   }
+}
+// If the game is true and not in the menu then the game need to be saved.
+public boolean needSaving() {
+  return (inGame && (!inPauseMenu));
 }

@@ -13,7 +13,6 @@ public class Player {
   private GameElement newCatch;
   private boolean caught;
   private PImage hook;
-  private String name;
   private int life;
   private boolean onBoard;
   private boolean danger;
