@@ -16,6 +16,7 @@ public class Player {
   private String name;
   private int life;
   private boolean onBoard;
+  private boolean danger;
 
   public Player() {
     control = new Control();
@@ -118,11 +119,16 @@ public class Player {
 
   public void myCatch(GameElement newCatch) {
     this.newCatch = newCatch;
+    danger = this.newCatch.getDangerState();
     caught = true;
   }
   
   public GameElement getCatch() {
     return newCatch;
+  }
+  
+  public boolean checkIfDangerous() {
+    return danger;
   }
 
   public void catchPosition(int x, int y) {

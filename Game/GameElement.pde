@@ -7,6 +7,7 @@ public class GameElement {
   private PImage fishP;
   private boolean startLeft;
   private boolean caught;
+  private boolean dangerous;
   //Variables below is used to cut the elemente image in the right places to create a movement
   private float imageDelay;
   private int imageXCut;
@@ -56,8 +57,11 @@ public class GameElement {
   }
 
   //Changes the speed, and moves the object
-  public void elementMovement(float speed, PImage image, PImage imageRevers, PImage taken) {
+  public void elementMovement(float speed, PImage image, PImage imageRevers, PImage taken, boolean dangerous) {
     
+    if(dangerous == true) {
+      this.dangerous = dangerous;
+    }
     if(caught == true) {
       drawElement(taken);
     }
@@ -133,5 +137,10 @@ public class GameElement {
   // Returns a value of whether or not the object is in motion.
   public boolean isInMotion() {
     return inMotion;
+  }
+  
+  //Returns a boolean. True if the object is dangerous, and false if not.
+  public boolean getDangerState() {
+    return dangerous;
   }
 }

@@ -124,11 +124,17 @@ public void play() {
     fish.get(i).drawAllFish();
 //There is two for-loops to prevent a bug in the fish animation 
   }
+  
   for (int i = 0; i < fish.size(); i++) {
     if(fish.get(i).isInMotion() == false) {
      fish.remove(i);
     }
   }
+  
+  if( (player.gotCatch() == true) && (player.checkIfDangerous() == true) ){
+    STATE = STATE_MENU;
+  }
+  
   if ( (player.gotCatch() == true) && (player.fishOnBoard() == true) ) {
     score = score + 1;
     for (int i = 0; i < fish.size(); i++) {
@@ -137,9 +143,11 @@ public void play() {
       }
     }
   }
+  
   if (player.gotCatch() == false) {
     catchSomething();
   }
+  
   spawner = spawner + int(random(1,10));
 }
 

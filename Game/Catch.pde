@@ -5,6 +5,7 @@ public class Catch extends GameElement {
   private int yCut;
   private int numberOfpictures;
   private float delay;
+  private boolean dangerous;
   //all fish images
   private PImage haraldImage;
   private PImage haraldImageRevers;
@@ -18,13 +19,16 @@ public class Catch extends GameElement {
   private PImage karinImage;
   private PImage karinImageRevers;
   private PImage karinCaught;
+  private PImage sharkImage;
+  private PImage sharkImageRevers;
+  private PImage sharkCaught;
   private int fishType;
   // private boolean caught;
 
   public Catch() {
     speed = random(1, 5);
-    //fishType = 3;
-    fishType = int(random(-1, 4));
+    fishType = 4;
+    //fishType = int(random(-1, 5));
     // caught = false;
     //load all fish images    
     haraldImage = loadImage("Bilder.Grafikk/Harald1update3.png");
@@ -42,6 +46,10 @@ public class Catch extends GameElement {
     karinImage = loadImage("Bilder.Grafikk/KarinAnimation.png");
     karinImageRevers = loadImage("Bilder.Grafikk/KarinAnimationRevers.png");
     karinCaught = loadImage("Bilder.Fisk/Karin/KarinFanget.png");
+    // Shark
+    sharkImage = loadImage("Bilder.Grafikk/shark.png");
+    sharkImageRevers  = loadImage("Bilder.Grafikk/sharkRevers.png");
+    sharkCaught = loadImage("Bilder.Grafikk/sharkCaught.png");
   }
 
   //draw all creatures in the deep
@@ -65,6 +73,9 @@ public class Catch extends GameElement {
     {
       karinFish();
     }
+    if(fishType == 4) {
+      shark();
+    }
   }
 
   //Creats a HaraldFishe
@@ -74,8 +85,9 @@ public class Catch extends GameElement {
     yCut = haraldImage.height;
     numberOfpictures = 8;
     delay = 0.80;
+    dangerous = false;
     imageDivider(numberOfpictures, xCut, yCut, delay);
-    elementMovement(speed, haraldImage, haraldImageRevers, haraldCaught);
+    elementMovement(speed, haraldImage, haraldImageRevers, haraldCaught, dangerous);
   }
 
   //Creats a GuriFish
@@ -84,8 +96,9 @@ public class Catch extends GameElement {
     yCut = guriImage.height;
     numberOfpictures = 8;
     delay = 0.80;
+    dangerous = false;
     imageDivider(numberOfpictures, xCut, yCut, delay);
-    elementMovement(speed, guriImage, guriImageRevers, guriCaught);
+    elementMovement(speed, guriImage, guriImageRevers, guriCaught, dangerous);
   }
 
   // creates a Bert fish
@@ -94,8 +107,9 @@ public class Catch extends GameElement {
     yCut = bertImage.height;
     numberOfpictures = 6;
     delay = 0.5;
+    dangerous = false;
     imageDivider(numberOfpictures, xCut, yCut, delay);
-    elementMovement(speed, bertImage, bertImageRevers, bertCaught);
+    elementMovement(speed, bertImage, bertImageRevers, bertCaught, dangerous);
   }
 
   // creates a Karin fish
@@ -104,8 +118,19 @@ public class Catch extends GameElement {
     yCut = karinImage.height;
     numberOfpictures = 6;
     delay = 0.5;
+    dangerous = false;
     imageDivider(numberOfpictures, xCut, yCut, delay);
-    elementMovement(speed, karinImage, karinImageRevers, karinCaught);
+    elementMovement(speed, karinImage, karinImageRevers, karinCaught, dangerous);
+  }
+  
+  public void shark() {
+    xCut = 139;
+    yCut = sharkImage.height;
+    numberOfpictures = 1;
+    delay = 1.0;
+    dangerous = true;
+    imageDivider(numberOfpictures, xCut, yCut, delay);
+    elementMovement(speed, sharkImageRevers, sharkImage, sharkCaught, dangerous);
   }
 
   //public void isCaught() {
