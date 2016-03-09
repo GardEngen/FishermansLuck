@@ -23,9 +23,9 @@ public class Player {
     control.setSpeedX(boatSpeed);
     control.setPositionX(boatPosition);
     //  control.setPositionX(DEFAULT_BOAT_POSITION);
-    hookM = loadImage("Bilder.Grafikk/hook1copy.png");
-    hookU = loadImage("Bilder.Grafikk/hookUtencopy.png");
-    fisher = loadImage("Bilder.Grafikk/fisker.png");
+    hookM = loadImage("animation/hook1copy.png");
+    hookU = loadImage("animation/hookUtencopy.png");
+    fisher = loadImage("animation/fisker.png");
     caught = false;
     onBoard = false;
   }
@@ -38,18 +38,18 @@ public class Player {
     //Fishingline
     line(xPos+299, 57, xPos+300, 63+rod);
     //draw hook
-    if(caught == true) {
-      
+    if (caught == true) {
+
       image(hookU, xPos+292, 57+rod);
       catchPosition(xPos+245, 50+rod);
-        if(rod <= control.minLenght) {
-           onBoard = true;
-        }
-        else {
-          onBoard = false;
-        }
+      if (rod <= control.minLenght) {
+        onBoard = true;
+      } 
+      else {
+        onBoard = false;
+      }
       
-    }else {
+    } else {
       image(hookM, xPos+285, 57+rod);
     }
   }
@@ -71,8 +71,8 @@ public class Player {
   //  boatPosition = newPositionX;
   //  control.setPositionX(boatPosition);
   //}
-  
-    // get position of the player. used in saving
+
+  // get position of the player. used in saving
   public int getPlayerPosition() {
     return control.horizontalMove();
   }
@@ -81,7 +81,7 @@ public class Player {
   public int getHookPosition() {
     return control.rodInteraction();
   }
-  
+
   // set the position of the hook. used in saving
   public void setHookPosition(int newPositonY) {
     control.setRoodY(newPositonY);
@@ -122,11 +122,11 @@ public class Player {
     danger = this.newCatch.getDangerState();
     caught = true;
   }
-  
+
   public GameElement getCatch() {
     return newCatch;
   }
-  
+
   public boolean checkIfDangerous() {
     return danger;
   }
@@ -143,23 +143,18 @@ public class Player {
 
   public boolean fishOnBoard() {
     boolean x = false;
-     if((caught == true) && (onBoard == true) ) {
-       x = true;
-       caught = false;
-       onBoard = false;
-       control.takeOutHook();
-     }
-     return x;
+    if ((caught == true) && (onBoard == true) ) {
+      x = true;
+      caught = false;
+      onBoard = false;
+      control.takeOutHook();
+    }
+    return x;
   }
-
-  // get the name of the player
-  public String getName() {
-    return name;
-  }
-
-  // set the name of the player
-  public String setName(String name) {
-    return name;
+  //Må se på
+  public int gethorizontalMove()
+  {
+    return control.horizontalMove();
   }
 
   // get the life of the player
@@ -170,5 +165,5 @@ public class Player {
   // set the life of the player
   public int setLife(int life) {
     return life;
-  }
+}
 }

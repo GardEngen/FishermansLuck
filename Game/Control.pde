@@ -13,17 +13,18 @@ public class Control {
     minLenght = 50;
     maxLenght = 550;
     hookInWater = false;
-    fishingLine = minLenght; 
+    fishingLine = minLenght;
   }
 
   //Returns an X position value, that changes if arrow keys are pressed 
   public int horizontalMove() {
+
     if (keyPressed && (key == CODED)) {
-      if (keyCode == LEFT && (startPositionX > 4)) {
-        startPositionX = startPositionX -speedX;
-      } else if (keyCode == RIGHT && (startPositionX < width-56)) {
-        startPositionX = startPositionX +speedX;
-      }
+    if (keyCode == LEFT && (startPositionX > 4)) {
+      startPositionX = startPositionX -speedX;
+    } else if (keyCode == RIGHT && (startPositionX < width-56)) {
+      startPositionX = startPositionX +speedX;
+    }
     }
     return startPositionX;
   }
@@ -53,7 +54,7 @@ public class Control {
     }
     return fishingLine;
   }
-  
+
   public int getMinLineLenght() {
     return minLenght;
   }
@@ -67,11 +68,11 @@ public class Control {
   public void setSpeedX(int speed) {
     speedX = speed;
   }
-  
+
   public void takeOutHook() {
     hookInWater = false;
   }
-  
+
   // set the Y value of the rood.
   public void setRoodY(int yPosition) {
     fishingLine = yPosition;

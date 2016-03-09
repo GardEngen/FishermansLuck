@@ -4,7 +4,7 @@ public class PauseButton extends Button {
   private PImage pause;
   
   public PauseButton() {
-    pause = loadImage("Knapp/Pause.png");
+    pause = loadImage("knapper/Pause.png");
     buttonInfo(xPosition, yPosition, pause, pause);
   }
 }
@@ -14,7 +14,7 @@ public class PlayButton extends Button {
   private PImage play;
   
   public PlayButton() {
-    play = loadImage("Knapp/Play.png");
+    play = loadImage("knapper/Play.png");
     buttonInfo(xPosition, yPosition, play, play);
   }
 }
@@ -29,8 +29,8 @@ public class SoundButton extends Button{
   private PImage soundOff;
   
   public SoundButton() {
-    soundOn = loadImage("Knapp/ButtonOntest.png");
-    soundOff = loadImage("Knapp/ButtonOfftest.png");
+    soundOn = loadImage("knapper/ButtonOntest.png");
+    soundOff = loadImage("knapper/ButtonOfftest.png");
     buttonInfo(xPosition, yPosition, soundOn, soundOff);
   }
   

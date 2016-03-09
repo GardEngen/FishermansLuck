@@ -6,8 +6,8 @@ public class Graphic {
   private PImage logo;
 
   public Graphic() {
-    background = loadImage("Bilder.Grafikk/background2tilpasset.png");
-    logo = loadImage("Bilder.Grafikk/tempLogo.png");
+    background = loadImage("grafikk/background2tilpasset.png");
+    logo = loadImage("grafikk/tempLogo.png");
   }
   public void drawBackground()
   {
@@ -17,8 +17,9 @@ public class Graphic {
   public void gameOverBackground() {
     background(0);
   }
+  
   public void drawLogo()
   {
-    image(logo,0,0);
+    image(logo, 0, 0);
   }
 }

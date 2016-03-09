@@ -1,38 +1,19 @@
-//XML
 import ddf.minim.*;
-import java.io.File;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import java.util.Timer; 
-import java.util.List;
-import org.w3c.dom.*; //  attr, document and element is used from this
-
-
 private AudioPlayer audioPlayer;
 private Minim minim;
 private Player player;
 private Graphic graphic;
+private Saving saving;
+private Load load;
 private ArrayList <Catch> fish;
-//private int numberOfFish = 5;
+//private int numberOfFish = 6;
 private InGameDisplay IGDisplay;
 private boolean sound = true;
 private boolean inGame = false;
 private boolean inPauseMenu;
 private boolean gameOver;
 private int score;
-private Load loader;
-private Saving save;
 private int spawner;
-
 
 private final int STATE_MENU = 1;
 private final int STATE_PLAYING = 2;
@@ -44,25 +25,27 @@ private final int STATE_GAME_OVER = 7;
 private int STATE = STATE_MENU;
 
 
+
 void setup ()
 {
   size(1000, 700);
   frameRate(60);
   player = new Player();
-  save = new Saving();
-  //loader = new Load(player);
   graphic = new Graphic();
   IGDisplay = new InGameDisplay();
   fish = new ArrayList <Catch>();
+  saving = new Saving();
+  load = new Load();
   //Music if sound == true play background music
   playBackgroundMusic(sound);
   gameOver = false;
-  score = 0;
   spawner = 300;
 }
 
+
 void draw () {
   run();
+  //play();
 }
 
 //Runs the game
@@ -75,8 +58,8 @@ public void run() {
     break;
 
   case STATE_CONTINUE: 
-    loader = new Load(player);
-    resumeGame(); 
+    load.playerLoad();
+    score = load.getScore();
     STATE = STATE_PLAYING;
     break;
 
@@ -87,15 +70,12 @@ public void run() {
   case STATE_TUTUROIAL: 
     // tutorial skal inn her
     text("oi, her er det ingenting", 350, 300);
-    ;
+
     break;
 
   case STATE_HELP:
-    text("Hvis du trenger hjelp i spillet må du gjøre dette...", 200, 350); //nr. 3
-    text("Dine kommandoer er:", 200, 270);     // ut print skal væer i meny 
-    text("q for avslutte spillet", 200, 290);
-    text("space for å slippe ned kroken", 200, 310);
-    text("Piltastene for å styre båten og fiskestangen", 200, 320);
+    println("Din score er: " + score);
+    println("LagraScore:" + load.getScore());
     break;
 
   case STATE_QUIT:
@@ -106,7 +86,8 @@ public void run() {
     gameOver = true;
     graphic.gameOverBackground();
     IGDisplay.drawGameOVerMenu();
-    break;
+   
+    break;   
 
   default:
     // do nothing
@@ -117,58 +98,60 @@ public void run() {
 //Starts the game 
 public void play() {
   inGame = true;
+   gameOver = false;
   graphic.drawBackground();
   IGDisplay.scoreBoard(score);
   player.boat();
+
   IGDisplay.drawInGameButton();
   //Checks if its time to spawn new fish
-  if(spawner >= 300) {
+  if (spawner >= 300) {
     spawn();
     spawner = 0;
   }
-  
+
   for (int i = 0; i < fish.size(); i++) {
     fish.get(i).drawAllFish();
-//There is two for-loops to prevent a bug in the fish animation 
+    //There is two for-loops to prevent a bug in the fish animation
   }
-  
+
   for (int i = 0; i < fish.size(); i++) {
-    if(fish.get(i).isInMotion() == false) {
-     fish.remove(i);
+    if (fish.get(i).isInMotion() == false) {
+      fish.remove(i);
     }
   }
-  
-  if( (player.gotCatch() == true) && (player.checkIfDangerous() == true) ){
+
+  if ( (player.gotCatch() == true) && (player.checkIfDangerous() == true) ) {
     STATE = STATE_GAME_OVER;
   }
-  
+
   if ( (player.gotCatch() == true) && (player.fishOnBoard() == true) ) {
     score = score + 1;
     for (int i = 0; i < fish.size(); i++) {
       if (fish.get(i).equals(player.getCatch())) {
-       fish.remove(i);
+        fish.remove(i);
       }
     }
   }
-  
+
   if (player.gotCatch() == false) {
     catchSomething();
   }
-  
-  spawner = spawner + int(random(1,10));
+
+  spawner = spawner + int(random(1, 10));
 }
 
 //Creats a fish and adds it to the arraylist
- private void spawn() {
-   fish.add(new Catch());
- }
+private void spawn() {
+  fish.add(new Catch());
+}
 
 //background music function.
 private void playBackgroundMusic(boolean sound) 
 {
   if (sound) {
     minim = new Minim(this);
-    audioPlayer = minim.loadFile("Lyd/Fishing2.mp3");
+    audioPlayer = minim.loadFile("lyd/Fishing2.mp3");
     //audioPlayer.play();
   }
   if (sound == false)
@@ -177,11 +160,10 @@ private void playBackgroundMusic(boolean sound)
     minim.stop();
   }
 }
-
 public void pauseGame()
 {
   noLoop(); 
-  save.saveState(player, fish);
+  saving.playerSave(player, score);
   inPauseMenu = true;
   IGDisplay.drawPauseMenu();
 }
@@ -240,12 +222,11 @@ public void mousePressed() {
     if (mouseOnQuit) {
       STATE = STATE_MENU;
       inGame = false;
-      gameOver = false;
+      
       loop();
     }
   }
-  
-  if(gameOver) {
+  if (gameOver) {
     //New Game button in menu 
     boolean mouseOnNewGame = IGDisplay.newGameButtonPressed();
     if (mouseOnNewGame) {
@@ -276,11 +257,4 @@ private void catchSomething() {
       player.myCatch(temp.isCaught());
     }
   }
-} 
-
-// resume the player from the last game.
-public void resumeGame() { 
-  //play();
-  loader.fillPlayerInfo();
-  //loader.fillFishInfo();
 }

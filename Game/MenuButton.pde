@@ -4,7 +4,7 @@ public class NewGameButton extends Button{
   private PImage newGameButton;
   
   public NewGameButton(){ 
-    newGameButton = loadImage("Knapp/NyttSpill.png");
+    newGameButton = loadImage("knapper/NyttSpill.png");
     buttonInfo(xPosition, yPosition, newGameButton, newGameButton);
   }
 }
@@ -15,7 +15,7 @@ public class ResumeButton extends Button{
   private PImage resumeButton;
   
   public ResumeButton() {
-    resumeButton = loadImage("Knapp/Forsett.png");
+    resumeButton = loadImage("knapper/Forsett.png");
     buttonInfo(xPosition, yPosition, resumeButton, resumeButton);
   }
 }
@@ -26,7 +26,7 @@ public class TutorialButton extends Button{
   private PImage tutorialButton;
   
   public TutorialButton() {
-    tutorialButton = loadImage("Knapp/Tutorial.png");
+    tutorialButton = loadImage("knapper/Tutorial.png");
     buttonInfo(xPosition, yPosition, tutorialButton, tutorialButton);
   }
 }
@@ -37,7 +37,7 @@ public class HelpButton extends Button{
   private PImage helpButton;
   
   public HelpButton() {
-    helpButton = loadImage("Knapp/Help.png");
+    helpButton = loadImage("knapper/Help.png");
     buttonInfo(xPosition, yPosition, helpButton, helpButton);
   }
 }
@@ -48,7 +48,7 @@ public class QuitButton extends Button{
   private PImage quitButton;
   
   public QuitButton() {
-    quitButton = loadImage("Knapp/AvsluttSpill.png");
+    quitButton = loadImage("knapper/AvsluttSpill.png");
     buttonInfo(xPosition, yPosition, quitButton, quitButton);
   }
 }

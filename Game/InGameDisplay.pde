@@ -9,7 +9,7 @@ class InGameDisplay {
   private QuitButton q;
   private PFont font;
   private PFont font2;
-  
+
   InGameDisplay()
   {
     s = new SoundButton();   
@@ -38,20 +38,20 @@ class InGameDisplay {
     h.drawButton();
     q.drawButton();
   }
-  
+
   public void drawPauseMenu()
   {
     r.drawButton();
     q.drawButton();
     play.drawButton();
   }
-  
+
   public void drawGameOVerMenu() {
-    
+
     n.drawButton();
-     textFont(font2, 30);
-      fill(255);
-      text("Game Over", 410, 300);
+    textFont(font2, 30);
+    fill(255);
+    text("Game Over", 410, 300);
     q.drawButton();
   }
 
@@ -83,7 +83,7 @@ class InGameDisplay {
   public boolean tutorialButtonPressed() {
     return t.buttonPressed();
   }
-    //function for HelpButton
+  //function for HelpButton
   public boolean helpButtonPressed() {
     return h.buttonPressed();
   }
@@ -91,10 +91,10 @@ class InGameDisplay {
   public boolean quitButtonPressed() {
     return q.buttonPressed();
   }
-  
-   private void scoreBoard(int score){
-      textFont(font, 16);
-      fill(0);
-      text("Score " + score, 30, 30);
+
+  private void scoreBoard(int score) {
+    textFont(font, 16);
+    fill(0);
+    text("Score " + score, 30, 30);
   }
 }

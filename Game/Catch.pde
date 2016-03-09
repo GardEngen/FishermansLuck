@@ -30,26 +30,26 @@ public class Catch extends GameElement {
     //fishType = 4;
     fishType = int(random(-1, 5));
     // caught = false;
-    //load all fish images    
-    haraldImage = loadImage("Bilder.Grafikk/Harald1update3.png");
-    haraldImageRevers = loadImage("Bilder.Grafikk/Harald1update3Revers.png");
-    haraldCaught = loadImage("Bilder.Fisk/Harald/HaraldFanget.png");
+    //load all fish images     
+    haraldImage = loadImage("animation/Harald1update3.png");
+    haraldImageRevers = loadImage("animation/Harald1update3Revers.png");
+    haraldCaught = loadImage("animation/HaraldFanget.png");
     // guri
-    guriImage = loadImage("Bilder.Grafikk/GuriAnimation.png"); 
-    guriImageRevers = loadImage("Bilder.Grafikk/GuriAnimationRevers.png");
-    guriCaught = loadImage("Bilder.Fisk/Guri/GuriFanget.png");
+    guriImage = loadImage("animation/GuriAnimation.png"); 
+    guriImageRevers = loadImage("animation/GuriAnimationRevers.png");
+    guriCaught = loadImage("animation/GuriFanget.png");
     // bert
-    bertImage = loadImage("Bilder.Grafikk/BertAnimation.png");
-    bertImageRevers = loadImage("Bilder.Grafikk/BertAnimationRevers.png");
-    bertCaught = loadImage("Bilder.Fisk/Bert/BertFanget.png");
+    bertImage = loadImage("animation/BertAnimation.png");
+    bertImageRevers = loadImage("animation/BertAnimationRevers.png");
+    bertCaught = loadImage("animation/BertFanget.png");
     // karin
-    karinImage = loadImage("Bilder.Grafikk/KarinAnimation.png");
-    karinImageRevers = loadImage("Bilder.Grafikk/KarinAnimationRevers.png");
-    karinCaught = loadImage("Bilder.Fisk/Karin/KarinFanget.png");
+    karinImage = loadImage("animation/KarinAnimation.png");
+    karinImageRevers = loadImage("animation/KarinAnimationRevers.png");
+    karinCaught = loadImage("animation/KarinFanget.png");
     // Shark
-    sharkImage = loadImage("Bilder.Grafikk/shark.png");
-    sharkImageRevers  = loadImage("Bilder.Grafikk/sharkRevers.png");
-    sharkCaught = loadImage("Bilder.Grafikk/sharkCaught.png");
+    sharkImage = loadImage("animation/shark.png");
+    sharkImageRevers  = loadImage("animation/sharkRevers.png");
+    sharkCaught = loadImage("animation/sharkCaught.png");
   }
 
   //draw all creatures in the deep
@@ -73,7 +73,7 @@ public class Catch extends GameElement {
     {
       karinFish();
     }
-    if(fishType == 4) {
+    if (fishType == 4) {
       shark();
     }
   }
