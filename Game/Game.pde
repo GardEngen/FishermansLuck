@@ -1,3 +1,4 @@
+//XML
 import ddf.minim.*;
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
@@ -26,6 +27,7 @@ private InGameDisplay IGDisplay;
 private boolean sound = true;
 private boolean inGame = false;
 private boolean inPauseMenu;
+private boolean gameOver;
 private int score;
 private Load loader;
 private Saving save;
@@ -38,6 +40,7 @@ private final int STATE_QUIT = 3;
 private final int STATE_HELP = 4;
 private final int STATE_CONTINUE = 5;
 private final int STATE_TUTUROIAL = 6;
+private final int STATE_GAME_OVER = 7;
 private int STATE = STATE_MENU;
 
 
@@ -53,6 +56,7 @@ void setup ()
   fish = new ArrayList <Catch>();
   //Music if sound == true play background music
   playBackgroundMusic(sound);
+  gameOver = false;
   score = 0;
   spawner = 300;
 }
@@ -72,9 +76,6 @@ public void run() {
 
   case STATE_CONTINUE: 
     loader = new Load(player);
-    //// fortsett spill skal inn her
-    //text("oi, her er det ingenting", 350, 300);
-    //text("her skal du kunne fortsette spillet", 350, 310);
     resumeGame(); 
     STATE = STATE_PLAYING;
     break;
@@ -99,6 +100,12 @@ public void run() {
 
   case STATE_QUIT:
     exit();
+    break;
+
+  case STATE_GAME_OVER:
+    gameOver = true;
+    graphic.gameOverBackground();
+    IGDisplay.drawGameOVerMenu();
     break;
 
   default:
@@ -132,7 +139,7 @@ public void play() {
   }
   
   if( (player.gotCatch() == true) && (player.checkIfDangerous() == true) ){
-    STATE = STATE_MENU;
+    STATE = STATE_GAME_OVER;
   }
   
   if ( (player.gotCatch() == true) && (player.fishOnBoard() == true) ) {
@@ -170,6 +177,7 @@ private void playBackgroundMusic(boolean sound)
     minim.stop();
   }
 }
+
 public void pauseGame()
 {
   noLoop(); 
@@ -220,11 +228,11 @@ public void mousePressed() {
     }
   }
   //buttons for in Pause Menu
-  if (inPauseMenu)
-  {
+  if (inPauseMenu) {
     //resume game
     boolean mouseOnResume = IGDisplay.resumeButtonPressed();
     if (mouseOnResume) { 
+      gameOver = false;
       loop();
     }
     //go back to menu
@@ -232,7 +240,21 @@ public void mousePressed() {
     if (mouseOnQuit) {
       STATE = STATE_MENU;
       inGame = false;
+      gameOver = false;
       loop();
+    }
+  }
+  
+  if(gameOver) {
+    //New Game button in menu 
+    boolean mouseOnNewGame = IGDisplay.newGameButtonPressed();
+    if (mouseOnNewGame) {
+      STATE = STATE_PLAYING;
+    }
+    //Quit button in menu 
+    boolean mouseOnQuit = IGDisplay.quitButtonPressed();
+    if (mouseOnQuit) {
+      STATE = STATE_MENU;
     }
   }
 }

@@ -13,6 +13,10 @@ public class Graphic {
   {
     image(background, 0, 0, 1000, 700);
   }
+  
+  public void gameOverBackground() {
+    background(0);
+  }
   public void drawLogo()
   {
     image(logo,0,0);

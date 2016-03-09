@@ -27,8 +27,8 @@ public class Catch extends GameElement {
 
   public Catch() {
     speed = random(1, 5);
-    fishType = 4;
-    //fishType = int(random(-1, 5));
+    //fishType = 4;
+    fishType = int(random(-1, 5));
     // caught = false;
     //load all fish images    
     haraldImage = loadImage("Bilder.Grafikk/Harald1update3.png");

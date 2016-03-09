@@ -8,6 +8,7 @@ class InGameDisplay {
   private HelpButton h;
   private QuitButton q;
   private PFont font;
+  private PFont font2;
   
   InGameDisplay()
   {
@@ -20,6 +21,7 @@ class InGameDisplay {
     h = new HelpButton();
     q = new QuitButton();
     font = createFont("Arial", 16, true);
+    font2 = createFont("Arial", 30, true);
   }
 
   public void drawInGameButton()
@@ -42,6 +44,15 @@ class InGameDisplay {
     r.drawButton();
     q.drawButton();
     play.drawButton();
+  }
+  
+  public void drawGameOVerMenu() {
+    
+    n.drawButton();
+     textFont(font2, 30);
+      fill(255);
+      text("Game Over", 410, 300);
+    q.drawButton();
   }
 
   //functions for SoundButton
