@@ -30,17 +30,21 @@ class Saving {
     int playerXpos = player.gethorizontalMove(); // get the players(boat) x position
     int roodYpos = player.getHookPosition(); // get the y-position of the rood
 
+    boolean roodInWaterOrNot = player.getPositionOfHook();
+
     json.setInt("xPos", playerXpos); 
     json.setInt("Score", score); 
     json.setInt("yPos", roodYpos); 
+    json.setBoolean("yRod", roodInWaterOrNot);
 
     //saveJSON();
     //saveJSONObject(json, "Game.app/data/data.json");
     //saveJSONObject(json, "data/data.json");
 
-    println("Saved boat Pos: " + playerXpos);
+    // println("Saved boat Pos: " + playerXpos);
     println("Saved score: " + score);
-    println("Saved rood Pos: " + roodYpos);
+    //println("Saved rood Pos: " + roodYpos);
+    println("The hook is in the water: " + roodInWaterOrNot);
   }
 
   public void saveFish(GameElement fish) {

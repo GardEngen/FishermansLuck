@@ -20,11 +20,11 @@ public class Control {
   public int horizontalMove() {
 
     if (keyPressed && (key == CODED)) {
-    if (keyCode == LEFT && (startPositionX > 4)) {
-      startPositionX = startPositionX -speedX;
-    } else if (keyCode == RIGHT && (startPositionX < width-56)) {
-      startPositionX = startPositionX +speedX;
-    }
+      if (keyCode == LEFT && (startPositionX > 4)) {
+        startPositionX = startPositionX -speedX;
+      } else if (keyCode == RIGHT && (startPositionX < width-56)) {
+        startPositionX = startPositionX +speedX;
+      }
     }
     return startPositionX;
   }
@@ -76,5 +76,15 @@ public class Control {
   // set the Y value of the rood.
   public void setRoodY(int yPosition) {
     fishingLine = yPosition;
+  }
+
+  // set the hook in the water. used in saving
+  public void setHookInWater(boolean hook) {
+    hookInWater = hook;
+  }
+
+  // get the hook used in saving
+  public boolean getHookInWater() {
+    return hookInWater;
   }
 }

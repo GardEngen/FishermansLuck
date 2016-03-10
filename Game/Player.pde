@@ -43,11 +43,9 @@ public class Player {
       catchPosition(xPos+245, 50+rod);
       if (rod <= control.minLenght) {
         onBoard = true;
-      } 
-      else {
+      } else {
         onBoard = false;
       }
-      
     } else {
       image(hookM, xPos+285, 57+rod);
     }
@@ -164,5 +162,15 @@ public class Player {
   // set the life of the player
   public int setLife(int life) {
     return life;
-}
+  }
+
+  // get if the hook is in the water or not. used in saving.
+  public boolean getPositionOfHook() {
+    return control.getHookInWater();
+  }
+
+  // set if the hook is in the water or not. used in saving
+  public void setPositionOfHook(boolean hook) {
+    control.setHookInWater(hook);
+  }
 }

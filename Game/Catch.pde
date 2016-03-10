@@ -66,6 +66,20 @@ public class Catch extends GameElement {
     sharkCaught = loadImage("animation/sharkCaught.png");
   }
 
+  public void setRandomFish() {
+    double hei = Math.random(); // "Returns a double value with a positive sign, greater than or equal to 0.0 and less than 1.0."
+
+    if (hei <0.5) { // 50 % sjanse
+      bertFish();
+    } else if (hei < 0.7) {
+      siriFish();
+    } else if (hei < 0.4) {
+      annaFish();
+    } else if (hei < 0.8) {
+      shark();
+    }
+  }
+
   //draw all creatures in the deep
   public void drawAllFish() {
     if (fishType == 0)

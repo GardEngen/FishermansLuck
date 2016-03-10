@@ -10,6 +10,7 @@ class SaveThread extends Thread {
     this.score = score;
   }
 
+  // ha med load sin getScore.
   @Override
     public void run() {
 
