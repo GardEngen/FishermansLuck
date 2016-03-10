@@ -5,15 +5,17 @@ class Button {
   private float xPosition;
   private float yPosition;
   private boolean beenPressed;
-  Button()
-  {
+  
+  Button(float xPos, float yPos) {
     currentState = true;
-  }
-
-  public void buttonInfo(float xPos, float yPos, PImage bImage1, PImage bImage2)
-  {
     xPosition = xPos;
     yPosition = yPos;
+  }
+
+  public void buttonInfo(PImage bImage1, PImage bImage2)
+  {
+    //xPosition = xPos;
+   // yPosition = yPos;
     buttonImage = bImage1;
     buttonImage2 = bImage2;
   }
@@ -43,7 +45,7 @@ class Button {
     if ( !((mouseX>xPosition) && (mouseX < (xPosition + buttonImage.width)) && 
       (mouseY>yPosition) && (mouseY < (yPosition + buttonImage.height))) )
     {
-      beenPressed=false;
+      beenPressed = false;
     }
     return beenPressed;
   }
