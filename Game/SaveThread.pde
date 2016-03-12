@@ -1,13 +1,11 @@
 class SaveThread extends Thread {
   Saving save;
   Game game;
-  int score;
- // ArrayList<Catch> fish;
 
-  public SaveThread(Saving save, Game game, int score) {
+
+  public SaveThread(Saving save, Game game) {
     this.save = save;
     this.game = game;
-    this.score = score;
   }
 
   // ha med load sin getScore.
@@ -16,9 +14,8 @@ class SaveThread extends Thread {
 
     while (true) {
 
-      if (game.needSaving()) {
-        //save.playerSave(player, score); //,fish);
-        save.saveGameState( player, score, fish);
+      if (game.needSaving()) { 
+        save.saveGameState( player, fish, score);
       }
       try {
         savingThread.sleep(5000); // saves every 5 second.

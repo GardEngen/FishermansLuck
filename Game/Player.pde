@@ -59,22 +59,15 @@ public class Player {
 
   // Sets player position. used in saving
   public void setPlayerPosition(int newPositionX) {
-    //boatPosition = newPositionX;
     control.setPositionX(newPositionX);
   }
-
-  ////Sets new start x position
-  //public void setStartPosition(int newPositionX) {
-  //  boatPosition = newPositionX;
-  //  control.setPositionX(boatPosition);
-  //}
 
   // get position of the player. used in saving
   public int getPlayerPosition() {
     return control.horizontalMove();
   }
 
-  // get position of the hook. used in saving
+ // get position of the hook. used in saving
   public int getHookPosition() {
     return control.rodInteraction();
   }
@@ -131,11 +124,16 @@ public class Player {
   public void catchPosition(int x, int y) {
     int xPos = x;
     int rod = y;
-    newCatch.onTheHook(xPos, rod);
+    newCatch.onTheHook(xPos, rod); // null pointer when closing the game then continue
   }
 
   public boolean gotCatch() {
     return caught;
+  }
+
+  // set if we have a fish on the hook.
+  public void setCatch(boolean newCaught) {
+    this.caught = newCaught;
   }
 
   public boolean fishOnBoard() {
@@ -149,8 +147,7 @@ public class Player {
     return x;
   }
   //Må se på
-  public int gethorizontalMove()
-  {
+  public int gethorizontalMove() {
     return control.horizontalMove();
   }
 
@@ -164,9 +161,9 @@ public class Player {
     return life;
   }
 
-  // get if the hook is in the water or not. used in saving.
-  public boolean getPositionOfHook() {
-    return control.getHookInWater();
+// get if the hook is in the water or not. used in saving.
+  public boolean checkPositionOfHook() {
+    return control.checkHookInWater();
   }
 
   // set if the hook is in the water or not. used in saving

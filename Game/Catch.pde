@@ -1,34 +1,34 @@
-
-public class Catch extends GameElement {
-  private float speed;
-  private int xCut;
-  private int yCut;
-  private int numberOfpictures;
-  private float delay;
-  private boolean dangerous;
+//public abstract class Catch extends GameElement {
+public  class Catch extends GameElement {
+  protected float speed;
+  protected int xCut;
+  protected int yCut;
+  protected int numberOfpictures;
+  protected float delay;
+  protected boolean dangerous;
   //all fish images
-  private PImage haraldImage;
-  private PImage haraldImageRevers;
-  private PImage haraldCaught;
-  private PImage guriImage;
-  private PImage guriImageRevers;
-  private PImage guriCaught;
-  private PImage bertImage;
-  private PImage bertImageRevers;
-  private PImage bertCaught;
-  private PImage karinImage;
-  private PImage karinImageRevers;
-  private PImage karinCaught;
-  private PImage sharkImage;
-  private PImage sharkImageRevers;
-  private PImage sharkCaught;
-  private PImage siriImage; // siri fisk
-  private PImage siriImageRevers;
-  private PImage siriCaught;
-  private PImage annaImage; // anna fisk
-  private PImage annaImageRevers;
-  private PImage annaCaught;
-  private int fishType;
+  protected PImage haraldImage;
+  protected PImage haraldImageRevers;
+  protected PImage haraldCaught;
+  protected PImage guriImage;
+  protected PImage guriImageRevers;
+  protected PImage guriCaught;
+  protected PImage bertImage;
+  protected PImage bertImageRevers;
+  protected PImage bertCaught;
+  protected PImage karinImage;
+  protected PImage karinImageRevers;
+  protected PImage karinCaught;
+  protected PImage sharkImage;
+  protected PImage sharkImageRevers;
+  protected PImage sharkCaught;
+  protected PImage siriImage; // siri fisk
+  protected PImage siriImageRevers;
+  protected PImage siriCaught;
+  protected PImage annaImage; // anna fisk
+  protected PImage annaImageRevers;
+  protected PImage annaCaught;
+  protected int fishType;
   // private boolean caught;
 
   public Catch() {
@@ -64,38 +64,48 @@ public class Catch extends GameElement {
     sharkImage = loadImage("animation/shark.png");
     sharkImageRevers  = loadImage("animation/sharkRevers.png");
     sharkCaught = loadImage("animation/sharkCaught.png");
+
+    //double fishProbability = Math.random(); // "Returns a double value with a positive sign, greater than or equal to 0.0 and less than 1.0."
   }
 
-  public void setRandomFish() {
-    double hei = Math.random(); // "Returns a double value with a positive sign, greater than or equal to 0.0 and less than 1.0."
-
-    if (hei <0.5) { // 50 % sjanse
+  public void createRandomFish() {
+    int random = (int) (Math.random()* 100); //generate a random number between 0 and 99
+    Catch fish;
+    
+     if (random < 20) { // in the range 0-19
+      fish = new Shark();
+    } else if (random < 30) { // range 20 - 29
       bertFish();
-    } else if (hei < 0.7) {
-      siriFish();
-    } else if (hei < 0.4) {
+    } else if (random < 40) { // range 30 - 39
       annaFish();
-    } else if (hei < 0.8) {
+    } else if (random < 50) { // range 40 - 49
+      haraldFish();
+    } else if (random < 60) { // range 50 - 59
+      guriFish();
+    } else if (random < 70) { // range 60-69
+      karinFish();
+    } else if (random < 80) { // range 70 - 89
       shark();
     }
+    //return fish;
+  }
+
+  public void drawFishes() {
   }
 
   //draw all creatures in the deep
   public void drawAllFish() {
-    if (fishType == 0)
+    if ((fishType == 0))
     {
       haraldFish();
-      // img = haraldImage;
     }
-    if (fishType == 1)
+    if ((fishType == 1))
     {
       guriFish();
-      // // img = guriImage;
     }
     if ( fishType == 2)
     {
       bertFish();
-      // // img = bertImage;
     }
     if ( fishType == 3) 
     {
@@ -187,13 +197,14 @@ public class Catch extends GameElement {
     elementMovement(speed, sharkImageRevers, sharkImage, sharkCaught, dangerous);
   }
 
-  //public void isCaught() {
-  //  speed = 0;
-  //  caught = true;
-  //}
-
   public GameElement isCaught() {
     //caught = true;
     return this;
   }
+
+  // this should be true for bad fishes
+  //public abstract boolean isBad(); 
+
+  // This can be used to save/load from Json
+ // public abstract String getType();
 }

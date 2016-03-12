@@ -84,7 +84,7 @@ public class Control {
   }
 
   // get the hook used in saving
-  public boolean getHookInWater() {
+  public boolean checkHookInWater() {
     return hookInWater;
   }
 }

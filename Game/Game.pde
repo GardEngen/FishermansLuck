@@ -1,22 +1,25 @@
 // the real G
 import ddf.minim.*;
 import java.util.*;
+import java.lang.Math;
+
 private AudioPlayer audioPlayer;
 private Minim minim;
 private Player player;
 private Graphic graphic;
 private Saving saving;
 private Load load;
+private SaveThread savingThread; 
+private Menu menu;
 private ArrayList <Catch> fish;
 //private int numberOfFish = 6;
-private Menu menu;
 private boolean sound = true;
 private boolean inGame = false;
 private boolean inPauseMenu;
 private boolean gameOver;
 private int score;
 private int spawner;
-private SaveThread savingThread; 
+
 
 private final String STATE_MENU = "menu";
 private final String STATE_PLAYING = "new";
@@ -26,8 +29,6 @@ private final String STATE_CONTINUE = "resume";
 private final String STATE_TUTUROIAL = "tutorial";
 private final String STATE_GAME_OVER = "game over";
 private String STATE = STATE_MENU;
-
-
 
 void setup () {
   size(1000, 700);
@@ -42,7 +43,7 @@ void setup () {
   playBackgroundMusic(sound);
   gameOver = false;
   spawner = 300;
-  this.savingThread = new SaveThread(saving, this, score);
+  this.savingThread = new SaveThread(saving, this);
   this.savingThread.start();
 }
 
@@ -61,7 +62,7 @@ public void run() {
     menu.drawMenuButton();
     break;
 
-  case STATE_CONTINUE: 
+  case STATE_CONTINUE:  // check with the got catch
     load.playerLoad();
     inPauseMenu = false;
     score = load.getScore();
@@ -75,7 +76,6 @@ public void run() {
   case STATE_TUTUROIAL: 
     // tutorial skal inn her
     text("oi, her er det ingenting", 350, 300);
-
     break;
 
   case STATE_HELP:
@@ -91,7 +91,6 @@ public void run() {
     gameOver = true;
     graphic.gameOverBackground();
     menu.drawGameOVerMenu();
-
     break;   
 
   default:
@@ -136,6 +135,7 @@ public void play() {
         fish.remove(i);
       }
     }
+    // må bli satt til false igjen
   }
 
   if (player.gotCatch() == false) {
@@ -165,8 +165,7 @@ private void playBackgroundMusic(boolean sound)
 }
 public void pauseGame() {
   noLoop(); 
-  //saving.playerSave(player, score);
-  saving.saveGameState( player, score, fish);
+  saving.saveGameState( player, fish, score);
   inPauseMenu = true;
   menu.drawPauseMenu();
 }

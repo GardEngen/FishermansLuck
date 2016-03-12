@@ -1,6 +1,5 @@
 class Load {
   private JSONObject json;
-  private GameElement fish;
   private int score;
   private int newScore;
   Load()
@@ -8,31 +7,37 @@ class Load {
     json = loadJSONObject("data.json");
   }
   public void playerLoad() {
- 
+
     int xPos = json.getInt("xPos");    // load the players boat position
     player.setPlayerPosition(xPos);   
-    
+    println("båt pos: " + xPos);
+
     int yPos = json.getInt("yPos"); // load the players road position
     player.setHookPosition(yPos);
-   
-   boolean yRod = json.getBoolean("yRod");
-   player.setPositionOfHook(yRod);
-   println("the rood is in the water: " + yRod);
-    
-     score = json.getInt("Score");   // load the score
+
+    score = json.getInt("Score");   // load the score
     println("Din lagra score er : " + score);
-    
-    // null pointer
+
+    boolean yRod = json.getBoolean("RoodInWater"); // get if the rood is in the water or not
+    player.setPositionOfHook(yRod);
+    //println("the rood is in the water: " + yRod);
+
+    boolean setCatch = json.getBoolean("gotCatch"); // get if it is a fish on the hook.
+    player.setCatch(setCatch);
+    println("Fish on the hook " + setCatch);
+
+    // null pointer 
     //float FishX = json.getFloat("FishX");
     //fish.setFishPosX(FishX);
-    
+
+    // null pointer
     //float FishY = json.getFloat("FishY");
     //fish.setFishPosY(FishY);
-    
   }
   public int getScore()
   {
     newScore = newScore + score;
     return newScore;
   }
+  
 }
