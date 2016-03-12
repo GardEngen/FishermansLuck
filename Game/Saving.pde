@@ -1,9 +1,10 @@
 class Saving {
   Player player;
   GameElement GameFish;
-
   JSONObject json;
+  
   Saving() {
+    createJSON();
   }
 
   // create the JSON document
@@ -17,7 +18,7 @@ class Saving {
     saveJSONObject(json, "data/data.json");
   }
   public void saveGameState(Player player, ArrayList<Catch> fish,int score) {
-    createJSON();
+  //  createJSON();
     playerSave(player, score);
     for ( Catch f : fish) {
       saveFish(f);
@@ -27,7 +28,7 @@ class Saving {
 
   public void playerSave(Player player, int score) {      
     //get positin to boat
-    int playerXpos = player.gethorizontalMove(); // get the players(boat) x position
+    int playerXpos = player.getPlayerPosition(); // get the players(boat) x position
     int roodYpos = player.getHookPosition(); // get the y-position of the rood
 
     boolean roodInWaterOrNot = player.checkPositionOfHook();
@@ -43,7 +44,7 @@ class Saving {
     println("Saved boat Pos: " + playerXpos);
     println("Saved score: " + score);
     println("fish on hook: " + gotCatch);
-    println("");
+
   }
 
   // save the information about the fish

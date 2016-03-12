@@ -37,11 +37,11 @@ class Menu {
   public void createInGameMenu() {
     s = (Button) new SoundButton(930, 5); 
     p = (Button) new PauseButton(935, 80);
-    play = (Button) new PlayButton(935, 80);
+   // play = (Button) new PlayButton(935, 80);
 
     inGameButtonsHash.put("sound", s);
     inGameButtonsHash.put("pause", p);
-    inGameButtonsHash.put("play", play);
+   // inGameButtonsHash.put("play", play);
   }
 
   public void createMainMenu() {
@@ -51,7 +51,7 @@ class Menu {
     h = (Button) new HelpButton(400, 450);
     q = (Button) new QuitButton(400, 510);
 
-    mainMenuButtonsHash.put("resume", r);
+    mainMenuButtonsHash.put("continue", r);
     mainMenuButtonsHash.put("new", n);
     mainMenuButtonsHash.put("tutorial", t);
     mainMenuButtonsHash.put("help", h);
@@ -60,7 +60,7 @@ class Menu {
 
   public void createPauseMenu() {
     q2 = (Button) new QuitButton(400, 330);
-
+    pauseMenuButtonsHash.put("resume", play);
     pauseMenuButtonsHash.put("resume", r);
     pauseMenuButtonsHash.put("menu", q2);
   }
@@ -100,7 +100,7 @@ class Menu {
     }
     textFont(font2, 30);
     fill(255);
-    text("Game Over", 410, 300);
+    text("Game Over", 410, 200);
   }
 
   //Takes the parameter of a HashMap<String,Button>, and chesk if any of the buttons are pressed.

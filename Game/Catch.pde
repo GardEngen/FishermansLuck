@@ -70,10 +70,10 @@ public  class Catch extends GameElement {
 
   public void createRandomFish() {
     int random = (int) (Math.random()* 100); //generate a random number between 0 and 99
-    Catch fish;
+    //Catch fish;
     
      if (random < 20) { // in the range 0-19
-      fish = new Shark();
+      //fish = new Shark();
     } else if (random < 30) { // range 20 - 29
       bertFish();
     } else if (random < 40) { // range 30 - 39

@@ -146,10 +146,10 @@ public class Player {
     }
     return x;
   }
-  //Må se på
-  public int gethorizontalMove() {
-    return control.horizontalMove();
-  }
+  ////Må se på
+  //public int gethorizontalMove() {
+  //  return control.horizontalMove();
+  //}
 
   // get the life of the player
   public int getLife() {
