@@ -10,7 +10,7 @@ private Graphic graphic;
 private Saving saving;
 private Load load;
 private Level level;
-//private SaveThread savingThread; 
+private SaveThread savingThread; 
 private Menu menu;
 //private ArrayList <Catch> fish;
 //private int numberOfFish = 6;
@@ -54,8 +54,8 @@ void setup () {
   inPauseMenu = false;
   //spawner = 300; //How often fish are spawning. The lower the number, the ofter fish are spawn
   saving.saveGameState( player, level.getArray(), level.getScore());
-  //this.savingThread = new SaveThread(saving, this);
-  //this.savingThread.start();
+  this.savingThread = new SaveThread(saving, this, player);
+  this.savingThread.start();
 }
 
 void draw () {

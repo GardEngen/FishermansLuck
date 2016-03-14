@@ -1,7 +1,9 @@
 {
-  "Score": 0,
-  "yPos": 50,
+  "Score": 2,
+  "yPos": 330,
   "gotCatch": false,
-  "xPos": 215,
-  "RoodInWater": false
+  "FishY": 575.468017578125,
+  "xPos": 47,
+  "FishX": 41.71982955932617,
+  "RoodInWater": true
 }

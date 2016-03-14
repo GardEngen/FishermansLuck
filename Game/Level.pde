@@ -54,7 +54,7 @@ class Level {
     }
 
     for (int i = 0; i < fish.size(); i++) {
-      fish.get(i).drawAllFish();
+      fish.get(i).drawFish();
     }
     //There is two for-loops to prevent a bug in the fish animation
     for (int i = 0; i < fish.size(); i++) {

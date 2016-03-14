@@ -1,4 +1,4 @@
-class Button {
+public class Button {
   private PImage buttonImage;
   private PImage buttonImage2;
   private boolean currentState;
