@@ -9,16 +9,17 @@ private Player player;
 private Graphic graphic;
 private Saving saving;
 private Load load;
+private Level level;
 //private SaveThread savingThread; 
 private Menu menu;
-private ArrayList <Catch> fish;
+//private ArrayList <Catch> fish;
 //private int numberOfFish = 6;
 private boolean sound;
 private boolean inGame;
 private boolean inPauseMenu;
 private boolean gameOver;
-private int score;
-private int spawner;
+//private int score;
+//private int spawner;
 
 
 private final String STATE_MENU = "menu";
@@ -39,18 +40,20 @@ void setup () {
   player = new Player();
   graphic = new Graphic();
   menu = new Menu();
-  fish = new ArrayList <Catch>();
+  //fish = new ArrayList <Catch>();
   saving = new Saving();
   load = new Load();
-  score = 0;
+  level = new Level();
+  level.setLevel(1);
+  //score = 0;
   sound = true;
   //Music if sound == true play background music
   playBackgroundMusic(sound);
   gameOver = false;
   inGame = false;
   inPauseMenu = false;
-  spawner = 300; //How often fish are spawning. The lower the 
-  saving.saveGameState( player, fish, score);
+  //spawner = 300; //How often fish are spawning. The lower the number, the ofter fish are spawn
+  saving.saveGameState( player, level.getArray(), level.getScore());
   //this.savingThread = new SaveThread(saving, this);
   //this.savingThread.start();
 }
@@ -85,7 +88,7 @@ public void run() {
     inGame = true;
     inPauseMenu = false;
     load.playerLoad();
-    score = load.getScore();
+    level.setScore(load.getScore());
     STATE = STATE_PLAYING;
     break;
 
@@ -115,7 +118,7 @@ public void run() {
     break;
 
   case STATE_HELP:
-    println("Din score er: " + score);
+    println("Din score er: " + level.getScore());
     println("LagraScore:" + load.getScore());
     break;
 
@@ -142,54 +145,55 @@ public void run() {
 
 //Starts the game 
 public void play() {
-  // inGame = true;
-  //gameOver = false;
   graphic.drawBackground();
-  menu.scoreBoard(score);
+  //level.scoreBoard();
   player.boat();
 
   menu.drawInGameButton();
-  //Checks if its time to spawn new fish
-  if (spawner >= 300) {
-    spawn();
-    spawner = 0;
-  }
+  level.levelState();
+  //level.catching();
+  //level.time();
+  ////Checks if its time to spawn new fish
+  //if (spawner >= 300) {
+  //  spawn();
+  //  spawner = 0;
+  //}
 
-  for (int i = 0; i < fish.size(); i++) {
-    fish.get(i).drawAllFish();
-  }
-  //There is two for-loops to prevent a bug in the fish animation
-  for (int i = 0; i < fish.size(); i++) {
-    if (fish.get(i).isInMotion() == false) {
-      fish.remove(i);
-    }
-  }
+  //for (int i = 0; i < fish.size(); i++) {
+  //  fish.get(i).drawAllFish();
+  //}
+  ////There is two for-loops to prevent a bug in the fish animation
+  //for (int i = 0; i < fish.size(); i++) {
+  //  if (fish.get(i).isInMotion() == false) {
+  //    fish.remove(i);
+  //  }
+  //}
 
-  if ( (player.gotCatch() == true) && (player.checkIfDangerous() == true) ) {
-    STATE = STATE_GAME_OVER;
-  }
+  //if ( (player.gotCatch() == true) && (player.checkIfDangerous() == true) ) {
+  //  STATE = STATE_GAME_OVER;
+  //}
 
-  if ( (player.gotCatch() == true) && (player.fishOnBoard() == true) ) {
-    score = score + 1;
-    for (int i = 0; i < fish.size(); i++) {
-      if (fish.get(i).equals(player.getCatch())) {
-        fish.remove(i);
-      }
-    }
-    // må bli satt til false igjen
-  }
+  //if ( (player.gotCatch() == true) && (player.fishOnBoard() == true) ) {
+  //  score = score + 1;
+  //  for (int i = 0; i < fish.size(); i++) {
+  //    if (fish.get(i).equals(player.getCatch())) {
+  //      fish.remove(i);
+  //    }
+  //  }
+  //  // må bli satt til false igjen
+  //}
 
-  if (player.gotCatch() == false) {
-    catchSomething();
-  }
+  //if (player.gotCatch() == false) {
+  //  catchSomething();
+  //}
 
-  spawner = spawner + int(random(1, 10));
+  //spawner = spawner + int(random(1, 10));
 }
 
-//Creats a fish and adds it to the arraylist
-private void spawn() {
-  fish.add(new Catch());
-}
+////Creats a fish and adds it to the arraylist
+//private void spawn() {
+//  fish.add(new Catch());
+//}
 
 //background music function.
 private void playBackgroundMusic(boolean sound) 
@@ -206,10 +210,7 @@ private void playBackgroundMusic(boolean sound)
 }
 
 public void pauseGame() {
-  
-  //noLoop(); 
-  saving.saveGameState( player, fish, score);
-  // inPauseMenu = true;
+  saving.saveGameState( player, level.getArray(), level.getScore());
   menu.drawPauseMenu();
 }
 
@@ -222,12 +223,9 @@ public void mousePressed() {
     }
 
     if (result2.equals("pause")) {
-      // else {
       STATE = STATE_PAUSE;
-      //pauseGame();
     }
   
-
   if (inGame==false)
   {
     String result = menu.isButtonPressed(menu.getMainMenuHash()) ;
@@ -235,43 +233,40 @@ public void mousePressed() {
       STATE = result;
     }
   }
-  //  //buttons for in Pause Menu
+  //  //buttons in Pause Menu
   if (inPauseMenu) {
 
     String result = menu.isButtonPressed(menu.getPauseMenuHash()) ;
     if (!result.equals("none")) {
       STATE = result;
-      //inPauseMenu = false;
     }
   }
   if (gameOver) {
     String result = menu.isButtonPressed(menu.getGameOverMenuHash()) ;
     if (!result.equals("none")) {
       STATE = result;
-      //gameOver = false;
-      //inGame = false;
     }
   }
 }
 
-//Hitbox detection for catching fish
-private void catchSomething() {
-  float catchX;
-  float catchY;
-  float catchHeight;
-  float rodX = player.getHitboxCenterXPos(); //centered
-  float rodY = player.getHitboxCenterYPos(); //centered
+////Hitbox detection for catching fish
+//private void catchSomething() {
+//  float catchX;
+//  float catchY;
+//  float catchHeight;
+//  float rodX = player.getHitboxCenterXPos(); //centered
+//  float rodY = player.getHitboxCenterYPos(); //centered
 
-  for (Catch temp : fish) {
-    catchHeight = temp.getYCut();
-    catchY = temp.getCenterYHit(); //centered
-    catchX = temp.getCenterXHit(); //centered
+//  for (Catch temp : fish) {
+//    catchHeight = temp.getYCut();
+//    catchY = temp.getCenterYHit(); //centered
+//    catchX = temp.getCenterXHit(); //centered
 
-    if ( dist(rodX, rodY, catchX, catchY) <= catchHeight/2 ) {
-      player.myCatch(temp.isCaught());
-    }
-  }
-}
+//    if ( dist(rodX, rodY, catchX, catchY) <= catchHeight/2 ) {
+//      player.myCatch(temp.isCaught());
+//    }
+//  }
+//}
 
 // If the game is true and not in the menu then the game need to be saved.
 public boolean needSaving() {

@@ -15,7 +15,7 @@ class Menu {
   private HashMap<String, Button> gameOverButtonsHash;
   private HashMap<String, Button> pauseMenuButtonsHash;
 
-  private PFont font;
+  //private PFont font;
   private PFont font2;
 
 
@@ -30,7 +30,7 @@ class Menu {
     createPauseMenu();
     createGameOverMenu();
 
-    font = createFont("Arial", 16, true);
+    //font = createFont("Arial", 16, true);
     font2 = createFont("Arial", 30, true);
   }
 
@@ -139,9 +139,15 @@ class Menu {
     return s.onOffSwitch();
   }
 
-  private void scoreBoard(int score) {
-    textFont(font, 16);
-    fill(0);
-    text("Score " + score, 30, 30);
-  }
+  //public void scoreBoard(int score) {
+  //  textFont(font, 16);
+  //  fill(0);
+  //  text("Score " + score, 30, 30);
+  //}
+  
+  //public void showTimer(String time) {
+  //  textFont(font, 16);
+  //  fill(0);
+  //  text("Time left " + time, 30, 50);
+  //}
 }
