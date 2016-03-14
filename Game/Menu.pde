@@ -41,13 +41,12 @@ class Menu {
   }
 
   public void createInGameMenu() {
-    s = (Button) new SoundButton(930, 5); 
+    s = (Button) new SoundButton(935, 20); 
     p = (Button) new PauseButton(935, 80);
-   // play = (Button) new PlayButton(935, 80);
+    play = (Button) new PlayButton(935, 80);
 
     inGameButtonsHash.put("sound", s);
     inGameButtonsHash.put("pause", p);
-   // inGameButtonsHash.put("play", play);
   }
 
   public void createMainMenu() {
@@ -76,7 +75,7 @@ class Menu {
 
   public void createPauseMenu() {
     q2 = (Button) new QuitButton(400, 330);
-    pauseMenuButtonsHash.put("resume", play);
+    pauseMenuButtonsHash.put("play", play);
     pauseMenuButtonsHash.put("resume", r);
     pauseMenuButtonsHash.put("menu", q2);
   }
