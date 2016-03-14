@@ -1,7 +1,10 @@
+
 // the real G
 import ddf.minim.*;
 import java.util.*;
 import java.lang.Math;
+import java.time.Duration;
+//import com.dhchoi.*;
 
 private AudioPlayer audioPlayer;
 private Minim minim;
@@ -18,9 +21,9 @@ private boolean sound;
 private boolean inGame;
 private boolean inPauseMenu;
 private boolean gameOver;
+//CountdownTimer time;
 //private int score;
 //private int spawner;
-
 
 private final String STATE_MENU = "menu";
 private final String STATE_NEW = "new";
@@ -40,12 +43,11 @@ void setup () {
   player = new Player();
   graphic = new Graphic();
   menu = new Menu();
-  //fish = new ArrayList <Catch>();
   saving = new Saving();
   load = new Load();
+  //time = CountdownTimerService.getNewCountdownTimer(this);
   level = new Level();
   level.setLevel(1);
-  //score = 0;
   sound = true;
   //Music if sound == true play background music
   playBackgroundMusic(sound);
@@ -56,6 +58,8 @@ void setup () {
   saving.saveGameState( player, level.getArray(), level.getScore());
   this.savingThread = new SaveThread(saving, this, player);
   this.savingThread.start();
+  
+  
 }
 
 void draw () {
@@ -93,7 +97,6 @@ public void run() {
     break;
 
   case STATE_RESUME:
-    // loop();
     gameOver = false;
     inGame = true;
     inPauseMenu = false;
@@ -109,6 +112,7 @@ public void run() {
     inGame = true;
     gameOver = false;
     inPauseMenu = false;
+    level.resetTimer();
     play();
     break;
 
@@ -134,7 +138,7 @@ public void run() {
     inGame = false;
     inPauseMenu = false;
     graphic.gameOverBackground();
-    menu.drawGameOVerMenu();
+    menu.drawGameOverMenu();
     break;   
 
   default:
@@ -151,49 +155,7 @@ public void play() {
 
   menu.drawInGameButton();
   level.levelState();
-  //level.catching();
-  //level.time();
-  ////Checks if its time to spawn new fish
-  //if (spawner >= 300) {
-  //  spawn();
-  //  spawner = 0;
-  //}
-
-  //for (int i = 0; i < fish.size(); i++) {
-  //  fish.get(i).drawAllFish();
-  //}
-  ////There is two for-loops to prevent a bug in the fish animation
-  //for (int i = 0; i < fish.size(); i++) {
-  //  if (fish.get(i).isInMotion() == false) {
-  //    fish.remove(i);
-  //  }
-  //}
-
-  //if ( (player.gotCatch() == true) && (player.checkIfDangerous() == true) ) {
-  //  STATE = STATE_GAME_OVER;
-  //}
-
-  //if ( (player.gotCatch() == true) && (player.fishOnBoard() == true) ) {
-  //  score = score + 1;
-  //  for (int i = 0; i < fish.size(); i++) {
-  //    if (fish.get(i).equals(player.getCatch())) {
-  //      fish.remove(i);
-  //    }
-  //  }
-  //  // må bli satt til false igjen
-  //}
-
-  //if (player.gotCatch() == false) {
-  //  catchSomething();
-  //}
-
-  //spawner = spawner + int(random(1, 10));
 }
-
-////Creats a fish and adds it to the arraylist
-//private void spawn() {
-//  fish.add(new Catch());
-//}
 
 //background music function.
 private void playBackgroundMusic(boolean sound) 
@@ -248,25 +210,6 @@ public void mousePressed() {
     }
   }
 }
-
-////Hitbox detection for catching fish
-//private void catchSomething() {
-//  float catchX;
-//  float catchY;
-//  float catchHeight;
-//  float rodX = player.getHitboxCenterXPos(); //centered
-//  float rodY = player.getHitboxCenterYPos(); //centered
-
-//  for (Catch temp : fish) {
-//    catchHeight = temp.getYCut();
-//    catchY = temp.getCenterYHit(); //centered
-//    catchX = temp.getCenterXHit(); //centered
-
-//    if ( dist(rodX, rodY, catchX, catchY) <= catchHeight/2 ) {
-//      player.myCatch(temp.isCaught());
-//    }
-//  }
-//}
 
 // If the game is true and not in the menu then the game need to be saved.
 public boolean needSaving() {

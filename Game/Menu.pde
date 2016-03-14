@@ -93,7 +93,7 @@ class Menu {
     }
   }
 
-  public void drawGameOVerMenu() {
+  public void drawGameOverMenu() {
     Set<String> keys = gameOverButtonsHash.keySet();
     for (String hashKey : keys) {
       gameOverButtonsHash.get(hashKey).drawButton();

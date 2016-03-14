@@ -1,6 +1,6 @@
 
 class Level {
-
+  
   //private int level;
   private int LEVEL;
   private int score;
@@ -8,12 +8,14 @@ class Level {
   private int startTime;
   private int timeLeft;
   private int time;
+  //private CountdownTimer time;
   private ArrayList <Catch> fish;
   private PFont font;
 
 
 
   Level() {
+    //this.time = time;
     fish = new ArrayList <Catch>();
     spawner = 300; //How often fish are spawning. The lower the number, the ofter fish are spawn
     score = 0;
@@ -27,15 +29,15 @@ class Level {
     switch(LEVEL) {
 
     case 1:
-      setStartTime(5000);
-      time();
+      setStartTime(5);
+      timer();
       scoreBoard();
       level.catching();
       break;
 
     case 2:
-      setStartTime(5000);
-      time();
+      setStartTime(5);
+      timer();
       scoreBoard();
       level.catching();
       break;
@@ -85,7 +87,7 @@ class Level {
   }
 
   //Creats a fish and adds it to the arraylist
-  private void spawn() {
+  public void spawn() {
     fish.add(new Catch());
   }
 
@@ -126,26 +128,34 @@ class Level {
     text("Score " + score, 30, 30);
   }
 
-  public boolean time() {
+  public boolean timer() {
     boolean timesUp = false;
+    
     if ((time <= startTime) && (!timesUp)) {
-      timeLeft = timeLeft - time;
+     timeLeft = timeLeft - time;
+  //println("Time: " );
+  //println("timeLeft: " );
 
-      long second = (timeLeft / 1000) % 60;
-      long minute = (timeLeft / (1000 * 60)) % 60;
-      String timeDisplay = minute + ":" + second;
-      showTimer(timeDisplay);
+    long minute = (timeLeft/60)%60;
+    long second = (timeLeft - minute*60)%60;
+    String timeDisplay = minute + ":" + second;
+     showTimer(timeDisplay);
     }
     return timesUp;
   }
 
-  //The time is set in millis (1 minute = 1000 millis.
-  public void setStartTime(int time) {
-    startTime = time;
+  //The time is set in second
+  public void setStartTime(int minute) {
+   startTime = minute*60*1000;
   }
 
   public void startTimer() {
     time = millis();
+    timeLeft = startTime;
+  }
+  
+  public void resetTimer() {
+   // time.reset(StopBehavior);
   }
 
   public void showTimer(String time) {
