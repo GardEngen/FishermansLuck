@@ -8,11 +8,15 @@ public class Player {
   private int currentFrameOfFisher;
   private float fisherAnimationDelay;
   private PImage fisher;
+  private PImage fisherRevers;
+  private PImage currentFisher;
   private PImage hookM;
   private PImage hookU;
+  private int HitboxX;
+  private int HitboxY;
   private GameElement newCatch;
   private boolean caught;
-  private PImage hook;
+  //private PImage hook;
   private int life;
   private boolean onBoard;
   private boolean danger;
@@ -25,6 +29,7 @@ public class Player {
     hookM = loadImage("animation/hook1copy.png");
     hookU = loadImage("animation/hookUtencopy.png");
     fisher = loadImage("animation/fisker.png");
+    fisherRevers = loadImage("animation/fiskerRevers.png");
     caught = false;
     onBoard = false;
   }
@@ -33,22 +38,49 @@ public class Player {
   public void boat() {
     int xPos = control.horizontalMove();
     int rod = control.rodInteraction();
-    drawFisher(); 
-    //Fishingline
-    line(xPos+299, 57, xPos+300, 63+rod);
-    //draw hook
-    if (caught == true) {
+    boolean reversBoat = control.fisherRevers();
 
-      image(hookU, xPos+292, 57+rod);
-      catchPosition(xPos+245, 50+rod);
-      if (rod <= control.minLenght) {
-        onBoard = true;
+    if (reversBoat)
+    {
+      currentFisher = fisherRevers;
+      line(xPos, 57, xPos, 63+rod);
+      //hitbox
+      HitboxX = control.horizontalMove() + (hookM.width/2);
+      HitboxY = 65+control.rodInteraction() + (hookM.height/2);
+      if (caught == true) {
+
+        image(hookU, xPos-9, 57+rod);
+        catchPosition(xPos-55, 50+rod);
+        if (rod <= control.minLenght) {
+          onBoard = true;
+        } else {
+          onBoard = false;
+        }
       } else {
-        onBoard = false;
+        image(hookM, xPos-14, 57+rod);
       }
-    } else {
-      image(hookM, xPos+285, 57+rod);
     }
+    if (reversBoat == false)
+    {
+      currentFisher = fisher;
+      line(xPos+299, 57, xPos+300, 63+rod);
+      //hitbox
+      HitboxX = 270 + control.horizontalMove() + (hookM.width/2);
+      HitboxY = 65+control.rodInteraction() + (hookM.height/2);
+      if (caught == true) {
+
+        image(hookU, xPos+292, 57+rod);
+        catchPosition(xPos+245, 50+rod);
+        if (rod <= control.minLenght) {
+          onBoard = true;
+        } else {
+          onBoard = false;
+        }
+      } else {
+        image(hookM, xPos+285, 57+rod);
+      }
+    }
+    drawFisher();
   }
 
   //Sets new boat speed
@@ -67,7 +99,7 @@ public class Player {
     return control.horizontalMove();
   }
 
- // get position of the hook. used in saving
+  // get position of the hook. used in saving
   public int getHookPosition() {
     return control.rodInteraction();
   }
@@ -77,24 +109,16 @@ public class Player {
     control.setRoodY(newPositonY);
   }
 
-  //Returns Hitbox x position
+  ///Returns Hitbox x position
   public int getHitboxCenterXPos() {
-    int pos = 270 + control.horizontalMove() + (hookM.width/2);
-    return pos;
+    //int pos = 270 + control.horizontalMove() + (hookM.width/2);
+    return HitboxX;
   }
 
-  //Returns Hitbox y position
+ //Returns Hitbox y position
   public int getHitboxCenterYPos() {
-    int hitBoxYPos = 65+control.rodInteraction() + (hookM.height/2);
-    return hitBoxYPos;
-  }
-
-  public int getHitboxHeight() {
-    return hook.height;
-  }
-
-  public int getHitboxWidth() {
-    return hook.width;
+    //int hitBoxYPos = 65+control.rodInteraction() + (hookM.height/2);
+    return HitboxY;
   }
 
   //Draws the Fisher, animates the images
@@ -103,7 +127,7 @@ public class Player {
     fisherAnimation = new PImage[5];
     fisherAnimationDelay = (fisherAnimationDelay + 0.15) % 5;
     currentFrameOfFisher =  int(fisherAnimationDelay);
-    fisherAnimation[currentFrameOfFisher] = fisher.get(300*currentFrameOfFisher, 0, 300, 220);
+    fisherAnimation[currentFrameOfFisher] = currentFisher.get(300*currentFrameOfFisher, 0, 300, 220);
     image(fisherAnimation[currentFrameOfFisher], xPosFisher, 30);
   }
 
@@ -161,7 +185,7 @@ public class Player {
     return life;
   }
 
-// get if the hook is in the water or not. used in saving.
+  // get if the hook is in the water or not. used in saving.
   public boolean checkPositionOfHook() {
     return control.checkHookInWater();
   }

@@ -7,13 +7,17 @@ public class Control {
   private boolean hookInWater;
   private int minLenght;
   private int maxLenght;
-  //private PImage [] animation;
+  private boolean currentState;
+  private boolean turn;
+  private boolean pressed;
 
   Control() {
     minLenght = 50;
     maxLenght = 550;
     hookInWater = false;
     fishingLine = minLenght;
+    turn = false;
+    pressed = false;
   }
 
   //Returns an X position value, that changes if arrow keys are pressed 
@@ -27,6 +31,23 @@ public class Control {
       }
     }
     return startPositionX;
+  }
+
+  //revers button
+  public boolean fisherRevers() {
+    if (keyPressed &&(pressed==false)) {
+      if (keyCode == SHIFT)
+      {
+        pressed = true;
+        currentState =! turn;
+        turn = currentState;
+      }
+    }
+    if (!keyPressed)
+    {
+      pressed = false;
+    }
+    return turn;
   }
 
   //Returns fishingLine bla bla #kan sikkert kodes bedre :D:D
