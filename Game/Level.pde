@@ -4,6 +4,7 @@ class Level {
   //private int level;
   private int LEVEL;
   private int score;
+  private int targetScore;
   private int spawner;
   private int startTime;
   private long minute;
@@ -37,7 +38,7 @@ class Level {
     switch(LEVEL) {
 
     case 1:
-
+      targetScore = 10;
       timer();
       scoreBoard();
       level.catching();
@@ -141,7 +142,7 @@ class Level {
   public void scoreBoard() {
     textFont(font, 16);
     fill(0);
-    text("Score " + score, 30, 30);
+    text("Score " + score + " / " + targetScore, 30, 30);
   }
 
 
