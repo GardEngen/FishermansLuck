@@ -76,16 +76,6 @@ public class Level2Button extends Button {
 }
 
 //************* New Class ******************
-public class Level2LButton extends Button {
-  private PImage level2LButton;
-
-  public Level2LButton(float xPos, float yPos) {
-    super(xPos, yPos);
-    level2LButton = loadImage("knapper/level2lock.png");
-    buttonInfo(level2LButton, level2LButton);
-  }
-}
-//************* New Class ******************
 public class MaratonButton extends Button {
   private PImage MaratonButton;
 

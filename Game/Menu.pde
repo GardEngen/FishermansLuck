@@ -9,8 +9,7 @@ class Menu {
   private Button h;
   private Button m;
   private Button l1;
-  private Button l2;
-  private Button l2Lock;  
+  private Button l2; 
   private Button q;
   private Button q2;
 
@@ -69,7 +68,6 @@ class Menu {
     l1 = (Button) new Level1Button(400, 270);
     l2 = (Button) new Level2Button(400, 330);
     m = (Button) new MaratonButton(400, 390);
-    //Button l2Lock = (Button) new Level2LButton(400, 330);
 
     levelMenuButtonsHash.put("gjørikkenoeee", l1);
     levelMenuButtonsHash.put("gjørikkeno", l2);
@@ -78,7 +76,7 @@ class Menu {
 
   public void createPauseMenu() {
     q2 = (Button) new QuitButton(400, 330);
-    pauseMenuButtonsHash.put("DU SKAL IKKE GJØRE EN DRITT MEN BARE SE PEN UT, TAKK!", play);
+    pauseMenuButtonsHash.put("DU SKAL IKKE GJØRE EN DRITT MEN BARE SE PEN UT, TAKK!", play); 
     pauseMenuButtonsHash.put("resume", r);
     pauseMenuButtonsHash.put("menu", q2);
   }
@@ -123,8 +121,10 @@ class Menu {
     for (String hashKey : keys) {
       gameOverButtonsHash.get(hashKey).drawButton();
     }
+    int hei = 1;
     textFont(font2, 30);
     fill(255);
+
     text("Game Over", 410, 200);
   }
 

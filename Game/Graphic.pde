@@ -4,10 +4,12 @@ public class Graphic {
 
   private PImage background;
   private PImage logo;
+  private int hei;
 
   public Graphic() {
     background = loadImage("grafikk/background2tilpasset.png");
     logo = loadImage("grafikk/tempLogo.png");
+    hei = 30;
   }
   public void drawBackground()
   {
@@ -15,7 +17,14 @@ public class Graphic {
   }
   
   public void gameOverBackground() {
-    background(0);
+    
+    background(hei,0,0);
+    hei = hei+1;
+    if (hei == 255 )
+    {
+      noLoop();
+    }
+    
   }
   
   public void drawLogo()
