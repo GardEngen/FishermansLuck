@@ -93,6 +93,7 @@ public void run() {
     inPauseMenu = false;
     load.playerLoad();
     level.setScore(load.getScore());
+    level.startTimer();
     STATE = STATE_PLAYING;
     break;
 
@@ -100,20 +101,25 @@ public void run() {
     gameOver = false;
     inGame = true;
     inPauseMenu = false;
+    level.startTimer();
     STATE = STATE_PLAYING;
     break;
 
   case STATE_NEW:
     setup();
     STATE = STATE_PLAYING;
+    level.resetTimer();
     break;
 
   case STATE_PLAYING: 
     inGame = true;
     gameOver = false;
     inPauseMenu = false;
-    level.resetTimer();
     play();
+    //graphic.drawBackground();
+    //graphic.drawLogo();
+
+    //menu.drawLevelButton();
     break;
 
   case STATE_TUTUROIAL: 
@@ -173,6 +179,7 @@ private void playBackgroundMusic(boolean sound)
 
 public void pauseGame() {
   saving.saveGameState( player, level.getArray(), level.getScore());
+  level.pauseTimer();
   menu.drawPauseMenu();
 }
 
