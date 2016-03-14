@@ -21,6 +21,7 @@ private boolean sound;
 private boolean inGame;
 private boolean inPauseMenu;
 private boolean gameOver;
+private boolean inLevelMenu;
 //CountdownTimer time;
 //private int score;
 //private int spawner;
@@ -28,6 +29,7 @@ private boolean gameOver;
 private final String STATE_MENU = "menu";
 private final String STATE_NEW = "new";
 private final String STATE_PLAYING = "play";
+private final String STATE_LEVEL = "level";
 private final String STATE_QUIT = "quit";     
 private final String STATE_HELP = "help";
 private final String STATE_CONTINUE = "continue";
@@ -74,12 +76,14 @@ public void run() {
     inGame = false;
     gameOver = false;
     inPauseMenu = false;
+    inLevelMenu = false;
     graphic.drawBackground();
     graphic.drawLogo();
     menu.drawMenuButton();
     break;
 
   case STATE_PAUSE:
+    inLevelMenu = false;
     gameOver = false;
     inGame = false;
     inPauseMenu = true;
@@ -89,6 +93,7 @@ public void run() {
 
   case STATE_CONTINUE:  // check with the got catch
     gameOver = false;
+    inLevelMenu = false;
     inGame = true;
     inPauseMenu = false;
     load.playerLoad();
@@ -99,6 +104,7 @@ public void run() {
 
   case STATE_RESUME:
     gameOver = false;
+    inLevelMenu = false;
     inGame = true;
     inPauseMenu = false;
     level.startTimer();
@@ -112,15 +118,24 @@ public void run() {
     break;
 
   case STATE_PLAYING: 
-    inGame = true;
+    //inGame = true;
     gameOver = false;
     inPauseMenu = false;
-    play();
-    //graphic.drawBackground();
-    //graphic.drawLogo();
-
-    //menu.drawLevelButton();
+    //play();
+    STATE = STATE_LEVEL;
     break;
+    
+  case STATE_LEVEL:
+    inGame = false;
+    inLevelMenu = true;
+    gameOver = false;
+    inPauseMenu = false;
+    graphic.drawBackground();
+    graphic.drawLogo();
+    menu.drawLevelButton();
+    
+    
+  break;
 
   case STATE_TUTUROIAL: 
     // tutorial skal inn her

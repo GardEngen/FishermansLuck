@@ -69,7 +69,7 @@ class Menu {
     l2 = (Button) new Level2Button(400, 330);
     //Button l2Lock = (Button) new Level2LButton(400, 330);
 
-    levelMenuButtonsHash.put("new", l1);
+    levelMenuButtonsHash.put("quit", l1);
     levelMenuButtonsHash.put("resume", l2);
   }
 
