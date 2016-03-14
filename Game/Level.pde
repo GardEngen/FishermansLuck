@@ -1,13 +1,18 @@
 
 class Level {
-  
+
   //private int level;
   private int LEVEL;
   private int score;
   private int spawner;
   private int startTime;
-  private int timeLeft;
-  private int time;
+  private long minute;
+  private long second;
+  private long savedMin;
+  private long savedSec;
+  private long oldSecond;
+  private boolean timesUp;
+  private boolean saved;
   //private CountdownTimer time;
   private ArrayList <Catch> fish;
   private PFont font;
@@ -20,26 +25,32 @@ class Level {
     spawner = 300; //How often fish are spawning. The lower the number, the ofter fish are spawn
     score = 0;
     font = createFont("Arial", 16, true);
-    startTimer();
+    setStartTime(5);
+    oldSecond = 0;
+    timesUp = false;
+    saved = false;
   }
 
-//Desides which level the player is in
+  //Desides which level the player is in
   public void levelState() {
 
     switch(LEVEL) {
 
     case 1:
-      setStartTime(5);
+
       timer();
       scoreBoard();
       level.catching();
       break;
 
     case 2:
-      setStartTime(5);
+
       timer();
       scoreBoard();
       level.catching();
+      break;
+
+    default:
       break;
     }
   }
@@ -82,14 +93,15 @@ class Level {
     if (player.gotCatch() == false) {
       catchSomething();
     }
-
     spawner = spawner + int(random(1, 10));
   }
+
 
   //Creats a fish and adds it to the arraylist
   public void spawn() {
     fish.add(new Catch());
   }
+
 
   //Hitbox detection for catching fish
   public void catchSomething() {
@@ -110,17 +122,21 @@ class Level {
     }
   }
 
+
   public ArrayList getArray() {
     return fish;
   }
+
 
   public int getScore() {
     return score;
   }
 
+
   public void setScore(int newScore) {
     score = newScore;
   }
+
 
   public void scoreBoard() {
     textFont(font, 16);
@@ -128,34 +144,66 @@ class Level {
     text("Score " + score, 30, 30);
   }
 
-  public boolean timer() {
-    boolean timesUp = false;
-    
-    if ((time <= startTime) && (!timesUp)) {
-     timeLeft = timeLeft - time;
-  //println("Time: " );
-  //println("timeLeft: " );
 
-    long minute = (timeLeft/60)%60;
-    long second = (timeLeft - minute*60)%60;
-    String timeDisplay = minute + ":" + second;
-     showTimer(timeDisplay);
+  public boolean timer() {
+    long newSecond = second();
+
+    if ((second == 0) && (minute == 0)) {
+      timesUp = true;
+    }
+    if (newSecond != oldSecond) {
+      oldSecond = newSecond;
+      second = second - 1;
+    }
+    if (second == 0) {
+      second = 59;
+      minute = minute - 1;
+    }
+
+    if (second < 10) {
+      String timeDisplay = minute + ":0" + second;
+      showTimer(timeDisplay);
+    } else {
+      String timeDisplay = minute + ":" + second;
+      showTimer(timeDisplay);
     }
     return timesUp;
   }
 
   //The time is set in second
-  public void setStartTime(int minute) {
-   startTime = minute*60*1000;
+  public void setStartTime(int min) {
+    startTime = min - 1;
+    minute = startTime - 1;
+    second = 59;
+  }
+
+  public void resetTimer() {
+    minute = startTime;
+    second = 59;
+  }
+
+  public long getMinute() {
+    return minute;
+  }
+
+  public long getSecond() {
+    return second;
+  }
+
+  public void pauseTimer() {
+    if (!saved) {
+      savedMin = minute;
+      savedSec = second;
+      saved = true;
+    }
   }
 
   public void startTimer() {
-    time = millis();
-    timeLeft = startTime;
-  }
-  
-  public void resetTimer() {
-   // time.reset(StopBehavior);
+    if (saved) {
+      minute = savedMin;
+      second = savedSec;
+      saved = false;
+    }
   }
 
   public void showTimer(String time) {
