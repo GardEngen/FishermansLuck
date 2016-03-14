@@ -28,8 +28,8 @@ public class SoundButton extends Button{
   
   public SoundButton(float xPos, float yPos) {
     super(xPos, yPos);
-    soundOn = loadImage("knapper/ButtonOntest.png");
-    soundOff = loadImage("knapper/ButtonOfftest.png");
+    soundOn = loadImage("knapper/soundon.png");
+    soundOff = loadImage("knapper/soundoff.png");
     buttonInfo(soundOn, soundOff);
   }
   
