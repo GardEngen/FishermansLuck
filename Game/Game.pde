@@ -1,5 +1,3 @@
-  
-  // the real G
   import ddf.minim.*;
   import java.util.*;
   import java.lang.Math;
@@ -28,7 +26,7 @@
   
   private final String STATE_MENU = "menu";
   private final String STATE_NEW = "new";
-  private final String STATE_PLAYING = "play";
+  private final String STATE_FREEPLAY = "freeplay";
   private final String STATE_LEVEL = "level";
   private final String STATE_QUIT = "quit";     
   private final String STATE_HELP = "help";
@@ -60,8 +58,6 @@
     saving.saveGameState( player, level.getArray(), level.getScore());
     this.savingThread = new SaveThread(saving, this, player);
     this.savingThread.start();
-    
-    
   }
   
   void draw () {
@@ -99,7 +95,8 @@
       load.playerLoad();
       level.setScore(load.getScore());
       level.startTimer();
-      STATE = STATE_PLAYING;
+      // Denne funbskjonen skal flyttes til Level
+      STATE = STATE_FREEPLAY;
       break;
   
     case STATE_RESUME:
@@ -108,23 +105,25 @@
       inGame = true;
       inPauseMenu = false;
       level.startTimer();
-      STATE = STATE_PLAYING;
+      // Denne funbskjonen skal flyttes til Level
+      STATE = STATE_FREEPLAY;
       break;
   
     case STATE_NEW:
       setup();
-      STATE = STATE_PLAYING;
+      STATE = STATE_LEVEL;
       level.resetTimer();
       break;
   
-    case STATE_PLAYING: 
-      //inGame = true;
+     // Denne funbskjonen skal flyttes til Level
+    case STATE_FREEPLAY: 
+      inGame = true;
+      inLevelMenu = false;
       gameOver = false;
       inPauseMenu = false;
-      //play();
-      STATE = STATE_LEVEL;
+      play();
       break;
-      
+  
     case STATE_LEVEL:
       inGame = false;
       inLevelMenu = true;
@@ -133,9 +132,7 @@
       graphic.drawBackground();
       graphic.drawLogo();
       menu.drawLevelButton();
-      
-      
-    break;
+      break;
   
     case STATE_TUTUROIAL: 
       // tutorial skal inn her
@@ -202,14 +199,14 @@
   public void mousePressed() {
   
     String result2 = menu.isButtonPressed(menu.getInGameMenuHash()) ;
-      if (result2.equals("sound")) {
-        playBackgroundMusic( menu.getSoundOnOffSwitch());
-      }
+    if (result2.equals("sound")) {
+      playBackgroundMusic( menu.getSoundOnOffSwitch());
+    }
   
-      if (result2.equals("pause")) {
-        STATE = STATE_PAUSE;
-      }
-    
+    if (result2.equals("pause")) {
+      STATE = STATE_PAUSE;
+    }
+  
     if (inGame==false)
     {
       String result = menu.isButtonPressed(menu.getMainMenuHash()) ;
@@ -227,6 +224,12 @@
     }
     if (gameOver) {
       String result = menu.isButtonPressed(menu.getGameOverMenuHash()) ;
+      if (!result.equals("none")) {
+        STATE = result;
+      }
+    }
+    if (inLevelMenu) {
+      String result = menu.isButtonPressed(menu.getLevelMenuButtonsHash()) ;
       if (!result.equals("none")) {
         STATE = result;
       }

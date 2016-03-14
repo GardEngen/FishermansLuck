@@ -7,6 +7,7 @@ class Menu {
   private Button r;
   private Button t;
   private Button h;
+  private Button m;
   private Button l1;
   private Button l2;
   private Button l2Lock;  
@@ -62,20 +63,22 @@ class Menu {
     mainMenuButtonsHash.put("help", h);
     mainMenuButtonsHash.put("quit", q);
   }
-  
+
   public void createLevelMenu()
   {
     l1 = (Button) new Level1Button(400, 270);
     l2 = (Button) new Level2Button(400, 330);
+    m = (Button) new MaratonButton(400, 390);
     //Button l2Lock = (Button) new Level2LButton(400, 330);
 
-    levelMenuButtonsHash.put("quit", l1);
-    levelMenuButtonsHash.put("resume", l2);
+    levelMenuButtonsHash.put("gjørikkenoeee", l1);
+    levelMenuButtonsHash.put("gjørikkeno", l2);
+    levelMenuButtonsHash.put("freeplay", m);
   }
 
   public void createPauseMenu() {
     q2 = (Button) new QuitButton(400, 330);
-    pauseMenuButtonsHash.put("play", play);
+    pauseMenuButtonsHash.put("DU SKAL IKKE GJØRE EN DRITT MEN BARE SE PEN UT, TAKK!", play);
     pauseMenuButtonsHash.put("resume", r);
     pauseMenuButtonsHash.put("menu", q2);
   }
@@ -100,7 +103,7 @@ class Menu {
       mainMenuButtonsHash.get(hashKey).drawButton();
     }
   }
-  
+
   public void drawLevelButton() {
     Set<String> keys = levelMenuButtonsHash.keySet();
     for (String hashKey : keys) {
@@ -156,6 +159,9 @@ class Menu {
   public HashMap getGameOverMenuHash() {
     return gameOverButtonsHash;
   }
+  public HashMap getLevelMenuButtonsHash() {
+    return levelMenuButtonsHash;
+  }
 
   public boolean getSoundOnOffSwitch() {
     return s.onOffSwitch();
@@ -166,7 +172,7 @@ class Menu {
   //  fill(0);
   //  text("Score " + score, 30, 30);
   //}
-  
+
   //public void showTimer(String time) {
   //  textFont(font, 16);
   //  fill(0);

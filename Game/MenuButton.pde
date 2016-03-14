@@ -85,3 +85,13 @@ public class Level2LButton extends Button {
     buttonInfo(level2LButton, level2LButton);
   }
 }
+//************* New Class ******************
+public class MaratonButton extends Button {
+  private PImage MaratonButton;
+
+  public MaratonButton(float xPos, float yPos) {
+    super(xPos, yPos);
+    MaratonButton = loadImage("knapper/Maraton.png");
+    buttonInfo(MaratonButton, MaratonButton);
+  }
+}
