@@ -134,7 +134,7 @@
       break;
   
     case STATE_LEVEL:
-     // setup();
+      // setup();
       inGame = false;
       inLevelMenu = true;
       gameOver = false;
@@ -274,10 +274,9 @@
             level.setLevel(i);
             STATE = STATE_PLAY;
           }
-          else {
-            STATE = result;
-          }
         }
+      } else if (result.equals("menu")) {
+        STATE = result;
       }
     }
   }
