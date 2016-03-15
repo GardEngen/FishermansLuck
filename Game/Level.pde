@@ -42,7 +42,7 @@ class Level {
     case 1:
       sharkProb = 40;
       oneFishType = false;
-      targetScore = 2;
+      targetScore = 20;
       timesUp = timer.time();
       level.catching();
       scoreBoard();
