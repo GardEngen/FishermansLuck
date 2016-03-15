@@ -15,7 +15,6 @@ class Level {
   private boolean hardcoreModefail;
   private String fishToCatch;
 
-  private Catch c;
 
   Level(Player player) {
     this.player = player;
@@ -27,8 +26,6 @@ class Level {
     score = 0;
     font = createFont("Arial", 16, true);
     fishToCatch = "";
-    
-    c = new Catch();
   }
 
   //Desides which level the player is in
