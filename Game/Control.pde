@@ -11,6 +11,7 @@ public class Control {
   private boolean turn;
   private boolean pressed;
   private int hookSpeed;
+  private boolean boatInMove;
 
   Control() {
     minLenght = 50;
@@ -28,9 +29,13 @@ public class Control {
     if (keyPressed && (key == CODED)) {
       if (keyCode == LEFT && (startPositionX > 4)) {
         startPositionX = startPositionX -speedX;
+        boatInMove = true;
       } else if (keyCode == RIGHT && (startPositionX < width-300)) {
         startPositionX = startPositionX +speedX;
+        boatInMove = true;
       }
+    } else {
+      boatInMove = false;
     }
     return startPositionX;
   }
@@ -73,6 +78,7 @@ public class Control {
       if (keyCode == UP && (hookInWater) && fishingLine > minLenght)
       {
         fishingLine = fishingLine - hookSpeed;
+        ;
       }
     }
     return fishingLine;
@@ -92,6 +98,11 @@ public class Control {
     speedX = speed;
   }
 
+  public boolean getBoatinMove()
+  {
+    return boatInMove;
+  }
+
   public void takeOutHook() {
     hookInWater = false;
   }
@@ -105,7 +116,7 @@ public class Control {
   public void setHookInWater(boolean hook) {
     hookInWater = hook;
   }
-  
+
   public void setHookSpeed(int hook)
   {
     hookSpeed = hook;

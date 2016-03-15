@@ -65,8 +65,8 @@
   }
   
   void draw () {
-    run();
-    //play();
+    //run();
+    play();
   }
   
   //Runs the game

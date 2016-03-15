@@ -10,6 +10,12 @@ public class Player {
   private PImage fisher;
   private PImage fisherRevers;
   private PImage currentFisher;
+
+  private PImage prop;
+  private PImage [] propAnimation;
+  private int currentFrameOfProp;
+  private float propAnimationDelay;
+
   private PImage hookM;
   private PImage hookU;
   private int HitboxX;
@@ -20,6 +26,7 @@ public class Player {
   private int life;
   private boolean onBoard;
   private boolean danger;
+  private boolean boatInMove;
 
   public Player() {
     control = new Control();
@@ -28,8 +35,9 @@ public class Player {
     //  control.setPositionX(DEFAULT_BOAT_POSITION);
     hookM = loadImage("animation/hook1copy.png");
     hookU = loadImage("animation/hookUtencopy.png");
-    fisher = loadImage("animation/fisker.png");
-    fisherRevers = loadImage("animation/fiskerRevers.png");
+    fisher = loadImage("animation/fisker2.png");
+    fisherRevers = loadImage("animation/fiskerRevers2.png");
+    prop = loadImage("animation/prop.png");
     caught = false;
     onBoard = false;
   }
@@ -81,6 +89,11 @@ public class Player {
       }
     }
     drawFisher();
+
+
+
+
+    drawprop();
   }
 
   //Sets new boat speed
@@ -115,7 +128,7 @@ public class Player {
     return HitboxX;
   }
 
- //Returns Hitbox y position
+  //Returns Hitbox y position
   public int getHitboxCenterYPos() {
     //int hitBoxYPos = 65+control.rodInteraction() + (hookM.height/2);
     return HitboxY;
@@ -129,6 +142,29 @@ public class Player {
     currentFrameOfFisher =  int(fisherAnimationDelay);
     fisherAnimation[currentFrameOfFisher] = currentFisher.get(300*currentFrameOfFisher, 0, 300, 220);
     image(fisherAnimation[currentFrameOfFisher], xPosFisher, 30);
+  }
+
+  //Draws the prop, animates the images
+  public void drawprop() {
+    boatInMove = control.getBoatinMove();
+    println(boatInMove);
+    int xPosProp = control.horizontalMove() - 15;
+
+    propAnimation = new PImage[17];
+    propAnimationDelay = (propAnimationDelay + 1.9) % 17;
+    currentFrameOfProp =  int(propAnimationDelay);
+    propAnimation[currentFrameOfProp] = prop.get(60*currentFrameOfProp, 0, 60, 36);
+    if (!boatInMove) {
+      image(propAnimation[currentFrameOfProp], xPosProp, 210);
+    } else
+    {
+
+      //propAnimation = new PImage[17];
+      //propAnimationDelay = (propAnimationDelay + 1.9) % 17;
+      //currentFrameOfProp =  int(propAnimationDelay);
+      //propAnimation[currentFrameOfProp] = prop.get(60*currentFrameOfProp, 0, 60, 36);
+      image(propAnimation[currentFrameOfProp], xPosProp, 210);
+    }
   }
 
   public void myCatch(GameElement newCatch) {
@@ -194,14 +230,14 @@ public class Player {
   public void setPositionOfHook(boolean hook) {
     control.setHookInWater(hook);
   }
-  
-  public void setHookSpeed(int hook){
+
+  public void setHookSpeed(int hook) {
     control.setHookSpeed(hook);
   }
-  
+
   public void resetPlayer() {
-      control.setPositionX(boatPosition);
-          caught = false;
+    control.setPositionX(boatPosition);
+    caught = false;
     onBoard = false;
   }
 }
