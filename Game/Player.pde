@@ -194,4 +194,8 @@ public class Player {
   public void setPositionOfHook(boolean hook) {
     control.setHookInWater(hook);
   }
+  
+  public void setHookSpeed(int hook){
+    control.setHookSpeed(hook);
+  }
 }

@@ -10,6 +10,7 @@ public class Control {
   private boolean currentState;
   private boolean turn;
   private boolean pressed;
+  private int hookSpeed;
 
   Control() {
     minLenght = 50;
@@ -18,6 +19,7 @@ public class Control {
     fishingLine = minLenght;
     turn = false;
     pressed = false;
+    hookSpeed = 5;
   }
 
   //Returns an X position value, that changes if arrow keys are pressed 
@@ -66,11 +68,11 @@ public class Control {
     {
       if (keyCode == DOWN && (hookInWater) && fishingLine < maxLenght)
       { 
-        fishingLine = fishingLine + 5;
+        fishingLine = fishingLine + hookSpeed;
       }
       if (keyCode == UP && (hookInWater) && fishingLine > minLenght)
       {
-        fishingLine = fishingLine - 5;
+        fishingLine = fishingLine - hookSpeed;
       }
     }
     return fishingLine;
@@ -102,6 +104,11 @@ public class Control {
   // set the hook in the water. used in saving
   public void setHookInWater(boolean hook) {
     hookInWater = hook;
+  }
+  
+  public void setHookSpeed(int hook)
+  {
+    hookSpeed = hook;
   }
 
   // get the hook used in saving

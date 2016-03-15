@@ -85,3 +85,15 @@ public class MaratonButton extends Button {
     buttonInfo(MaratonButton, MaratonButton);
   }
 }
+
+
+//************* New Class ******************
+public class HardcoreModeButton extends Button {
+  private PImage HardcoreModeButton;
+
+  public HardcoreModeButton(float xPos, float yPos) {
+    super(xPos, yPos);
+    HardcoreModeButton = loadImage("knapper/Hardcore.png");
+    buttonInfo(HardcoreModeButton, HardcoreModeButton);
+  }
+}

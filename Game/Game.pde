@@ -235,7 +235,7 @@
       String result = menu.isButtonPressed(menu.getLevelMenuButtonsHash()) ;
       if (!result.equals("none")) {
        // int level = int (Float.valueOf(result));
-       for(int i = 0; i < 4; i++) {
+       for(int i = 0; i <= 4; i++) {
          String iString = "" + i;
          if(iString.equals(result)) {
            level.setLevel(i);

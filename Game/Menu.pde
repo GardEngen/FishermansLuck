@@ -9,7 +9,8 @@ class Menu {
   private Button h;
   private Button m;
   private Button l1;
-  private Button l2; 
+  private Button l2;
+  private Button hard;
   private Button q;
   private Button q2;
 
@@ -68,10 +69,12 @@ class Menu {
     l1 = (Button) new Level1Button(400, 270);
     l2 = (Button) new Level2Button(400, 330);
     m = (Button) new MaratonButton(400, 390);
-
+    hard = (Button) new HardcoreModeButton(400, 450);
+    
     levelMenuButtonsHash.put("1", l1);
     levelMenuButtonsHash.put("2", l2);
-    levelMenuButtonsHash.put("3", m);
+    levelMenuButtonsHash.put("3", m); 
+    levelMenuButtonsHash.put("4", hard);
   }
 
   public void createPauseMenu() {

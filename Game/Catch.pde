@@ -7,7 +7,7 @@ public  class Catch extends GameElement {
   public final boolean[] DANGEROUS =             { false, false, false, false, false, false, true };
   // These numbers represent relative probability for each fish. 
   // They do not have to sum up to 100, only their relative proportion matters
-  public final int[] PROBABILITIES =             { 40, 70, 40, 60, 40, 40, 50 }; // LEGG INN PASSENDE SANNSYNLIGHET
+  public int [] PROBABILITIES =                   {40, 70, 40, 60, 40, 40, 50};// LEGG INN PASSENDE SANNSYNLIGHET 
 
   // Constants common for all fish types
   private final String IMAGE_DIR = "animation/";
@@ -50,6 +50,8 @@ public  class Catch extends GameElement {
     dangerous = DANGEROUS[fishType];
   }
 
+  
+
   // the origional drawAllFish methode
   public void drawFish() {
     imageDivider(numberOfpictures, xCut, yCut, delay);
@@ -81,12 +83,17 @@ public  class Catch extends GameElement {
     // Just in case we just take first fish type
     return 0;
   }
-  
-  public String getFishName(){
+
+  public String getFishName() {
     return fishName;
   }
 
   public GameElement isCaught() {
     return this;
+  }
+  
+  public void setProbabilitieShark(int prob)
+  {
+      PROBABILITIES[6] = prob;
   }
 }

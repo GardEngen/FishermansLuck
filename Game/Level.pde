@@ -12,12 +12,14 @@ class Level {
   private ArrayList <Catch> fish;
   private PFont font;
   private boolean oneFishType;
+  private boolean hardcoreModefail;
   private String fishToCatch;
 
-
+  private Catch c;
 
   Level(Player player) {
     this.player = player;
+    hardcoreModefail = false;
     //this.targetScore = targetScore;
     fish = new ArrayList <Catch>();
     timer = new Timer(4); // in minutes
@@ -25,12 +27,14 @@ class Level {
     score = 0;
     font = createFont("Arial", 16, true);
     fishToCatch = "";
+    
+    c = new Catch();
   }
 
   //Desides which level the player is in
   public void levelState() {
-  boolean timesUp = false;
-    
+    boolean timesUp = false;
+
     switch(LEVEL) {
 
     case 1:
@@ -39,10 +43,10 @@ class Level {
       timesUp = timer.time();
       level.catching();
       scoreBoard();
-      if((score == targetScore)&& (!timesUp)){
+      if ((score == targetScore)&& (!timesUp)) {
         STATE = STATE_LEVEL;
       }
-      if(timesUp) {
+      if (timesUp) {
         STATE = STATE_GAME_OVER;
       }
       break;
@@ -54,10 +58,10 @@ class Level {
       timesUp = timer.time();
       level.catching();
       scoreBoard();
-      if((score == targetScore)&& (!timesUp)){
+      if ((score == targetScore)&& (!timesUp)) {
         STATE = STATE_LEVEL;
       }
-      if(timesUp) {
+      if (timesUp) {
         STATE = STATE_GAME_OVER;
       }
       break;
@@ -66,6 +70,18 @@ class Level {
       oneFishType = false;
       level.catching();
       scoreBoardFree();
+      
+      break;
+
+    case 4:
+      oneFishType = false;
+      level.catching();
+      scoreBoardFree();
+      player.setHookSpeed(10);
+      if (hardcoreModefail)
+      {
+        STATE = STATE_GAME_OVER;
+      }
       break;
 
     default:
@@ -91,6 +107,7 @@ class Level {
     for (int i = 0; i < fish.size(); i++) {
       if (fish.get(i).isInMotion() == false) {
         fish.remove(i);
+        hardcoreModefail = true;
       }
     }
 
