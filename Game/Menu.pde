@@ -13,6 +13,7 @@ class Menu {
   private Button hard;
   private Button q;
   private Button q2;
+  private Button q3;
 
   private HashMap<String, Button> mainMenuButtonsHash;
   private HashMap<String, Button> inGameButtonsHash;
@@ -70,11 +71,13 @@ class Menu {
     l2 = (Button) new Level2Button(400, 330);
     m = (Button) new MaratonButton(400, 390);
     hard = (Button) new HardcoreModeButton(400, 450);
+    q3 = (Button) new QuitButton(400, 510);
     
     levelMenuButtonsHash.put("1", l1);
     levelMenuButtonsHash.put("2", l2);
     levelMenuButtonsHash.put("3", m); 
     levelMenuButtonsHash.put("4", hard);
+    levelMenuButtonsHash.put("menu", q3);
   }
 
   public void createPauseMenu() {

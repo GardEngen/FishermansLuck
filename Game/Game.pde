@@ -20,6 +20,7 @@
   private boolean inPauseMenu;
   private boolean gameOver;
   private boolean inLevelMenu;
+  private boolean inMainMenu;
   //CountdownTimer time;
   //private int score;
   //private int spawner;
@@ -55,6 +56,8 @@
     gameOver = false;
     inGame = false;
     inPauseMenu = false;
+    inLevelMenu = false;
+    inMainMenu = true;
     //spawner = 300; //How often fish are spawning. The lower the number, the ofter fish are spawn
     saving.saveGameState( player, level.getArray(), level.getScore());
     this.savingThread = new SaveThread(saving, this, player);
@@ -74,6 +77,7 @@
       gameOver = false;
       inPauseMenu = false;
       inLevelMenu = false;
+      inMainMenu = true;
       graphic.drawBackground();
       graphic.drawLogo();
       menu.drawMenuButton();
@@ -84,6 +88,7 @@
       gameOver = false;
       inGame = false;
       inPauseMenu = true;
+      inMainMenu = false;
       pauseGame();
       break;
   
@@ -93,6 +98,7 @@
       inLevelMenu = false;
       inGame = true;
       inPauseMenu = false;
+      inMainMenu = false;
       load.playerLoad();
       level.setScore(load.getScore());
       level.startTimer();
@@ -105,6 +111,7 @@
       inLevelMenu = false;
       inGame = true;
       inPauseMenu = false;
+      inMainMenu = false;
       level.startTimer();
       // Denne funbskjonen skal flyttes til Level
       STATE = STATE_PLAY;
@@ -122,6 +129,7 @@
       inLevelMenu = false;
       gameOver = false;
       inPauseMenu = false;
+      inMainMenu = false;
       play();
       break;
   
@@ -131,6 +139,7 @@
       inLevelMenu = true;
       gameOver = false;
       inPauseMenu = false;
+      inMainMenu = false;
       graphic.drawBackground();
       graphic.drawLogo();
       menu.drawLevelButton();
@@ -151,6 +160,7 @@
       gameOver = false;
       inGame = false;
       inPauseMenu = false;
+      inMainMenu = false;
       exit();
       break;
   
@@ -159,15 +169,17 @@
       gameOver = true;
       inGame = false;
       inPauseMenu = false;
+      inMainMenu = false;
       graphic.gameBlackBackground();
       menu.drawGameOverMenu();
       break;  
   
     case STATE_WIN:
       inLevelMenu = true;
-      gameOver = true;
+      gameOver = false;
       inGame = false;
       inPauseMenu = false;
+      inMainMenu = false;
       graphic.gameBlackBackground();
       level.winBoard();
       level.resetAfterWin();
@@ -227,7 +239,7 @@
     }
   
     // Checks buttons in inGame menu
-    if (inGame==false)
+    if (inMainMenu)
     {
       String result = menu.isButtonPressed(menu.getMainMenuHash()) ;
       if (!result.equals("none")) {
@@ -261,6 +273,9 @@
           if (iString.equals(result)) {
             level.setLevel(i);
             STATE = STATE_PLAY;
+          }
+          else {
+            STATE = result;
           }
         }
       }
