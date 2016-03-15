@@ -198,4 +198,10 @@ public class Player {
   public void setHookSpeed(int hook){
     control.setHookSpeed(hook);
   }
+  
+  public void resetPlayer() {
+      control.setPositionX(boatPosition);
+          caught = false;
+    onBoard = false;
+  }
 }

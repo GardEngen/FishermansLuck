@@ -17,7 +17,7 @@ public class Timer {
     oldSecond = 0;
     timesUp = false;
     saved = false;
-    font = createFont("Arial", 16, true);
+    font = createFont("Fantasy", 16, true);
   }
 
   public boolean time() {
@@ -94,6 +94,6 @@ public class Timer {
  public void showTimer(String time) {
    textFont(font, 16);
    fill(0);
-   text("Time left " + time, 30, 50);
+   text("" + time, 30, 50);
  }
 }

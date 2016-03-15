@@ -14,7 +14,9 @@ class Level {
   private boolean oneFishType;
   private boolean hardcoreModefail;
   private String fishToCatch;
-
+  private boolean win;
+  private boolean gameOver;
+  private int sharkProb;
 
   Level(Player player) {
     this.player = player;
@@ -24,8 +26,11 @@ class Level {
     timer = new Timer(4); // in minutes
     spawner = 300; //How often fish are spawning. The lower the number, the ofter fish are spawn
     score = 0;
-    font = createFont("Arial", 16, true);
+    font = createFont("Fantasy", 16, true);
     fishToCatch = "";
+    win = false;
+    gameOver = false;
+    sharkProb = 40; //default
   }
 
   //Desides which level the player is in
@@ -35,20 +40,24 @@ class Level {
     switch(LEVEL) {
 
     case 1:
+      sharkProb = 40;
       oneFishType = false;
-      targetScore = 20;
+      targetScore = 2;
       timesUp = timer.time();
       level.catching();
       scoreBoard();
       if ((score == targetScore)&& (!timesUp)) {
-        STATE = STATE_LEVEL;
+        win = true;
+        //STATE = STATE_LEVEL;
       }
       if (timesUp) {
-        STATE = STATE_GAME_OVER;
+        gameOver = true;
+        //STATE = STATE_GAME_OVER;
       }
       break;
 
     case 2:
+      sharkProb = 30;
       oneFishType = true;
       targetScore = 10;
       fishToCatch = "Guri";
@@ -56,14 +65,17 @@ class Level {
       level.catching();
       scoreBoard();
       if ((score == targetScore)&& (!timesUp)) {
-        STATE = STATE_LEVEL;
+        win = true;
+        //STATE = STATE_LEVEL;
       }
       if (timesUp) {
-        STATE = STATE_GAME_OVER;
+        gameOver = true;
+        //STATE = STATE_GAME_OVER;
       }
       break;
 
     case 3:
+      sharkProb = 60;
       oneFishType = false;
       level.catching();
       scoreBoardFree();
@@ -71,13 +83,15 @@ class Level {
       break;
 
     case 4:
+      sharkProb = 0;
       oneFishType = false;
       level.catching();
       scoreBoardFree();
       player.setHookSpeed(10);
       if (hardcoreModefail)
       {
-        STATE = STATE_GAME_OVER;
+        gameOver = true;
+        //STATE = STATE_GAME_OVER;
       }
       break;
 
@@ -103,8 +117,10 @@ class Level {
     //There is two for-loops to prevent a bug in the fish animation
     for (int i = 0; i < fish.size(); i++) {
       if (fish.get(i).isInMotion() == false) {
-        fish.remove(i);
+        if(!fish.get(i).isDangerous()) {
         hardcoreModefail = true;
+        fish.remove(i);
+        }
       }
     }
 
@@ -135,7 +151,7 @@ class Level {
 
   //Creats a fish and adds it to the arraylist
   public void spawn() {
-    fish.add(new Catch());
+    fish.add(new Catch(sharkProb));
   }
 
 
@@ -175,15 +191,21 @@ class Level {
 
 
   public void scoreBoard() {
-    textFont(font, 16);
+    textFont(font, 20);
     fill(0);
     text("Score " + score + "/" + targetScore, 30, 30);
   }
 
   public void scoreBoardFree() {
-    textFont(font, 16);
+    textFont(font, 20);
     fill(0);
     text("Score " + score, 30, 30);
+  }
+  
+    public void winBoard() {
+    textFont(font, 50);
+    fill(255);
+    text("Level Fullført", 340, 200);
   }
 
   public boolean levelCompleted() {
@@ -204,4 +226,21 @@ class Level {
   public void resetTimer() {
     timer.resetTimer();
   }
+  
+  public boolean getWinStatus() {
+    return win;
+  }
+  
+  public void resetAfterWin() {
+    win = false;
+    score = 0;
+    resetTimer();
+    player.resetPlayer();
+    player.setHookSpeed(6);
+  }
+  
+  public boolean getGameOverStatus() {
+    return gameOver;
+  }
+  
 } 

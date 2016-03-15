@@ -41,9 +41,9 @@ class Saving {
     json.setBoolean("RoodInWater", roodInWaterOrNot); // check if the hook is in the hook or not.
     json.setBoolean("gotCatch", gotCatch); // got fish on the hook
 
-    println("Saved boat Pos: " + playerXpos);
-    println("Saved score: " + score);
-    println("fish on hook: " + gotCatch);
+   // println("Saved boat Pos: " + playerXpos);
+    //println("Saved score: " + score);
+    //println("fish on hook: " + gotCatch);
 
   }
 

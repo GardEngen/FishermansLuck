@@ -1,5 +1,15 @@
 public  class Catch extends GameElement {
 
+    // Fish-type specific values
+  private String fishName;
+  private float speed;
+  private int xCut;
+  private int yCut;
+  private int numberOfpictures;
+  private float delay;
+  private boolean dangerous;
+  private int sharkProb;
+  
   public final String[] FISH_NAMES = new String[]{ "Harald", "Guri", "Bert", "Karin", "Siri", "Anna", "Shark" };
   public final int[] XCUTS =                     { 100, 90, 100, 100, 100, 100, 139 };
   public final int[] NUM_PICTURES =              { 8, 8, 8, 8, 8, 8, 1 };
@@ -7,7 +17,7 @@ public  class Catch extends GameElement {
   public final boolean[] DANGEROUS =             { false, false, false, false, false, false, true };
   // These numbers represent relative probability for each fish. 
   // They do not have to sum up to 100, only their relative proportion matters
-  public int [] PROBABILITIES =                   {40, 70, 40, 60, 40, 40, 50};// LEGG INN PASSENDE SANNSYNLIGHET 
+  public int [] PROBABILITIES =                   {40, 70, 40, 60, 40, 40, sharkProb};// LEGG INN PASSENDE SANNSYNLIGHET 
 
   // Constants common for all fish types
   private final String IMAGE_DIR = "animation/";
@@ -17,26 +27,18 @@ public  class Catch extends GameElement {
   // Fish type
   private int fishType;
 
-  // Fish-type specific values
-  private String fishName;
-  private float speed;
-  private int xCut;
-  private int yCut;
-  private int numberOfpictures;
-  private float delay;
-  private boolean dangerous;
-
   // Images
   private PImage fishImage;
   private PImage fishImageRevers;
   private PImage fishImageCaught;
 
-  public Catch() {
+  public Catch(int sharkProb) {
+    this.sharkProb = sharkProb;
     speed = random(MIN_SPEED, MAX_SPEED);
     // Comment: type of fish is decided when the fish is created
     fishType = getRandomFishType();
     fishName = FISH_NAMES[fishType];
-
+    //setSharkProbability(sharkProb);
     //load all fish images     
     fishImage = loadImage(IMAGE_DIR + fishName + "Animation.png");
     fishImageRevers = loadImage(IMAGE_DIR + fishName + "AnimationRevers.png");
@@ -92,8 +94,11 @@ public  class Catch extends GameElement {
     return this;
   }
   
-  public void setProbabilitieShark(int prob)
-  {
-      PROBABILITIES[6] = prob;
+  public boolean isDangerous() {
+    return dangerous;
   }
+  
+  //public void setSharkProbability(int prob) {
+  // PROBABILITIES[6] = prob;
+  //}
 }

@@ -10,14 +10,14 @@ class Load {
     json = loadJSONObject("data/data.json");
     int xPos = json.getInt("xPos");    // load the players boat position
     player.setPlayerPosition(xPos);   
-    println("båt pos: " + xPos);
+   // println("båt pos: " + xPos);
 
     int yPos = json.getInt("yPos"); // load the players road position
     player.setHookPosition(yPos);
-  println("snor pos: " + yPos);
+ // println("snor pos: " + yPos);
 
     score = json.getInt("Score");   // load the score
-    println("Din lagra score er : " + score);
+   // println("Din lagra score er : " + score);
     level.setScore(score);
 
     boolean yRod = json.getBoolean("RoodInWater"); // get if the rood is in the water or not
@@ -26,7 +26,7 @@ class Load {
 
     boolean setCatch = json.getBoolean("gotCatch"); // get if it is a fish on the hook.
     player.setCatch(setCatch);
-    println("Fish on the hook " + setCatch);
+   // println("Fish on the hook " + setCatch);
 
     // null pointer 
     //float FishX = json.getFloat("FishX");

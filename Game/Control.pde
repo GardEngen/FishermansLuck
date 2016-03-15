@@ -28,7 +28,7 @@ public class Control {
     if (keyPressed && (key == CODED)) {
       if (keyCode == LEFT && (startPositionX > 4)) {
         startPositionX = startPositionX -speedX;
-      } else if (keyCode == RIGHT && (startPositionX < width-56)) {
+      } else if (keyCode == RIGHT && (startPositionX < width-300)) {
         startPositionX = startPositionX +speedX;
       }
     }

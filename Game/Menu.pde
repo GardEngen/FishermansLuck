@@ -38,7 +38,7 @@ class Menu {
     createLevelMenu();
 
     //font = createFont("Arial", 16, true);
-    font2 = createFont("Arial", 30, true);
+    font2 = createFont("Fantasy", 40, true);
   }
 
   public void createInGameMenu() {
@@ -124,11 +124,11 @@ class Menu {
     for (String hashKey : keys) {
       gameOverButtonsHash.get(hashKey).drawButton();
     }
-    int hei = 1;
-    textFont(font2, 30);
+    //int hei = 1;
+    textFont(font2, 50);
     fill(255);
 
-    text("Game Over", 410, 200);
+    text("Game Over", 350, 200);
   }
 
   //Takes the parameter of a HashMap<String,Button>, and chesk if any of the buttons are pressed.
