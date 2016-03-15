@@ -12,10 +12,11 @@ public class Player {
   private PImage currentFisher;
 
   private PImage prop;
+  private int propPos;
   private PImage [] propAnimation;
   private int currentFrameOfProp;
   private float propAnimationDelay;
-
+  private int idlePropFrame;
   private PImage hookM;
   private PImage hookU;
   private int HitboxX;
@@ -27,6 +28,7 @@ public class Player {
   private boolean onBoard;
   private boolean danger;
   private boolean boatInMove;
+
 
   public Player() {
     control = new Control();
@@ -40,6 +42,7 @@ public class Player {
     prop = loadImage("animation/prop.png");
     caught = false;
     onBoard = false;
+    idlePropFrame = 0;
   }
 
   //Manages the boatMovement
@@ -51,7 +54,10 @@ public class Player {
     if (reversBoat)
     {
       currentFisher = fisherRevers;
+      
       line(xPos, 57, xPos, 63+rod);
+      propPos = +258;
+      
       //hitbox
       HitboxX = control.horizontalMove() + (hookM.width/2);
       HitboxY = 65+control.rodInteraction() + (hookM.height/2);
@@ -72,6 +78,7 @@ public class Player {
     {
       currentFisher = fisher;
       line(xPos+299, 57, xPos+300, 63+rod);
+      propPos = -23;
       //hitbox
       HitboxX = 270 + control.horizontalMove() + (hookM.width/2);
       HitboxY = 65+control.rodInteraction() + (hookM.height/2);
@@ -147,23 +154,19 @@ public class Player {
   //Draws the prop, animates the images
   public void drawprop() {
     boatInMove = control.getBoatinMove();
-    println(boatInMove);
-    int xPosProp = control.horizontalMove() - 15;
-
+    int xPosProp = control.horizontalMove() + propPos;
     propAnimation = new PImage[17];
-    propAnimationDelay = (propAnimationDelay + 1.9) % 17;
-    currentFrameOfProp =  int(propAnimationDelay);
-    propAnimation[currentFrameOfProp] = prop.get(60*currentFrameOfProp, 0, 60, 36);
     if (!boatInMove) {
-      image(propAnimation[currentFrameOfProp], xPosProp, 210);
+      propAnimation[idlePropFrame] = prop.get(60*idlePropFrame, 0, 60, 47);
+      image(propAnimation[idlePropFrame], xPosProp, 207);
     } else
     {
-
-      //propAnimation = new PImage[17];
-      //propAnimationDelay = (propAnimationDelay + 1.9) % 17;
-      //currentFrameOfProp =  int(propAnimationDelay);
-      //propAnimation[currentFrameOfProp] = prop.get(60*currentFrameOfProp, 0, 60, 36);
-      image(propAnimation[currentFrameOfProp], xPosProp, 210);
+      propAnimation = new PImage[17];
+      propAnimationDelay = (propAnimationDelay + 1.5) % 17;
+      currentFrameOfProp =  int(propAnimationDelay);
+      idlePropFrame =currentFrameOfProp;
+      propAnimation[currentFrameOfProp] = prop.get(60*currentFrameOfProp, 0, 60, 47);
+      image(propAnimation[currentFrameOfProp], xPosProp, 207);
     }
   }
 
