@@ -6,49 +6,66 @@ class Level {
   private int score;
   private int targetScore;
   private int spawner;
-  private int startTime;
-  private long minute;
-  private long second;
-  private long savedMin;
-  private long savedSec;
-  private long oldSecond;
-  private boolean timesUp;
-  private boolean saved;
-  //private CountdownTimer time;
+  private Timer timer;
+  private Player player;
+  private boolean levelComplete;
   private ArrayList <Catch> fish;
   private PFont font;
+  private boolean oneFishType;
+  private String fishToCatch;
 
 
 
-  Level() {
-    //this.time = time;
+  Level(Player player) {
+    this.player = player;
+    //this.targetScore = targetScore;
     fish = new ArrayList <Catch>();
+    timer = new Timer(4); // in minutes
     spawner = 300; //How often fish are spawning. The lower the number, the ofter fish are spawn
     score = 0;
     font = createFont("Arial", 16, true);
-    setStartTime(5);
-    oldSecond = 0;
-    timesUp = false;
-    saved = false;
+    fishToCatch = "";
   }
 
   //Desides which level the player is in
   public void levelState() {
-
+  boolean timesUp = false;
+    
     switch(LEVEL) {
 
     case 1:
-      targetScore = 10;
-      timer();
-      scoreBoard();
+      oneFishType = false;
+      targetScore = 20;
+      timesUp = timer.time();
       level.catching();
+      scoreBoard();
+      if((score == targetScore)&& (!timesUp)){
+        STATE = STATE_LEVEL;
+      }
+      if(timesUp) {
+        STATE = STATE_GAME_OVER;
+      }
       break;
 
     case 2:
-
-      timer();
-      scoreBoard();
+      oneFishType = true;
+      targetScore = 10;
+      fishToCatch = "Guri";
+      timesUp = timer.time();
       level.catching();
+      scoreBoard();
+      if((score == targetScore)&& (!timesUp)){
+        STATE = STATE_LEVEL;
+      }
+      if(timesUp) {
+        STATE = STATE_GAME_OVER;
+      }
+      break;
+
+    case 3:
+      oneFishType = false;
+      level.catching();
+      scoreBoardFree();
       break;
 
     default:
@@ -82,13 +99,17 @@ class Level {
     }
 
     if ( (player.gotCatch() == true) && (player.fishOnBoard() == true) ) {
-      score = score + 1;
+      if (!oneFishType) {
+        score = score + 1;
+      }
       for (int i = 0; i < fish.size(); i++) {
         if (fish.get(i).equals(player.getCatch())) {
+          if ((oneFishType == true) && (fish.get(i).getFishName()).equals(fishToCatch)) {
+            score = score + 1;
+          }
           fish.remove(i);
         }
       }
-      // må bli satt til false igjen
     }
 
     if (player.gotCatch() == false) {
@@ -142,74 +163,31 @@ class Level {
   public void scoreBoard() {
     textFont(font, 16);
     fill(0);
-    text("Score " + score + " / " + targetScore, 30, 30);
+    text("Score " + score + "/" + targetScore, 30, 30);
   }
 
+  public void scoreBoardFree() {
+    textFont(font, 16);
+    fill(0);
+    text("Score " + score, 30, 30);
+  }
 
-  public boolean timer() {
-    long newSecond = second();
-
-    if ((second == 0) && (minute == 0)) {
-      timesUp = true;
+  public boolean levelCompleted() {
+    if ((targetScore == score) && (!timer.checkIfTimesUp())) {
+      levelComplete = true;
     }
-    if (newSecond != oldSecond) {
-      oldSecond = newSecond;
-      second = second - 1;
-    }
-    if (second == 0) {
-      second = 59;
-      minute = minute - 1;
-    }
-
-    if (second < 10) {
-      String timeDisplay = minute + ":0" + second;
-      showTimer(timeDisplay);
-    } else {
-      String timeDisplay = minute + ":" + second;
-      showTimer(timeDisplay);
-    }
-    return timesUp;
-  }
-
-  //The time is set in second
-  public void setStartTime(int min) {
-    startTime = min - 1;
-    minute = startTime - 1;
-    second = 59;
-  }
-
-  public void resetTimer() {
-    minute = startTime;
-    second = 59;
-  }
-
-  public long getMinute() {
-    return minute;
-  }
-
-  public long getSecond() {
-    return second;
-  }
-
-  public void pauseTimer() {
-    if (!saved) {
-      savedMin = minute;
-      savedSec = second;
-      saved = true;
-    }
+    return levelComplete;
   }
 
   public void startTimer() {
-    if (saved) {
-      minute = savedMin;
-      second = savedSec;
-      saved = false;
-    }
+    timer.startTimer();
   }
 
-  public void showTimer(String time) {
-    textFont(font, 16);
-    fill(0);
-    text("Time left " + time, 30, 50);
+  public void pauseTimer() {
+    timer.pauseTimer() ;
+  }
+
+  public void resetTimer() {
+    timer.resetTimer();
   }
 } 

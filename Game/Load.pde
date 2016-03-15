@@ -18,6 +18,7 @@ class Load {
 
     score = json.getInt("Score");   // load the score
     println("Din lagra score er : " + score);
+    level.setScore(score);
 
     boolean yRod = json.getBoolean("RoodInWater"); // get if the rood is in the water or not
     player.setPositionOfHook(yRod);

@@ -69,9 +69,9 @@ class Menu {
     l2 = (Button) new Level2Button(400, 330);
     m = (Button) new MaratonButton(400, 390);
 
-    levelMenuButtonsHash.put("gjørikkenoeee", l1);
-    levelMenuButtonsHash.put("gjørikkeno", l2);
-    levelMenuButtonsHash.put("freeplay", m);
+    levelMenuButtonsHash.put("1", l1);
+    levelMenuButtonsHash.put("2", l2);
+    levelMenuButtonsHash.put("3", m);
   }
 
   public void createPauseMenu() {

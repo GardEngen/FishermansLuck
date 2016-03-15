@@ -26,7 +26,7 @@
   
   private final String STATE_MENU = "menu";
   private final String STATE_NEW = "new";
-  private final String STATE_FREEPLAY = "freeplay";
+  private final String STATE_PLAY = "play";
   private final String STATE_LEVEL = "level";
   private final String STATE_QUIT = "quit";     
   private final String STATE_HELP = "help";
@@ -46,8 +46,8 @@
     saving = new Saving();
     load = new Load();
     //time = CountdownTimerService.getNewCountdownTimer(this);
-    level = new Level();
-    level.setLevel(1);
+    level = new Level(player);
+   // level.setLevel(1);
     sound = true;
     //Music if sound == true play background music
     playBackgroundMusic(sound);
@@ -96,7 +96,7 @@
       level.setScore(load.getScore());
       level.startTimer();
       // Denne funbskjonen skal flyttes til Level
-      STATE = STATE_FREEPLAY;
+      STATE = STATE_PLAY;
       break;
   
     case STATE_RESUME:
@@ -106,7 +106,7 @@
       inPauseMenu = false;
       level.startTimer();
       // Denne funbskjonen skal flyttes til Level
-      STATE = STATE_FREEPLAY;
+      STATE = STATE_PLAY;
       break;
   
     case STATE_NEW:
@@ -115,16 +115,17 @@
       level.resetTimer();
       break;
   
-     // Denne funbskjonen skal flyttes til Level
-    case STATE_FREEPLAY: 
-      inGame = true;
-      inLevelMenu = false;
-      gameOver = false;
-      inPauseMenu = false;
-      play();
-      break;
+
+    case STATE_PLAY: 
+     inGame = true;
+     inLevelMenu = false;
+     gameOver = false;
+     inPauseMenu = false;
+     play();
+     break;
   
     case STATE_LEVEL:
+      setup();
       inGame = false;
       inLevelMenu = true;
       gameOver = false;
@@ -168,9 +169,7 @@
   //Starts the game 
   public void play() {
     graphic.drawBackground();
-    //level.scoreBoard();
     player.boat();
-  
     menu.drawInGameButton();
     level.levelState();
   }
@@ -202,11 +201,11 @@
     if (result2.equals("sound")) {
       playBackgroundMusic( menu.getSoundOnOffSwitch());
     }
-  
     if (result2.equals("pause")) {
       STATE = STATE_PAUSE;
     }
   
+  // Checks buttons in inGame menu
     if (inGame==false)
     {
       String result = menu.isButtonPressed(menu.getMainMenuHash()) ;
@@ -214,24 +213,35 @@
         STATE = result;
       }
     }
-    //  //buttons in Pause Menu
+    
+    // Checks buttons in Pause menu
     if (inPauseMenu) {
-  
       String result = menu.isButtonPressed(menu.getPauseMenuHash()) ;
       if (!result.equals("none")) {
         STATE = result;
       }
     }
+    
+    // Checks buttons in Game Over menu
     if (gameOver) {
       String result = menu.isButtonPressed(menu.getGameOverMenuHash()) ;
       if (!result.equals("none")) {
         STATE = result;
       }
     }
+    
+    // Checks buttons in level menu
     if (inLevelMenu) {
       String result = menu.isButtonPressed(menu.getLevelMenuButtonsHash()) ;
       if (!result.equals("none")) {
-        STATE = result;
+       // int level = int (Float.valueOf(result));
+       for(int i = 0; i < 4; i++) {
+         String iString = "" + i;
+         if(iString.equals(result)) {
+           level.setLevel(i);
+           STATE = STATE_PLAY;
+         }
+       }
       }
     }
   }
