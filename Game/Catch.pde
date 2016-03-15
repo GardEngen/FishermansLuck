@@ -11,13 +11,13 @@ public  class Catch extends GameElement {
   private int sharkProb;
   
   public final String[] FISH_NAMES = new String[]{ "Harald", "Guri", "Bert", "Karin", "Siri", "Anna", "Shark" };
-  public final int[] XCUTS =                     { 100, 90, 100, 100, 100, 100, 139 };
-  public final int[] NUM_PICTURES =              { 8, 8, 8, 8, 8, 8, 1 };
-  public final float[] DELAYS =                  { 0.8, 0.8, 0.5, 0.5, 0.5, 0.5, 1 };
+  public final int[] XCUTS =                     { 100, 90, 100, 100, 100, 100, 240 };
+  public final int[] NUM_PICTURES =              { 8, 8, 8, 8, 8, 8, 6};
+  public final float[] DELAYS =                  { 0.8, 0.8, 0.5, 0.5, 0.5, 0.5, 0.3 };
   public final boolean[] DANGEROUS =             { false, false, false, false, false, false, true };
   // These numbers represent relative probability for each fish. 
   // They do not have to sum up to 100, only their relative proportion matters
-  public int [] PROBABILITIES =                   {40, 70, 40, 60, 40, 40, sharkProb};// LEGG INN PASSENDE SANNSYNLIGHET 
+  public int [] PROBABILITIES =                   {40, 70, 40, 60, 40, 40, 100};// LEGG INN PASSENDE SANNSYNLIGHET  sharkProb
 
   // Constants common for all fish types
   private final String IMAGE_DIR = "animation/";
