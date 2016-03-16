@@ -12,6 +12,7 @@ class Menu {
   private Button l2;
   private Button hard;
   private Button hm;
+  private Button hm2;
   private Button next;
   private Button back;
   private Button q;
@@ -26,7 +27,7 @@ class Menu {
   private HashMap<String, Button> pauseMenuButtonsHash;
   private HashMap<String, Button> levelMenuButtonsHash;
   private HashMap<String, Button> tutorialMenuButtonsHash;
-
+  private HashMap<String, Button> helpMenuButtonsHash;
   //private PFont font;
   private PFont font2;
 
@@ -38,6 +39,7 @@ class Menu {
     pauseMenuButtonsHash = new HashMap<String, Button>();
     levelMenuButtonsHash = new HashMap<String, Button>();
     tutorialMenuButtonsHash = new HashMap<String, Button>();
+    helpMenuButtonsHash = new HashMap<String, Button>();
 
     createMainMenu();
     createInGameMenu();
@@ -45,6 +47,7 @@ class Menu {
     createGameOverMenu();
     createLevelMenu();
     createTutorialMenu();
+    createHelpMenu();
 
     //font = createFont("Arial", 16, true);
     font2 = createFont("Fantasy", 40, true);
@@ -104,12 +107,18 @@ class Menu {
   
   public void createTutorialMenu()
   {
-    hm = (Button) new HovedmenyButton(420, 640);
+    hm = (Button) new HovedmenyButton(400, 640);
     next = (Button) new NextButton(520, 570);
     back = (Button) new BackButton(440, 570);
     tutorialMenuButtonsHash.put("menu",hm);
     tutorialMenuButtonsHash.put("next",next);
     tutorialMenuButtonsHash.put("back",back);
+  }
+  
+  public void createHelpMenu()
+  { 
+    hm2 = (Button) new HovedmenyButton(400, 640);
+    helpMenuButtonsHash.put("menu",hm2);
   }
 
   public void drawInGameButton() {  
@@ -146,7 +155,12 @@ class Menu {
       tutorialMenuButtonsHash.get(hashKey).drawButton();
     }
   }
-  
+   public void drawHelpMenu() {
+    Set<String> keys = helpMenuButtonsHash.keySet();
+    for (String hashKey : keys) {
+      helpMenuButtonsHash.get(hashKey).drawButton();
+    }
+  }
 
   public void drawGameOverMenu() {
     Set<String> keys = gameOverButtonsHash.keySet();
@@ -197,6 +211,10 @@ class Menu {
   
   public HashMap getTutorialMenuButtonsHash(){
     return tutorialMenuButtonsHash;
+  }
+  
+  public HashMap getHelpMenuButtonsHash(){
+    return helpMenuButtonsHash;
   }
 
   public boolean getSoundOnOffSwitch() {

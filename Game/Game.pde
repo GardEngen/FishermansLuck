@@ -24,6 +24,7 @@
   private boolean inLevelMenu;
   private boolean inMainMenu;
   private boolean inTutorialMenu;
+  private boolean inHelpMenu;
   //CountdownTimer time;
   //private int score;
   //private int spawner;
@@ -61,7 +62,7 @@
     inPauseMenu = false;
     inLevelMenu = false;
     inMainMenu = true;
-    
+  
     picNr = 1;
     //spawner = 300; //How often fish are spawning. The lower the number, the ofter fish are spawn
     saving.saveGameState( player, level.getArray(), level.getScore());
@@ -84,6 +85,7 @@
       inLevelMenu = false;
       inMainMenu = true;
       inTutorialMenu = false;
+      inHelpMenu = false;
       graphic.drawBackground();
       graphic.drawLogo();
       menu.drawMenuButton();
@@ -96,6 +98,7 @@
       inPauseMenu = true;
       inMainMenu = false;
       inTutorialMenu = false;
+      inHelpMenu = false;
       pauseGame();
       break;
   
@@ -107,6 +110,7 @@
       inPauseMenu = false;
       inMainMenu = false;
       inTutorialMenu = false;
+      inHelpMenu = false;
       load.playerLoad();
       level.setScore(load.getScore());
       level.startTimer();
@@ -121,6 +125,7 @@
       inPauseMenu = false;
       inMainMenu = false;
       inTutorialMenu = false;
+      inHelpMenu = false;
       level.startTimer();
       // Denne funbskjonen skal flyttes til Level
       STATE = STATE_PLAY;
@@ -140,6 +145,7 @@
       inPauseMenu = false;
       inMainMenu = false;
       inTutorialMenu = false;
+      inHelpMenu = false;
       play();
       break;
   
@@ -151,27 +157,32 @@
       inPauseMenu = false;
       inMainMenu = false;
       inTutorialMenu = false;
+      inHelpMenu = false;
       graphic.drawBackground();
       graphic.drawLogo();
       menu.drawLevelButton();
       break;
   
     case STATE_TUTUROIAL:
-     inGame = false;
+      inGame = false;
       inLevelMenu = false;
       gameOver = false;
       inPauseMenu = false;
       inMainMenu = false;
       inTutorialMenu = true;
+      inHelpMenu = false;
       fill(0);
-      rect(0,0,1000,700);
+      rect(0, 0, 1000, 700);
       graphic.tutorialPic(picNr);
       menu.drawTutorialMenu();   
       break;
   
     case STATE_HELP:
-      //println("Din score er: " + level.getScore());
-      //println("LagraScore:" + load.getScore());
+      inHelpMenu = true;
+      fill(0);
+      rect(0, 0, 1000, 700);
+      graphic.help();
+      menu.drawHelpMenu();
       break;
   
     case STATE_QUIT:
@@ -181,6 +192,7 @@
       inPauseMenu = false;
       inMainMenu = false;
       inTutorialMenu = false;
+      inHelpMenu = false;
       exit();
       break;
   
@@ -191,6 +203,7 @@
       inPauseMenu = false;
       inMainMenu = false;
       inTutorialMenu = false;
+      inHelpMenu = false;
       graphic.gameBlackBackground();
       menu.drawGameOverMenu();
       break;  
@@ -202,6 +215,7 @@
       inPauseMenu = false;
       inMainMenu = false;
       inTutorialMenu = false;
+      inHelpMenu = false;
       graphic.gameBlackBackground();
       level.winBoard();
       level.resetAfterWin();
@@ -301,27 +315,31 @@
         STATE = result;
       }
     }
-    
-    if(inTutorialMenu)
+  
+    if (inTutorialMenu)
     {
       String result = menu.isButtonPressed(menu.getTutorialMenuButtonsHash());
       if (!result.equals("none")) {
-       
-        if(result.equals("next")&&(picNr<3))
+  
+        if (result.equals("next")&&(picNr<3))
         {
           picNr++;  
           println(picNr);
-        }
-        else if(result.equals("back")&&(picNr>1))
+        } else if (result.equals("back")&&(picNr>1))
         {     
-        picNr--; 
+          picNr--; 
           println(picNr);
         }
         graphic.tutorialPic(picNr);
         STATE = result;
       }
     }
-    
+    if (inHelpMenu){
+      String result = menu.isButtonPressed(menu.getHelpMenuButtonsHash()) ;
+      if (!result.equals("none")) {
+        STATE = result;
+      }
+    }
   }
   
   // If the game is true and not in the menu then the game need to be saved.

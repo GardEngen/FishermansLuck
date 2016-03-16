@@ -26,22 +26,28 @@ public class Graphic {
     switch(PICTURE)
     {
     case 1:
-  
+
       fill(0, 255, 0);
       rect(0, 0, 1000, 550);
-     // PICTURE = 0;
-      
+      // PICTURE = 0;
+
       break;
-      
+
     case 2:
       fill(255, 0, 0);
       rect(0, 0, 1000, 550);
-    // PICTURE = 0;
+      // PICTURE = 0;
       break; 
-      
-      default:
+
+    default:
       break;
     }
+  }
+
+  public void help()
+  {
+    fill(55, 0, 255);
+    rect(0, 0, 1000, 550);
   }
 
   //public void winBackground() {
