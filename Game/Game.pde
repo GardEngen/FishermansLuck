@@ -65,7 +65,7 @@
   
     picNr = 1;
     //spawner = 300; //How often fish are spawning. The lower the number, the ofter fish are spawn
-    saving.saveGameState( player, level.getArray(), level.getScore());
+    saving.saveGameState( player, level.getArray(), level.getScore(), level);
     this.savingThread = new SaveThread(saving, this, player, level);
     this.savingThread.start();
   }
