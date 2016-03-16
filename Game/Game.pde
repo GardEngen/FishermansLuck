@@ -174,8 +174,8 @@
       inMainMenu = false;
       inTutorialMenu = true;
       inHelpMenu = false;
-      fill(0);
-      rect(0, 0, 1000, 700);
+      
+      graphic.drawTutorialButtonBackground();
       graphic.tutorialPic(picNr);
       menu.drawTutorialMenu();   
       break;
@@ -253,8 +253,9 @@
   {
     if (sound) {
       minim = new Minim(this);
-      audioPlayer = minim.loadFile("lyd/Fishing2.mp3");
-      audioPlayer.play();
+      //soundsource: http://www.bensound.com/royalty-free-music/track/cute
+      audioPlayer = minim.loadFile("lyd/bensound-cute.mp3");
+      audioPlayer.loop();
     }
     if (sound == false) {
       audioPlayer.close();
@@ -326,7 +327,7 @@
       String result = menu.isButtonPressed(menu.getTutorialMenuButtonsHash());
       if (!result.equals("none")) {
   
-        if (result.equals("next")&&(picNr<3))
+        if (result.equals("next")&&(picNr<10))
         {
           picNr++;  
           println(picNr);
