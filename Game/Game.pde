@@ -16,7 +16,8 @@
   //private ArrayList <Catch> fish;
   //private int numberOfFish = 6;
   private int picNr;
-  
+  private boolean playMusic;
+
   private boolean sound;
   private boolean inGame;
   private boolean inPauseMenu;
@@ -55,14 +56,12 @@
     level = new Level(player);
     // level.setLevel(1);
     sound = true;
-    //Music if sound == true play background music
-    playBackgroundMusic(sound);
     gameOver = false;
     inGame = false;
     inPauseMenu = false;
     inLevelMenu = false;
     inMainMenu = true;
-  
+    playMusic = true;
     picNr = 1;
     //spawner = 300; //How often fish are spawning. The lower the number, the ofter fish are spawn
     saving.saveGameState( player, level.getArray(), level.getScore(), level);
@@ -89,6 +88,12 @@
       graphic.drawBackground();
       graphic.drawLogo();
       menu.drawMenuButton();
+      
+      //to avoid loop
+      if(playMusic){
+      playBackgroundMusic(sound);
+      playMusic = false;
+      }
       break;
   
     case STATE_PAUSE:
@@ -179,10 +184,8 @@
   
     case STATE_HELP:
       inHelpMenu = true;
-      fill(0);
-      rect(0, 0, 1000, 700);
       graphic.help();
-      menu.drawHelpMenu();
+      menu.drawHelpMenu();  
       break;
   
     case STATE_QUIT:
@@ -253,7 +256,7 @@
     if (sound) {
       minim = new Minim(this);
       audioPlayer = minim.loadFile("lyd/Fishing2.mp3");
-      //audioPlayer.play();
+      audioPlayer.play();
     }
     if (sound == false) {
       audioPlayer.close();
