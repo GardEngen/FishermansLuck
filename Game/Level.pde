@@ -40,7 +40,6 @@ class Level {
 
   //Desides which level the player is in
   public void levelState() {
-
     switch(LEVEL) {
 
     case 1:
@@ -58,7 +57,7 @@ class Level {
       } 
       else {
  
-      level.catching();
+      catching();
       scoreBoard();
       }
 
@@ -81,7 +80,7 @@ class Level {
       }
       else {
       timesUp = timer.time();
-      level.catching();
+      catching();
       scoreBoard();
       }
       image(level2Pic, 135, 0, 80, 60);
@@ -91,7 +90,7 @@ class Level {
       sharkProb = 60;
       oneFishType = false;
       levelComplete = false;
-      level.catching();
+      catching();
       scoreBoardFree();
       
       break;
@@ -105,7 +104,7 @@ class Level {
         gameOver = true;
       }
       else {
-       level.catching();
+       catching();
       }
       textFont(font, 20);
       fill(0);
