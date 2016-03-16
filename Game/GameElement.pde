@@ -27,7 +27,7 @@ public class GameElement {
   //Sets the start position, left or right
   public boolean setStartPosition() {
     if (startPosition == 0) {
-      xPosition = -200;
+      xPosition = -240;
       startLeft = true;
     } else if (startPosition == 1) {
       xPosition = width + 40;
@@ -66,7 +66,7 @@ public class GameElement {
       drawElement(taken);
     }
 
-    else if ((startLeft == false)&&(xPosition > -200)&&(caught == false))
+    else if ((startLeft == false)&&(xPosition > -240)&&(caught == false))
     {
       xPosition = xPosition - speed;
       drawElement(imageRevers);
