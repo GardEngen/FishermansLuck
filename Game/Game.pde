@@ -21,6 +21,7 @@
   private boolean gameOver;
   private boolean inLevelMenu;
   private boolean inMainMenu;
+  private boolean inTutorialMenu;
   //CountdownTimer time;
   //private int score;
   //private int spawner;
@@ -78,6 +79,7 @@
       inPauseMenu = false;
       inLevelMenu = false;
       inMainMenu = true;
+      inTutorialMenu = false;
       graphic.drawBackground();
       graphic.drawLogo();
       menu.drawMenuButton();
@@ -89,6 +91,7 @@
       inGame = false;
       inPauseMenu = true;
       inMainMenu = false;
+      inTutorialMenu = false;
       pauseGame();
       break;
   
@@ -99,6 +102,7 @@
       inGame = true;
       inPauseMenu = false;
       inMainMenu = false;
+      inTutorialMenu = false;
       load.playerLoad();
       level.setScore(load.getScore());
       level.startTimer();
@@ -112,6 +116,7 @@
       inGame = true;
       inPauseMenu = false;
       inMainMenu = false;
+      inTutorialMenu = false;
       level.startTimer();
       // Denne funbskjonen skal flyttes til Level
       STATE = STATE_PLAY;
@@ -130,6 +135,7 @@
       gameOver = false;
       inPauseMenu = false;
       inMainMenu = false;
+      inTutorialMenu = false;
       play();
       break;
   
@@ -140,6 +146,7 @@
       gameOver = false;
       inPauseMenu = false;
       inMainMenu = false;
+      inTutorialMenu = false;
       graphic.drawBackground();
       graphic.drawLogo();
       menu.drawLevelButton();
@@ -147,7 +154,12 @@
   
     case STATE_TUTUROIAL: 
       // tutorial skal inn her
-      text("oi, her er det ingenting", 350, 300);
+      inTutorialMenu = true;
+      
+      graphic.tutorialPic();
+      
+      menu.drawTutorialMenu();
+      
       break;
   
     case STATE_HELP:
@@ -161,6 +173,7 @@
       inGame = false;
       inPauseMenu = false;
       inMainMenu = false;
+      inTutorialMenu = false;
       exit();
       break;
   
@@ -170,6 +183,7 @@
       inGame = false;
       inPauseMenu = false;
       inMainMenu = false;
+      inTutorialMenu = false;
       graphic.gameBlackBackground();
       menu.drawGameOverMenu();
       break;  
@@ -180,6 +194,7 @@
       inGame = false;
       inPauseMenu = false;
       inMainMenu = false;
+      inTutorialMenu = false;
       graphic.gameBlackBackground();
       level.winBoard();
       level.resetAfterWin();
@@ -279,6 +294,19 @@
         STATE = result;
       }
     }
+    
+    if(inTutorialMenu)
+    {
+      String result = menu.isButtonPressed(menu.getTutorialMenuButtonsHash());
+      if (!result.equals("none")) {
+        STATE = result;
+        if(result.equals("neste"))
+        {
+          println("NESTEBILDE");
+        }
+      }
+    }
+    
   }
   
   // If the game is true and not in the menu then the game need to be saved.

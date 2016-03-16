@@ -22,6 +22,12 @@ public class Graphic {
 
   }
   
+  public void tutorialPic()
+  {
+    fill(0, 0, 0);
+    rect(0, 0, 1000, 700);
+  }
+  
   //public void winBackground() {
   //   fill(0, 0, 0, 10);
   //  rect(0, 0, 1000, 700);

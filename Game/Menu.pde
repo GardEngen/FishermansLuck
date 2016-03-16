@@ -20,6 +20,7 @@ class Menu {
   private HashMap<String, Button> gameOverButtonsHash;
   private HashMap<String, Button> pauseMenuButtonsHash;
   private HashMap<String, Button> levelMenuButtonsHash;
+  private HashMap<String, Button> tutorialMenuButtonsHash;
 
   //private PFont font;
   private PFont font2;
@@ -31,12 +32,14 @@ class Menu {
     gameOverButtonsHash = new HashMap<String, Button>();
     pauseMenuButtonsHash = new HashMap<String, Button>();
     levelMenuButtonsHash = new HashMap<String, Button>();
+    tutorialMenuButtonsHash = new HashMap<String, Button>();
 
     createMainMenu();
     createInGameMenu();
     createPauseMenu();
     createGameOverMenu();
     createLevelMenu();
+    createTutorialMenu();
 
     //font = createFont("Arial", 16, true);
     font2 = createFont("Fantasy", 40, true);
@@ -89,9 +92,16 @@ class Menu {
 
   public void createGameOverMenu() {
     n2 = (Button) new NewGameButton(400, 270);
-
     gameOverButtonsHash.put("new", n2);
     gameOverButtonsHash.put("quit", q2);
+  }
+  
+  public void createTutorialMenu()
+  {
+    q3 = (Button) new QuitButton(400, 510);
+    hard = (Button) new HardcoreModeButton(400, 450);
+    tutorialMenuButtonsHash.put("menu",q3);
+    tutorialMenuButtonsHash.put("neste",hard);
   }
 
   public void drawInGameButton() {  
@@ -121,6 +131,14 @@ class Menu {
       pauseMenuButtonsHash.get(hashKey).drawButton();
     }
   }
+  
+   public void drawTutorialMenu() {
+    Set<String> keys = tutorialMenuButtonsHash.keySet();
+    for (String hashKey : keys) {
+      tutorialMenuButtonsHash.get(hashKey).drawButton();
+    }
+  }
+  
 
   public void drawGameOverMenu() {
     Set<String> keys = gameOverButtonsHash.keySet();
@@ -167,6 +185,10 @@ class Menu {
   }
   public HashMap getLevelMenuButtonsHash() {
     return levelMenuButtonsHash;
+  }
+  
+  public HashMap getTutorialMenuButtonsHash(){
+    return tutorialMenuButtonsHash;
   }
 
   public boolean getSoundOnOffSwitch() {
