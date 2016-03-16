@@ -28,14 +28,21 @@ public class Graphic {
     switch(PICTURE)
     {
     case 1:
-      fill(0, 0, 0);
+  
+      fill(0, 255, 0);
       rect(0, 0, 1000, 700);
+     // PICTURE = 0;
+      
       break;
       
     case 2:
       fill(255, 0, 0);
       rect(0, 0, 1000, 700);
-      break;  
+    // PICTURE = 0;
+      break; 
+      
+      default:
+      break;
     }
   }
 

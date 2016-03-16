@@ -62,7 +62,7 @@
     inLevelMenu = false;
     inMainMenu = true;
     
-    picNr = 0;
+    picNr = 1;
     //spawner = 300; //How often fish are spawning. The lower the number, the ofter fish are spawn
     saving.saveGameState( player, level.getArray(), level.getScore());
     this.savingThread = new SaveThread(saving, this, player, level);
@@ -156,13 +156,19 @@
       menu.drawLevelButton();
       break;
   
-    case STATE_TUTUROIAL: 
-      // tutorial skal inn her
+    case STATE_TUTUROIAL:
+     inGame = false;
+      inLevelMenu = false;
+      gameOver = false;
+      inPauseMenu = false;
+      inMainMenu = false;
       inTutorialMenu = true;
+      // tutorial skal inn her
       
       graphic.tutorialPic(picNr);
-      
       menu.drawTutorialMenu();
+      //graphic.tutorialPic(picNr);
+      //menu.drawTutorialMenu();
       
       break;
   
@@ -303,17 +309,23 @@
     {
       String result = menu.isButtonPressed(menu.getTutorialMenuButtonsHash());
       if (!result.equals("none")) {
-        STATE = result;
-        if(result.equals("next"))
+       
+        if(result.equals("next")&&(picNr<3))
         {
           picNr++;
+       
           println(picNr);
         }
-        if(result.equals("back")&&(picNr>0))
+        else if(result.equals("back")&&(picNr>1))
         {
+         
         picNr--;
+        //graphic.tutorialPic(picNr);
+     
           println(picNr);
         }
+        graphic.tutorialPic(picNr);
+        STATE = result;
       }
     }
     
