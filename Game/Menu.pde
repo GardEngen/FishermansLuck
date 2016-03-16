@@ -12,6 +12,8 @@ class Menu {
   private Button l2;
   private Button hard;
   private Button hm;
+  private Button next;
+  private Button back;
   private Button q;
   private Button q2;
   private Button q3;
@@ -104,8 +106,11 @@ class Menu {
   {
     hm = (Button) new HovedmenyButton(400, 510);
     hard = (Button) new HardcoreModeButton(400, 450);
+    next = (Button) new NextButton(100, 100);
+    back = (Button) new BackButton(100, 200);
     tutorialMenuButtonsHash.put("menu",hm);
-    tutorialMenuButtonsHash.put("neste",hard);
+    tutorialMenuButtonsHash.put("next",next);
+    tutorialMenuButtonsHash.put("back",back);
   }
 
   public void drawInGameButton() {  

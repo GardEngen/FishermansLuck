@@ -108,3 +108,23 @@ public class HovedmenyButton extends Button {
     buttonInfo(HovedmenyButton, HovedmenyButton);
   }
 }
+//************* New Class ******************
+public class NextButton extends Button {
+  private PImage NextButton;
+
+  public NextButton(float xPos, float yPos) {
+    super(xPos, yPos);
+    NextButton = loadImage("knapper/Next.png");
+    buttonInfo(NextButton, NextButton);
+  }
+}
+//************* New Class ******************
+public class BackButton extends Button {
+  private PImage BackButton;
+
+  public BackButton(float xPos, float yPos) {
+    super(xPos, yPos);
+    BackButton = loadImage("knapper/Back.png");
+    buttonInfo(BackButton, BackButton);
+  }
+}

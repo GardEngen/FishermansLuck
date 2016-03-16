@@ -15,6 +15,8 @@
   private Menu menu;
   //private ArrayList <Catch> fish;
   //private int numberOfFish = 6;
+  private int picNr;
+  
   private boolean sound;
   private boolean inGame;
   private boolean inPauseMenu;
@@ -59,6 +61,8 @@
     inPauseMenu = false;
     inLevelMenu = false;
     inMainMenu = true;
+    
+    picNr = 0;
     //spawner = 300; //How often fish are spawning. The lower the number, the ofter fish are spawn
     saving.saveGameState( player, level.getArray(), level.getScore());
     this.savingThread = new SaveThread(saving, this, player, level);
@@ -156,7 +160,7 @@
       // tutorial skal inn her
       inTutorialMenu = true;
       
-      graphic.tutorialPic();
+      graphic.tutorialPic(picNr);
       
       menu.drawTutorialMenu();
       
@@ -300,9 +304,15 @@
       String result = menu.isButtonPressed(menu.getTutorialMenuButtonsHash());
       if (!result.equals("none")) {
         STATE = result;
-        if(result.equals("neste"))
+        if(result.equals("next"))
         {
-          println("NESTEBILDE");
+          picNr++;
+          println(picNr);
+        }
+        if(result.equals("back")&&(picNr>0))
+        {
+        picNr--;
+          println(picNr);
         }
       }
     }
