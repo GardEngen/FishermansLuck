@@ -42,7 +42,7 @@ class Level {
     switch(LEVEL) {
 
     case 1:
-      sharkProb = 40;
+      sharkProb = 50;
       oneFishType = false;
       targetScore = 20;
       timesUp = timer.time();
@@ -62,7 +62,7 @@ class Level {
       break;
 
     case 2:
-     sharkProb = 30;
+     sharkProb = 40;
       oneFishType = true;
       targetScore = 10;
       fishToCatch = "Guri";

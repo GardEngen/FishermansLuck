@@ -8,7 +8,7 @@ public  class Catch extends GameElement {
   private int numberOfpictures;
   private float delay;
   private boolean dangerous;
-  private int sharkProb;
+  //private int sharkProb;
   
   public final String[] FISH_NAMES = new String[]{ "Harald", "Guri", "Bert", "Karin", "Siri", "Anna", "Shark" };
   public final int[] XCUTS =                     { 100, 90, 100, 100, 100, 100, 240 };
@@ -17,7 +17,7 @@ public  class Catch extends GameElement {
   public final boolean[] DANGEROUS =             { false, false, false, false, false, false, true };
   // These numbers represent relative probability for each fish. 
   // They do not have to sum up to 100, only their relative proportion matters
-  public int [] PROBABILITIES =                   {40, 70, 40, 60, 40, 40, sharkProb};// LEGG INN PASSENDE SANNSYNLIGHET  sharkProb
+  public int [] PROBABILITIES =                   {40, 70, 40, 60, 40, 40, 0};// LEGG INN PASSENDE SANNSYNLIGHET  sharkProb
 
   // Constants common for all fish types
   private final String IMAGE_DIR = "animation/";
@@ -33,7 +33,8 @@ public  class Catch extends GameElement {
   private PImage fishImageCaught;
 
   public Catch(int sharkProb) {
-    this.sharkProb = sharkProb;
+    setSharkProbability(sharkProb);
+    //this.sharkProb = sharkProb;
     speed = random(MIN_SPEED, MAX_SPEED);
     // Comment: type of fish is decided when the fish is created
     fishType = getRandomFishType();
@@ -98,7 +99,7 @@ public  class Catch extends GameElement {
     return dangerous;
   }
   
-  //public void setSharkProbability(int prob) {
-  // PROBABILITIES[6] = prob;
-  //}
+  public void setSharkProbability(int prob) {
+  PROBABILITIES[6] = prob;
+  }
 }
