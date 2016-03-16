@@ -10,8 +10,8 @@ public class Timer {
   private boolean saved;
   private boolean timesUp;
   private String time;
-   private PFont font;
-  
+  private PFont font;
+
   Timer(int countDown) {
     setStartTime(countDown);
     oldSecond = 0;
@@ -23,14 +23,14 @@ public class Timer {
   public boolean time() {
     long newSecond = second();
 
-    if ((second == 0) && (minute == 0)) {
+    if ((second <= 0) && (minute <= 0)) {
       timesUp = true;
-    }
-    if (newSecond != oldSecond) {
+    } 
+    else if (newSecond != oldSecond) {
       oldSecond = newSecond;
       second = second - 1;
     }
-    if (second == 0) {
+    else if (second <= 0) {
       second = 59;
       minute = minute - 1;
     }
@@ -42,7 +42,7 @@ public class Timer {
     } else {
       String timeDisplay = minute + ":" + second;
       showTimer(timeDisplay);
-     // time = timeDisplay;
+      // time = timeDisplay;
     }
     return timesUp;
   }
@@ -55,6 +55,8 @@ public class Timer {
   }
 
   public void resetTimer() {
+    saved = false;
+    timesUp = false;
     minute = startTime;
     second = 59;
   }
@@ -82,18 +84,18 @@ public class Timer {
       saved = false;
     }
   }
-  
+
   public String getTime() {
     return time;
   }
-  
+
   public boolean checkIfTimesUp() {
     return timesUp;
   }
-  
- public void showTimer(String time) {
-   textFont(font, 16);
-   fill(0);
-   text("" + time, 30, 50);
- }
+
+  public void showTimer(String time) {
+    textFont(font, 16);
+    fill(0);
+    text("" + time, 30, 50);
+  }
 }

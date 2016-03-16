@@ -17,6 +17,7 @@ class Level {
   private boolean win;
   private boolean gameOver;
   private int sharkProb;
+  private boolean timesUp;
 
   Level(Player player) {
     this.player = player;
@@ -30,48 +31,81 @@ class Level {
     fishToCatch = "";
     win = false;
     gameOver = false;
-    sharkProb = 40; //default
+    sharkProb = 0; //default
+   // startTimer();
+   timesUp = false;
   }
 
   //Desides which level the player is in
   public void levelState() {
-    boolean timesUp = false;
 
     switch(LEVEL) {
 
     case 1:
-      sharkProb = 40;
+    sharkProb = 40;
       oneFishType = false;
       targetScore = 20;
       timesUp = timer.time();
-      level.catching();
-      scoreBoard();
-      if ((score == targetScore)&& (!timesUp)) {
-        win = true;
-        //STATE = STATE_LEVEL;
-      }
-      if (timesUp) {
+     if (timesUp) {
         gameOver = true;
         //STATE = STATE_GAME_OVER;
       }
+      else if ((score == targetScore)&& (!timesUp)) {
+        win = true;
+        //STATE = STATE_LEVEL;
+      } 
+      else {
+      //sharkProb = 40;
+      //oneFishType = false;
+      //targetScore = 20;
+      //timesUp = timer.time();
+      level.catching();
+      scoreBoard();
+      }
+      //if ((score == targetScore)&& (!timesUp)) {
+      //  win = true;
+      //  //STATE = STATE_LEVEL;
+      //}
+      //if (timesUp) {
+      //  gameOver = true;
+      //  //STATE = STATE_GAME_OVER;
+      //}
       break;
 
     case 2:
-      sharkProb = 30;
+     sharkProb = 30;
       oneFishType = true;
       targetScore = 10;
       fishToCatch = "Guri";
       timesUp = timer.time();
-      level.catching();
-      scoreBoard();
-      if ((score == targetScore)&& (!timesUp)) {
+      
+     if (timesUp) {
+        gameOver = true;
+        resetTimer();
+        //STATE = STATE_GAME_OVER;
+      }
+       else if ((score == targetScore)&& (!timesUp)) {
         win = true;
         //STATE = STATE_LEVEL;
       }
-      if (timesUp) {
-        gameOver = true;
-        //STATE = STATE_GAME_OVER;
+      else {
+      //sharkProb = 30;
+      //oneFishType = true;
+      //targetScore = 10;
+      //fishToCatch = "Guri";
+      timesUp = timer.time();
+      level.catching();
+      scoreBoard();
       }
+      //if ((score == targetScore)&& (!timesUp)) {
+      //  win = true;
+      //  //STATE = STATE_LEVEL;
+      //}
+      //if (timesUp) {
+      //  gameOver = true;
+      //  resetTimer();
+      //  //STATE = STATE_GAME_OVER;
+      //}
       break;
 
     case 3:
@@ -85,13 +119,14 @@ class Level {
     case 4:
       sharkProb = 0;
       oneFishType = false;
-      level.catching();
-      scoreBoardFree();
       player.setHookSpeed(10);
-      if (hardcoreModefail)
-      {
+      scoreBoardFree();
+      if (hardcoreModefail) {
         gameOver = true;
-        //STATE = STATE_GAME_OVER;
+      }
+      else {
+       level.catching();
+       
       }
       break;
 
@@ -224,6 +259,7 @@ class Level {
   }
 
   public void resetTimer() {
+    timesUp = false;
     timer.resetTimer();
   }
   
