@@ -14,6 +14,8 @@ class Menu {
   private Button q;
   private Button q2;
   private Button q3;
+  private Button q4;
+  private Button q5;
 
   private HashMap<String, Button> mainMenuButtonsHash;
   private HashMap<String, Button> inGameButtonsHash;
@@ -92,15 +94,16 @@ class Menu {
 
   public void createGameOverMenu() {
     n2 = (Button) new NewGameButton(400, 270);
+    q4 = (Button) new QuitButton(400, 330);
     gameOverButtonsHash.put("new", n2);
-    gameOverButtonsHash.put("quit", q2);
+    gameOverButtonsHash.put("quit", q4);
   }
   
   public void createTutorialMenu()
   {
-    q3 = (Button) new QuitButton(400, 510);
+    q5 = (Button) new QuitButton(400, 510);
     hard = (Button) new HardcoreModeButton(400, 450);
-    tutorialMenuButtonsHash.put("menu",q3);
+    tutorialMenuButtonsHash.put("menu",q5);
     tutorialMenuButtonsHash.put("neste",hard);
   }
 
