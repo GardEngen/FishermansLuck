@@ -28,14 +28,14 @@ public class Graphic {
     case 1:
   
       fill(0, 255, 0);
-      rect(0, 0, 1000, 610);
+      rect(0, 0, 1000, 550);
      // PICTURE = 0;
       
       break;
       
     case 2:
       fill(255, 0, 0);
-      rect(0, 0, 1000, 610);
+      rect(0, 0, 1000, 550);
     // PICTURE = 0;
       break; 
       
