@@ -18,6 +18,7 @@ class Level {
   private boolean gameOver;
   private int sharkProb;
   private boolean timesUp;
+  private PImage level2Pic;
 
   Level(Player player) {
     this.player = player;
@@ -32,8 +33,9 @@ class Level {
     win = false;
     gameOver = false;
     sharkProb = 0; //default
-   // startTimer();
-   timesUp = false;
+    // startTimer();
+    timesUp = false;
+    level2Pic = loadImage("grafikk/level2Pic.png");
   }
 
   //Desides which level the player is in
@@ -82,6 +84,7 @@ class Level {
       level.catching();
       scoreBoard();
       }
+      image(level2Pic, 135, 0, 80, 60);
       break;
 
     case 3:
@@ -103,8 +106,10 @@ class Level {
       }
       else {
        level.catching();
-       
       }
+      textFont(font, 20);
+      fill(0);
+      text("Fang Alle ", 30, 60);
       break;
 
     default:

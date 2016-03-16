@@ -13,6 +13,8 @@ class Menu {
   private Button hard;
   private Button hm;
   private Button hm2;
+  private Button hm3;
+  private Button hm4;
   private Button next;
   private Button back;
   private Button q;
@@ -82,20 +84,20 @@ class Menu {
     l2 = (Button) new Level2Button(400, 330);
     m = (Button) new MaratonButton(400, 390);
     hard = (Button) new HardcoreModeButton(400, 450);
-    q3 = (Button) new QuitButton(400, 510);
+    hm3 = (Button) new HovedmenyButton(400, 510);
     
     levelMenuButtonsHash.put("1", l1);
     levelMenuButtonsHash.put("2", l2);
     levelMenuButtonsHash.put("3", m); 
     levelMenuButtonsHash.put("4", hard);
-    levelMenuButtonsHash.put("menu", q3);
+    levelMenuButtonsHash.put("menu", hm3);
   }
 
   public void createPauseMenu() {
-    q2 = (Button) new QuitButton(400, 330);
+    hm4 = (Button) new HovedmenyButton(400, 330);
     pauseMenuButtonsHash.put("DU SKAL IKKE GJØRE EN DRITT MEN BARE SE PEN UT, TAKK!", play); 
     pauseMenuButtonsHash.put("resume", r);
-    pauseMenuButtonsHash.put("menu", q2);
+    pauseMenuButtonsHash.put("menu", hm4);
   }
 
   public void createGameOverMenu() {

@@ -308,18 +308,19 @@
     // Checks buttons in level menu
     if (inLevelMenu) {
       String result = menu.isButtonPressed(menu.getLevelMenuButtonsHash()) ;
+      if (result.equals("menu")) {
+        STATE = result;
+      }
       if (!result.equals("none")) {
         // int level = int (Float.valueOf(result));
-        for (int i = 0; i <= 4; i++) {
+        for (int i = 1; i <= 4; i++) {
           String iString = "" + i;
           if (iString.equals(result)) {
             level.setLevel(i);
             STATE = STATE_PLAY;
           }
         }
-      } else if (result.equals("menu")) {
-        STATE = result;
-      }
+      } 
     }
   
     if (inTutorialMenu)
