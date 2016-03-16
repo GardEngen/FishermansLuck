@@ -12,3 +12,5 @@ Video 5: Level meny -> Maraton - > Fang hai -> Nytt Spill
 
 Video 6: Level meny -> Hardcore -> Fang noen fisker -> "mist" en fisk -> Nytt spill
 	  -> Hovedmeny -> Avslutt
+
+Video 7: Vinn et spill
