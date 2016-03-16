@@ -4,11 +4,13 @@ public class Graphic {
 
   private PImage background;
   private PImage logo;
+  private PImage helpbackground;
   private int PICTURE;
 
   public Graphic() {
     background = loadImage("grafikk/background2tilpasset.png");
     logo = loadImage("grafikk/tempLogo.png");
+    helpbackground = loadImage("grafikk/helpbackground.png");
   }
   public void drawBackground()
   {
@@ -46,8 +48,10 @@ public class Graphic {
 
   public void help()
   {
-    fill(55, 0, 255);
-    rect(0, 0, 1000, 550);
+    image(background, 0, 0, 1000, 700);
+    image(helpbackground, 210, 145, 570, 345);
+    //fill(55, 0, 255);
+    //rect(0, 0, 1000, 550);
   }
 
   //public void winBackground() {
