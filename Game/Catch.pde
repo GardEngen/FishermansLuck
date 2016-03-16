@@ -17,7 +17,7 @@ public  class Catch extends GameElement {
   public final boolean[] DANGEROUS =             { false, false, false, false, false, false, true };
   // These numbers represent relative probability for each fish. 
   // They do not have to sum up to 100, only their relative proportion matters
-  public int [] PROBABILITIES =                   {40, 70, 40, 60, 40, 40, 100};// LEGG INN PASSENDE SANNSYNLIGHET  sharkProb
+  public int [] PROBABILITIES =                   {40, 70, 40, 60, 40, 40, sharkProb};// LEGG INN PASSENDE SANNSYNLIGHET  sharkProb
 
   // Constants common for all fish types
   private final String IMAGE_DIR = "animation/";

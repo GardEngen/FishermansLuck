@@ -42,7 +42,7 @@ class Level {
     switch(LEVEL) {
 
     case 1:
-    sharkProb = 40;
+      sharkProb = 40;
       oneFishType = false;
       targetScore = 20;
       timesUp = timer.time();
@@ -52,24 +52,13 @@ class Level {
       }
       else if ((score == targetScore)&& (!timesUp)) {
         win = true;
-        //STATE = STATE_LEVEL;
       } 
       else {
-      //sharkProb = 40;
-      //oneFishType = false;
-      //targetScore = 20;
-      //timesUp = timer.time();
+ 
       level.catching();
       scoreBoard();
       }
-      //if ((score == targetScore)&& (!timesUp)) {
-      //  win = true;
-      //  //STATE = STATE_LEVEL;
-      //}
-      //if (timesUp) {
-      //  gameOver = true;
-      //  //STATE = STATE_GAME_OVER;
-      //}
+
       break;
 
     case 2:
@@ -82,30 +71,15 @@ class Level {
      if (timesUp) {
         gameOver = true;
         resetTimer();
-        //STATE = STATE_GAME_OVER;
       }
        else if ((score == targetScore)&& (!timesUp)) {
         win = true;
-        //STATE = STATE_LEVEL;
       }
       else {
-      //sharkProb = 30;
-      //oneFishType = true;
-      //targetScore = 10;
-      //fishToCatch = "Guri";
       timesUp = timer.time();
       level.catching();
       scoreBoard();
       }
-      //if ((score == targetScore)&& (!timesUp)) {
-      //  win = true;
-      //  //STATE = STATE_LEVEL;
-      //}
-      //if (timesUp) {
-      //  gameOver = true;
-      //  resetTimer();
-      //  //STATE = STATE_GAME_OVER;
-      //}
       break;
 
     case 3:
