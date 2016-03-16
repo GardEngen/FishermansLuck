@@ -1,9 +1,12 @@
 {
   "Score": 1,
-  "yPos": 50,
+  "yPos": 240,
   "gotCatch": false,
-  "FishY": 419.48016357421875,
-  "xPos": 279,
-  "FishX": -233.8512420654297,
-  "RoodInWater": false
+  "Win_status": false,
+  "Completed_level": false,
+  "level": 2,
+  "FishY": 559.2884521484375,
+  "xPos": 439,
+  "FishX": 948.197021484375,
+  "RoodInWater": true
 }

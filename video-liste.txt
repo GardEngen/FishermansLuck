@@ -3,7 +3,7 @@ Video 1: Hovedmeny -> tutorial -> hovedmeny
 
 Video 2: Hovedmeny -> Hjelp -> Hovedmeny
 
-Video 3: Hovedmeny -> Nytt spill -> Level 1 -> Fang 20 fisk -> Pause -> Hovedmeny 
+Video 3: Hovedmeny -> Nytt spill -> Level 1 -> Fang 2 fisk -> Pause -> Hovedmeny 
 	 -> Fortsett
 
 Video 4: Level meny -> Level 2 -> Fang Guri -> Fang 1 vanlig -> TimesUp -> Nytt Spill

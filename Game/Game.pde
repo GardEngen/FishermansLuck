@@ -26,6 +26,7 @@
   private boolean inTutorialMenu;
   private boolean inHelpMenu;
   private boolean haveSavedAfterWin = false;
+  private boolean haveSavedAfterStart = false;
   //private int score;
   //private int spawner;
   
@@ -49,10 +50,11 @@
     player = new Player();
     graphic = new Graphic();
     menu = new Menu();
-    saving = new Saving();
+    
     load = new Load();
     //time = CountdownTimerService.getNewCountdownTimer(this);
     level = new Level(player);
+    saving = new Saving();
     // level.setLevel(1);
     sound = true;
     gameOver = false;
@@ -62,12 +64,14 @@
     inMainMenu = true;
     picNr = 1;
     //spawner = 300; //How often fish are spawning. The lower the number, the ofter fish are spawn
-    saving.saveGameState( player, level.getArray(), level.getScore(), level);
+    //saving.saveGameState( player, level.getArray(), level.getScore(), level);
     this.savingThread = new SaveThread(saving, this, player, level);
     this.savingThread.start();
   }
   
   void draw () {
+    println(level.getLevel());
+    println("hei");
     run();
     //play();
   }
@@ -211,8 +215,8 @@
   
     case STATE_WIN:
     if (!haveSavedAfterWin) {
-      saving.saveGameState( player, level.getArray(), level.getScore(), level); // to save when you win the game
-      haveSavedAfterWin = true;
+    saving.saveGameState( player, level.getArray(), level.getScore(), level); // to save when you win the game
+    haveSavedAfterWin = true;
     }
       inLevelMenu = true;
       gameOver = false;
@@ -236,6 +240,7 @@
   
   //Starts the game 
   public void play() {
+
     graphic.drawBackground();
     player.boat();
     menu.drawInGameButton();
