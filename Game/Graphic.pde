@@ -5,12 +5,10 @@ public class Graphic {
   private PImage background;
   private PImage logo;
   private int PICTURE;
-  //ß private int hei;
 
   public Graphic() {
     background = loadImage("grafikk/background2tilpasset.png");
     logo = loadImage("grafikk/tempLogo.png");
-    //hei = 0;
   }
   public void drawBackground()
   {
@@ -30,14 +28,14 @@ public class Graphic {
     case 1:
   
       fill(0, 255, 0);
-      rect(0, 0, 1000, 700);
+      rect(0, 0, 1000, 610);
      // PICTURE = 0;
       
       break;
       
     case 2:
       fill(255, 0, 0);
-      rect(0, 0, 1000, 700);
+      rect(0, 0, 1000, 610);
     // PICTURE = 0;
       break; 
       

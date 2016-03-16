@@ -104,10 +104,9 @@ class Menu {
   
   public void createTutorialMenu()
   {
-    hm = (Button) new HovedmenyButton(400, 510);
-    hard = (Button) new HardcoreModeButton(400, 450);
-    next = (Button) new NextButton(100, 100);
-    back = (Button) new BackButton(100, 200);
+    hm = (Button) new HovedmenyButton(40, 620);
+    next = (Button) new NextButton(920, 620);
+    back = (Button) new BackButton(820, 620);
     tutorialMenuButtonsHash.put("menu",hm);
     tutorialMenuButtonsHash.put("next",next);
     tutorialMenuButtonsHash.put("back",back);

@@ -163,13 +163,10 @@
       inPauseMenu = false;
       inMainMenu = false;
       inTutorialMenu = true;
-      // tutorial skal inn her
-      
+      fill(0);
+      rect(0,0,1000,700);
       graphic.tutorialPic(picNr);
-      menu.drawTutorialMenu();
-      //graphic.tutorialPic(picNr);
-      //menu.drawTutorialMenu();
-      
+      menu.drawTutorialMenu();   
       break;
   
     case STATE_HELP:
@@ -312,16 +309,12 @@
        
         if(result.equals("next")&&(picNr<3))
         {
-          picNr++;
-       
+          picNr++;  
           println(picNr);
         }
         else if(result.equals("back")&&(picNr>1))
-        {
-         
-        picNr--;
-        //graphic.tutorialPic(picNr);
-     
+        {     
+        picNr--; 
           println(picNr);
         }
         graphic.tutorialPic(picNr);
