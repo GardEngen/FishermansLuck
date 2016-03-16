@@ -16,8 +16,7 @@
   //private ArrayList <Catch> fish;
   //private int numberOfFish = 6;
   private int picNr;
-  private boolean playMusic;
-
+  private boolean playMusic = true;
   private boolean sound;
   private boolean inGame;
   private boolean inPauseMenu;
@@ -61,7 +60,6 @@
     inPauseMenu = false;
     inLevelMenu = false;
     inMainMenu = true;
-    playMusic = true;
     picNr = 1;
     //spawner = 300; //How often fish are spawning. The lower the number, the ofter fish are spawn
     saving.saveGameState( player, level.getArray(), level.getScore(), level);
