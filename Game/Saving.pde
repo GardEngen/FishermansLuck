@@ -1,8 +1,6 @@
 class Saving {
-  Player player;
-  GameElement GameFish;
   JSONObject json;
-  
+
   Saving() {
     createJSON();
   }
@@ -17,13 +15,25 @@ class Saving {
     //saveJSONObject(json, "Game.app/data/data.json");
     saveJSONObject(json, "data/data.json");
   }
-  public void saveGameState(Player player, ArrayList<Catch> fish,int score) {
-  //  createJSON();
+  public void saveGameState(Player player, ArrayList<Catch> fish, int score, Level level) {
+    //  createJSON();
     playerSave(player, score);
+    saveLevel(level);
     for ( Catch f : fish) {
       saveFish(f);
     }
     saveJSON();
+  }
+
+  public void saveLevel(Level level) {
+    println("saver");
+    int currentLevel = level.getLevel();
+    boolean winStatus = level.getWinStatus();
+    boolean completeLevel = level.levelCompleted();
+    
+    json.setInt("level", currentLevel);
+    json.setBoolean("Win_status", winStatus);
+    json.setBoolean("Completed_level", completeLevel);
   }
 
   public void playerSave(Player player, int score) {      
@@ -40,11 +50,6 @@ class Saving {
 
     json.setBoolean("RoodInWater", roodInWaterOrNot); // check if the hook is in the hook or not.
     json.setBoolean("gotCatch", gotCatch); // got fish on the hook
-
-   // println("Saved boat Pos: " + playerXpos);
-    //println("Saved score: " + score);
-    //println("fish on hook: " + gotCatch);
-
   }
 
   // save the information about the fish

@@ -18,7 +18,7 @@ public SaveThread(Saving save, Game game, Player player, Level level) {
   while (true) {
 
     if (game.needSaving()) { 
-      save.saveGameState( player, level.getArray(), level.getScore());
+      save.saveGameState( player, level.getArray(), level.getScore(),level);
     }
     try {
       savingThread.sleep(5000); // saves every 5 second.

@@ -32,8 +32,8 @@ class Level {
     win = false;
     gameOver = false;
     sharkProb = 0; //default
-   // startTimer();
-   timesUp = false;
+    // startTimer();
+    timesUp = false;
   }
 
   //Desides which level the player is in
@@ -44,63 +44,58 @@ class Level {
     case 1:
       sharkProb = 50;
       oneFishType = false;
-      targetScore = 20;
+      levelComplete = false;
+      targetScore = 2; // sett tilabek til 20
       timesUp = timer.time();
-     if (timesUp) {
+      if (timesUp) {
         gameOver = true;
         //STATE = STATE_GAME_OVER;
-      }
-      else if ((score == targetScore)&& (!timesUp)) {
+      } else if ((score == targetScore)&& (!timesUp)) {
         win = true;
-      } 
-      else {
- 
-      level.catching();
-      scoreBoard();
+      } else {
+        level.catching();
+        scoreBoard();
       }
-
       break;
 
     case 2:
-     sharkProb = 40;
+      sharkProb = 40;
       oneFishType = true;
+      levelComplete = false;
       targetScore = 10;
       fishToCatch = "Guri";
       timesUp = timer.time();
-      
-     if (timesUp) {
+
+      if (timesUp) {
         gameOver = true;
         resetTimer();
-      }
-       else if ((score == targetScore)&& (!timesUp)) {
+      } else if ((score == targetScore)&& (!timesUp)) {
         win = true;
-      }
-      else {
-      timesUp = timer.time();
-      level.catching();
-      scoreBoard();
+      } else {
+        timesUp = timer.time();
+        level.catching();
+        scoreBoard();
       }
       break;
 
     case 3:
       sharkProb = 60;
       oneFishType = false;
+      levelComplete = false;
       level.catching();
       scoreBoardFree();
-      
       break;
 
     case 4:
       sharkProb = 0;
       oneFishType = false;
+      levelComplete = false;
       player.setHookSpeed(10);
       scoreBoardFree();
       if (hardcoreModefail) {
         gameOver = true;
-      }
-      else {
-       level.catching();
-       
+      } else {
+        level.catching();
       }
       break;
 
@@ -111,6 +106,10 @@ class Level {
 
   public void setLevel(int newLevel) {
     LEVEL = newLevel;
+  }
+
+  public int getLevel() {
+    return LEVEL;
   }
 
   public void catching() {
@@ -126,9 +125,9 @@ class Level {
     //There is two for-loops to prevent a bug in the fish animation
     for (int i = 0; i < fish.size(); i++) {
       if (fish.get(i).isInMotion() == false) {
-        if(!fish.get(i).isDangerous()) {
-        hardcoreModefail = true;
-        fish.remove(i);
+        if (!fish.get(i).isDangerous()) {
+          hardcoreModefail = true;
+          fish.remove(i);
         }
       }
     }
@@ -210,8 +209,8 @@ class Level {
     fill(0);
     text("Score " + score, 30, 30);
   }
-  
-    public void winBoard() {
+
+  public void winBoard() {
     textFont(font, 50);
     fill(255);
     text("Level Fullført", 340, 200);
@@ -220,8 +219,14 @@ class Level {
   public boolean levelCompleted() {
     if ((targetScore == score) && (!timer.checkIfTimesUp())) {
       levelComplete = true;
+      println(levelComplete);
     }
     return levelComplete;
+  }
+
+  // set if the level is completed.
+  public void setLevelCompleted(boolean newLevelComplete) {
+    levelComplete = newLevelComplete;
   }
 
   public void startTimer() {
@@ -236,11 +241,20 @@ class Level {
     timesUp = false;
     timer.resetTimer();
   }
-  
+
   public boolean getWinStatus() {
+    println("Har vi vunnet? : " + win);
+    //if ((score == targetScore)&& (!timesUp)) {
+    //  win = true;
+    //} 
     return win;
   }
-  
+
+  // set the win status
+  public void setWinStatus(boolean newWin) {
+    win = newWin;
+  }
+
   public void resetAfterWin() {
     win = false;
     score = 0;
@@ -248,9 +262,8 @@ class Level {
     player.resetPlayer();
     player.setHookSpeed(6);
   }
-  
+
   public boolean getGameOverStatus() {
     return gameOver;
   }
-  
 } 
