@@ -97,3 +97,14 @@ public class HardcoreModeButton extends Button {
     buttonInfo(HardcoreModeButton, HardcoreModeButton);
   }
 }
+
+//************* New Class ******************
+public class HovedmenyButton extends Button {
+  private PImage HovedmenyButton;
+
+  public HovedmenyButton(float xPos, float yPos) {
+    super(xPos, yPos);
+    HovedmenyButton = loadImage("knapper/Hovedmeny.png");
+    buttonInfo(HovedmenyButton, HovedmenyButton);
+  }
+}

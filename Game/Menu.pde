@@ -11,6 +11,7 @@ class Menu {
   private Button l1;
   private Button l2;
   private Button hard;
+  private Button hm;
   private Button q;
   private Button q2;
   private Button q3;
@@ -101,9 +102,9 @@ class Menu {
   
   public void createTutorialMenu()
   {
-    q5 = (Button) new QuitButton(400, 510);
+    hm = (Button) new HovedmenyButton(400, 510);
     hard = (Button) new HardcoreModeButton(400, 450);
-    tutorialMenuButtonsHash.put("menu",q5);
+    tutorialMenuButtonsHash.put("menu",hm);
     tutorialMenuButtonsHash.put("neste",hard);
   }
 
